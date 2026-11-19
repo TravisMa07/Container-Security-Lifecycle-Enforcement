@@ -1,0 +1,2 @@
+# Application runtime; P0 tooling retains its separate historical lock.
+pydantic==2.14.4

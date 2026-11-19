@@ -8,7 +8,8 @@ doctor:
 bootstrap:
 	python3 scripts/bootstrap_tools.py
 	uv venv --allow-existing --python 3.12.16 .tools/venv
-	uv pip sync --require-hashes --python .tools/venv/bin/python requirements-p0.lock
+	uv pip sync --require-hashes --python .tools/venv/bin/python requirements-dev.lock
+	uv pip install --no-deps --no-build-isolation --python .tools/venv/bin/python -e .
 
 test:
 	.tools/venv/bin/python -m unittest discover -s tests/unit -v

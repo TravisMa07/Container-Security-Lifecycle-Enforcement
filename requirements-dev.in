@@ -1,0 +1,4 @@
+-r requirements-p0.in
+-r requirements-app.in
+# Exact build backend for editable CLI installation without isolated downloads.
+setuptools==84.2.1
