@@ -1,0 +1,274 @@
+{
+  "schema_version": "1",
+  "review_scope": "P0 primary-source discovery review, not P6 implementation or certification",
+  "source_delivery": "owner supplied official-publication copies; hashes identify reviewed bytes, not independent publisher signature authentication",
+  "reviewers": [
+    "root",
+    "pdf_pci_review",
+    "pdf_cis_review"
+  ],
+  "tools": {
+    "pypdf": "7.1.1",
+    "pypdfium2": "5.15.2",
+    "Pillow": "13.0.0",
+    "method": "complete relevant pages and continuation tables extracted and visually inspected; rendering resolves reading ambiguity"
+  },
+  "pci": {
+    "source": "owner-supplied publication copy",
+    "filename": "PCI-DSS-v4_0_1.pdf",
+    "sha256": "5e6b9093b84007b973097d20126a3768ea2f0a1d4200255c849b0fb3bf04ebc7",
+    "page_count": 397,
+    "title": "Payment Card Industry Data Security Standard: Requirements and Testing Procedures",
+    "edition": "4.0.1",
+    "publication_date": "June 2024",
+    "review_method": "complete relevant table/continuation pages extracted using PDFium and visually inspected full-page renders; no publisher digital-signature verification",
+    "controls": [
+      {
+        "id": "6.3.1",
+        "pdf_pages": [
+          147,
+          148,
+          149,
+          150
+        ],
+        "printed_pages": [
+          143,
+          144,
+          145,
+          146
+        ],
+        "testing_procedures": [
+          "6.3.1.a",
+          "6.3.1.b"
+        ],
+        "bounded_direction": "digest-bound scanner findings contribute to vulnerability identification; entity risk ranking, broader monitoring and software coverage require manual facts",
+        "applicability": "scans alone do not satisfy this separate process requirement"
+      },
+      {
+        "id": "6.3.3",
+        "pdf_pages": [
+          152,
+          153
+        ],
+        "printed_pages": [
+          148,
+          149
+        ],
+        "testing_procedures": [
+          "6.3.3.a",
+          "6.3.3.b"
+        ],
+        "bounded_direction": "scoped image replacement/rescan can support patch evidence; entity critical ranking, vendor patch-release date, applicable patch inventory and deadlines require independent facts",
+        "timing": "entity-ranked critical patches within one month of release; other applicable patches on entity risk-based timing; example60/90days is not mandatory"
+      },
+      {
+        "id": "11.3.1",
+        "pdf_pages": [
+          270,
+          271
+        ],
+        "printed_pages": [
+          266,
+          267
+        ],
+        "testing_procedures": [
+          "11.3.1.a",
+          "11.3.1.b",
+          "11.3.1.c",
+          "11.3.1.d"
+        ],
+        "bounded_direction": "scan/DB freshness, scoped scan/rescan and remediation history contribute technical evidence; cannot establish entire internal scope,12month cadence, qualified personnel or organizational independence",
+        "cadence": "at least once every three months; resolve and rescan high-risk and critical findings"
+      }
+    ],
+    "related_review": [
+      {
+        "id": "11.3.1.1",
+        "pdf_pages": [
+          272
+        ],
+        "printed_pages": [
+          268
+        ],
+        "effective_after": "2025-03-31",
+        "limit": "lower-ranked findings require entity targeted-risk-analysis timing and rescans as needed; no indefinite suppression"
+      },
+      {
+        "id": "11.3.1.2",
+        "pdf_pages": [
+          273
+        ],
+        "printed_pages": [
+          269
+        ],
+        "effective_after": "2025-03-31",
+        "limit": "authenticated scan rule excludes components unable to accept credentials; containers are examples, not a blanket exemption from11.3.1"
+      }
+    ],
+    "reference_url": "https://www.pcisecuritystandards.org/document_library/"
+  },
+  "cis": {
+    "source": "owner-supplied CIS-branded publication; publisher digital origin not independently authenticated",
+    "edition": "2.1.0",
+    "cover_date": "2026-09-30",
+    "pages": 344,
+    "sha256": "491849d6ede263ce9397afc89c102e00b9ce586a45c83c969f952df633afc495",
+    "reviewed_pdf_pages": [
+      1,
+      2,
+      8,
+      251,
+      252,
+      253,
+      254,
+      255,
+      256,
+      257,
+      258,
+      259,
+      260,
+      261,
+      262
+    ],
+    "visual_pages": [
+      1,
+      2,
+      8,
+      251,
+      253,
+      255,
+      257,
+      259,
+      260,
+      261,
+      262
+    ],
+    "target_range": "1.34\u20131.35",
+    "audience_range": "1.37\u20131.35",
+    "scope_page": {
+      "pdf": 8,
+      "printed": 7
+    },
+    "interpretation": "Kubernetes1.35 is the intersection; do not claim full benchmark applicability to1.37.2",
+    "controls": [
+      {
+        "id": "5.2.2",
+        "pdf_pages": [
+          251,
+          252
+        ],
+        "printed_pages": [
+          250,
+          251
+        ],
+        "assessment": "Manual",
+        "profile": "Master Node",
+        "level": 1,
+        "topic": "privileged execution"
+      },
+      {
+        "id": "5.2.3",
+        "pdf_pages": [
+          253,
+          254
+        ],
+        "printed_pages": [
+          252,
+          253
+        ],
+        "assessment": "Manual",
+        "profile": "Master Node",
+        "level": 1,
+        "topic": "host PID sharing"
+      },
+      {
+        "id": "5.2.4",
+        "pdf_pages": [
+          255,
+          256
+        ],
+        "printed_pages": [
+          254,
+          255
+        ],
+        "assessment": "Manual",
+        "profile": "Master Node",
+        "level": 1,
+        "topic": "host IPC sharing"
+      },
+      {
+        "id": "5.2.5",
+        "pdf_pages": [
+          257,
+          258
+        ],
+        "printed_pages": [
+          256,
+          257
+        ],
+        "assessment": "Manual",
+        "profile": "Master Node",
+        "level": 1,
+        "topic": "host networking"
+      },
+      {
+        "id": "5.2.6",
+        "pdf_pages": [
+          259,
+          260
+        ],
+        "printed_pages": [
+          258,
+          259
+        ],
+        "assessment": "Manual",
+        "profile": "Master Node",
+        "level": 1,
+        "topic": "privilege escalation"
+      },
+      {
+        "id": "5.2.7",
+        "pdf_pages": [
+          261,
+          262
+        ],
+        "printed_pages": [
+          260,
+          261
+        ],
+        "assessment": "Manual",
+        "profile": "Master Node",
+        "level": 2,
+        "topic": "host-root prevention"
+      }
+    ],
+    "limits": [
+      "Exact source review only, notP6control implementation or benchmark conformance",
+      "Observed pod settings alone do not prove namespace-wide effective admission restriction or validexceptionpermissions",
+      "5.2.6 unspecified allowPrivilegeEscalation cannotbe treatedas false",
+      "5.2.7 supports nonroot strategy on1.35; its user-namespace alternative is describedfor1.36+ and has kernel/runtime prerequisites",
+      "Terms page prohibits thirdparty benchmark hosting; noPDF or extractedtext shouldbecommitted"
+    ],
+    "reference_url": "https://www.cisecurity.org/benchmark/kubernetes"
+  },
+  "nist": {
+    "edition": "SP800-53 Rev5 release5.2.0",
+    "catalog_sha256": "1645df6a370dcb931db2e2d5d70c2f77bc89c38499a416c23a70eb2c0e595bcc",
+    "controls": [
+      "RA-5",
+      "SI-2",
+      "CM-6",
+      "AC-6"
+    ],
+    "review_record": "docs/framework-sources.md"
+  },
+  "selected_profile": {
+    "kubernetes_version": "v1.35.10",
+    "reason": "intersection of supplied CIS target and audience ranges",
+    "runtime_status": "qualified_on_branch",
+    "runtime_record": "docs/results/p0-final-qualification.json",
+    "executed_revision": "59b870e7b9299284948793a303943eaea30dc31b"
+  },
+  "distribution_policy": "No publication, full extract or rendered page is committed; metadata and bounded original paraphrases only",
+  "p6_implementation_status": "not_implemented"
+}

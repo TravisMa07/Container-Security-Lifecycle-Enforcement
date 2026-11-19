@@ -1,0 +1,255 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:csle:contracts:v1:workload-observation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "cluster_id",
+    "namespace",
+    "kind",
+    "name",
+    "uid",
+    "owner_refs",
+    "container_name",
+    "container_type",
+    "desired_image_ref",
+    "runtime_image_id",
+    "resolved_digest",
+    "resolution_status",
+    "phase",
+    "replicas_desired",
+    "replicas_ready",
+    "observed_at",
+    "source_event_at",
+    "ingested_at",
+    "source",
+    "event_type",
+    "observation_id",
+    "resource_version",
+    "idempotency_key"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1"
+    },
+    "cluster_id": {
+      "$ref": "urn:csle:contracts:v1:common#/$defs/id"
+    },
+    "namespace": {
+      "$ref": "urn:csle:contracts:v1:common#/$defs/id"
+    },
+    "kind": {
+      "enum": [
+        "Pod",
+        "Job",
+        "CronJob",
+        "Deployment",
+        "ReplicaSet",
+        "StatefulSet",
+        "DaemonSet"
+      ]
+    },
+    "name": {
+      "$ref": "urn:csle:contracts:v1:common#/$defs/id"
+    },
+    "uid": {
+      "$ref": "urn:csle:contracts:v1:common#/$defs/id"
+    },
+    "owner_refs": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "uid"
+        ],
+        "properties": {
+          "kind": {
+            "$ref": "urn:csle:contracts:v1:common#/$defs/id"
+          },
+          "uid": {
+            "$ref": "urn:csle:contracts:v1:common#/$defs/id"
+          },
+          "name": {
+            "$ref": "urn:csle:contracts:v1:common#/$defs/id"
+          },
+          "controller": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "container_name": {
+      "$ref": "urn:csle:contracts:v1:common#/$defs/id"
+    },
+    "container_type": {
+      "enum": [
+        "regular",
+        "init",
+        "ephemeral"
+      ]
+    },
+    "desired_image_ref": {
+      "$ref": "urn:csle:contracts:v1:common#/$defs/text"
+    },
+    "runtime_image_id": {
+      "anyOf": [
+        {
+          "$ref": "urn:csle:contracts:v1:common#/$defs/text"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "resolved_digest": {
+      "anyOf": [
+        {
+          "$ref": "urn:csle:contracts:v1:common#/$defs/digest"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "resolution_status": {
+      "enum": [
+        "resolved",
+        "unknown"
+      ]
+    },
+    "phase": {
+      "anyOf": [
+        {
+          "$ref": "urn:csle:contracts:v1:common#/$defs/text"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "replicas_desired": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "replicas_ready": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "observed_at": {
+      "$ref": "urn:csle:contracts:v1:common#/$defs/utc"
+    },
+    "source_event_at": {
+      "anyOf": [
+        {
+          "$ref": "urn:csle:contracts:v1:common#/$defs/utc"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "ingested_at": {
+      "$ref": "urn:csle:contracts:v1:common#/$defs/utc"
+    },
+    "source": {
+      "enum": [
+        "kubernetes_watch",
+        "kubernetes_list",
+        "kubernetes_reconcile",
+        "synthetic_contract_test"
+      ]
+    },
+    "event_type": {
+      "enum": [
+        "ADDED",
+        "MODIFIED",
+        "DELETED",
+        "SNAPSHOT"
+      ]
+    },
+    "observation_id": {
+      "$ref": "urn:csle:contracts:v1:common#/$defs/id"
+    },
+    "resource_version": {
+      "$ref": "urn:csle:contracts:v1:common#/$defs/id"
+    },
+    "idempotency_key": {
+      "$ref": "urn:csle:contracts:v1:common#/$defs/id"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "resolution_status": {
+            "const": "resolved"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "resolved_digest": {
+            "$ref": "urn:csle:contracts:v1:common#/$defs/digest"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "resolved_digest": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "source": {
+            "const": "kubernetes_watch"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "event_type": {
+            "enum": [
+              "ADDED",
+              "MODIFIED",
+              "DELETED"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "source": {
+            "enum": [
+              "kubernetes_list",
+              "kubernetes_reconcile"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "event_type": {
+            "const": "SNAPSHOT"
+          }
+        }
+      }
+    }
+  ],
+  "$comment": "Stable resource identity is (cluster_id, uid); container observations further identify container_name/container_type. resource_version is opaque and cannot prove historical completeness."
+}

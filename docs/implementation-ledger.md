@@ -52,3 +52,19 @@ Working tree based on `4ed333231834e93b7111942017240464ede81f7b`, documentation-
 - Independent read-only review by `readiness_review` found no blocking findings. Its provisional-roadmap-status note was resolved with this evidence link. No product or tool integration was reviewed as qualified.
 
 The commit containing this section is the final repository-readiness change. Its exact pushed SHA, clean-tree/remote comparison and new CI result are verified in the final handoff; the earlier CI link above qualifies only the seed revision. No runtime compatibility claim follows from foundation CI.
+
+## P0 implementation item — 2026-11-19
+
+Base: `8c5e95e661781f2810030ca6b89d6c0f7afd4f08`; expectation-freeze commit `9d420b25ca845541d66c931da652ea7d209a89e3`; branch `phase/p0-compatibility`; [draft PR #9](https://github.com/TravisMa07/Container-Security-Lifecycle-Enforcement/pull/9), refs phase issue #1. Parent owns code/pins/cluster integration; `p0_sources` and `p0_review` performed bounded read-only research/review. No concurrent cluster qualification.
+
+Implemented project-local verified tooling and opt-in isolated compatibility experiments; 22 offline tests pass. Owner authorized local Kind privilege/Floci socket and selected Apache-2.0. Real first-assessment path passed; stronger reassessment tests exposed older-expired-payload selection. Independent source research by `attestation_selection` led to a second expectation-freeze commit `19409bc`: fixed v2 with signed recognized timestamp and disabled verification cache. Two successive corrected admissions plus strict initial negatives passed, retaining the original failures and all v1 evidence. [P0 ledger](p0-ledger.md) owns commands, hashes, failures, review fixes and remaining gates; [runbook](p0-runbook.md) owns reproducible commands and retained resources. No P0 completion, product feature qualification, merge or release is claimed.
+
+## P0 closure continuation — 2026-11-19
+
+Parent-owned integration on existing draft PR#9. Freeze09e8f2f; contract implementation by closure_contracts, source/advisory research by closure_sources/closure_patch_review, independent code review by closure_review. Implemented contracts, full adversarial fixtures, isolated clean-clone profiles and verified patched-node building. Review’s malformed-falsy scan bug was reproduced red and fixed; 44 offline tests pass. Clean-clone/runtime scenarios passed at93730f7 and were rerun after review atae3c009, with strict actual-time expiry. Source and artifact identities are in the P0 ledger/closure summary. No generic threat-model process expansion was added; useful checks are executable tests.
+
+Technical P0 acceptance is qualified for the documented ARM64 local profile. Exact official PCI/CIS wording is still unavailable; source gate remains open unless the owner supplies official publications or explicitly amends its phase ownership. No phase/issue closure or merge has been performed.
+
+## P0 final qualification and closure
+
+Owner supplied both publications while retaining the original source gate. Source review completed with independent PCI/CIS review and final source-consistency review. The CIS target/audience inconsistency led to a separately frozen conservative1.35.10 profile, implemented in59b870e and fully qualified from a clean clone.44 tests and all actual integration/negative/expiry scenarios passed. Current evidence is docs/results/p0-final-qualification.json; exact reviewed source hashes/locators are in p0-framework-source-review.json. No PDFs/extracts/renders are tracked. P0 is qualified on branch for tracker closure; PR#9 stays draft/unmerged, and owner acceptance/merge/merged verification remain separate. P1–P7 and all mandatory MVP features remain outstanding.

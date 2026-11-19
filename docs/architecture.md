@@ -21,8 +21,10 @@ The signer is a separate authorized invocation with separate key access, not a c
 | Decision | Status | Record |
 | --- | --- | --- |
 | Small monolith and independent trust boundaries | Accepted | [ADR 0001](decisions/0001-foundation.md) |
-| Python runtime baseline | Selected for initial development, not qualified | [ADR 0001](decisions/0001-foundation.md) |
-| Exact external tool/image set and admission API | Pending compatibility experiments | [Dependencies](dependencies.md) |
-| License | Owner decision pending, no release | [Limitations](limitations.md) |
+| Python runtime baseline | 3.12.16 locally qualified for P0 | [ADR 0001](decisions/0001-foundation.md) |
+| Exact local tool/image/build set and admission API | Locally qualified on ARM64 with source-aligned Kubernetes1.35.10 | [P0 ledger](p0-ledger.md) |
+| License | Apache-2.0, owner-selected during P0 | [License](../LICENSE) |
 
 Do not add a web service, broker, Postgres, operator framework or full Inspector adapter without a demonstrated requirement and a new decision record.
+
+P0 selects project-local verified tools, isolated local Docker resources, explicit emulator endpoints and a dedicated kubeconfig. [Compatibility results](p0-ledger.md) retain the initial cached older-payload failure and the corrected v2 profile: recognized signed timestamp, current assessment-ID binding, and verification cache disabled. Successive admissions were exercised without deleting old evidence. The P0 contract/negative/fresh-clone gates now pass. This remains a local single-artifact feasibility profile; P5 owns the product policy/issuance contract, and exact official framework source review is now completed for P0. P6 implementation/conformance claims remain separate.

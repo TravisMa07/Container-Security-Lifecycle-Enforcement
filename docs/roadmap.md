@@ -1,11 +1,11 @@
 # Phased implementation and acceptance plan
 
-All phases collectively define MVP. No phase is complete merely because code or documentation exists. Repository creation and initial GitHub push are complete. The owner requested public visibility, phase issues and PRs per future implementation item; this final readiness update prepares P0 without starting product implementation.
+All phases collectively define MVP. No phase is complete merely because code or documentation exists. Repository creation and P0 qualification are complete on the implementation branch. Each further implementation item uses a linked PR; P0 changes in draft PR#9 are not yet merged.
 
 | Work | Scope and dependency | Required observable acceptance | Status |
 | --- | --- | --- | --- |
-| Foundation | Preserve handoff; instructions, ADR, threat model, host discovery, repo hygiene | Full handoff preserved; docs links valid; no committed credentials; public remote and pushed SHA verified; phase issues and item-PR workflow prepared | Repository-ready; [evidence](implementation-ledger.md); P0 gate open |
-| [P0](https://github.com/TravisMa07/Container-Security-Lifecycle-Enforcement/issues/1) | Resolve exact compatible tools, image digests, architecture, risk and control-source reviews | Real Kind + Kyverno + Floci/OCI + Trivy + Cosign smoke results; failures/workarounds recorded; license and source decisions explicit | Discovery started; runtime gate open |
+| Foundation | Preserve handoff; instructions, ADR, threat model, host discovery, repo hygiene | Full handoff preserved; docs links valid; no committed credentials; public remote and pushed SHA verified; phase issues and item-PR workflow prepared | Repository-ready; [evidence](implementation-ledger.md) |
+| [P0](https://github.com/TravisMa07/Container-Security-Lifecycle-Enforcement/issues/1) | Resolve exact compatible tools, image digests, architecture, risk and control-source reviews | Real Kind + Kyverno + Floci/OCI + Trivy + Cosign smoke results; failures/workarounds recorded; license and source decisions explicit | Qualified on branch; original source gate satisfied; [final evidence](results/p0-final-qualification.json) |
 | [P1](https://github.com/TravisMa07/Container-Security-Lifecycle-Enforcement/issues/2) | Typed v1 contracts, SQLite migrations, CLI, digest-bound Trivy ingestion; depends on contract freeze and P0 scan path | Real pinned image scan; reimport idempotency; malformed/oversized input rejection; stable JSON/exit codes; raw report hash and scanner/DB provenance | Planned |
 | [P2](https://github.com/TravisMa07/Container-Security-Lifecycle-Enforcement/issues/3) | Watch/list/reconcile all specified kinds; depends on P1 | S1/S2/S5/S11: deleted Job history, scale-zero reference, reconnect/410/restart, gaps and duplicates; UID reuse and owners | Planned |
 | [P3](https://github.com/TravisMa07/Container-Security-Lifecycle-Enforcement/issues/4) | Pure correlation/remediation; depends on P1/P2 | S3/S4/S12/S13: multi-namespace remaining refs, patched replacement, regression, mutable tags, unresolved runtime IDs, partial inventory and stale evidence | Planned |
@@ -31,7 +31,7 @@ Full scenarios, fields and definition of done remain in HANDOFF.md; this plan do
 
 | Phase | Tracking issue | Suggested branch | PR state |
 | --- | --- | --- | --- |
-| P0 | [#1](https://github.com/TravisMa07/Container-Security-Lifecycle-Enforcement/issues/1) | `phase/p0-compatibility` | Not created; open per implementation item when work starts |
+| P0 | [#1](https://github.com/TravisMa07/Container-Security-Lifecycle-Enforcement/issues/1) | `phase/p0-compatibility` | [Draft #9](https://github.com/TravisMa07/Container-Security-Lifecycle-Enforcement/pull/9); evidence and gaps in P0 ledger |
 | P1 | [#2](https://github.com/TravisMa07/Container-Security-Lifecycle-Enforcement/issues/2) | `phase/p1-ingestion` | Not created; open per implementation item when work starts |
 | P2 | [#3](https://github.com/TravisMa07/Container-Security-Lifecycle-Enforcement/issues/3) | `phase/p2-inventory` | Not created; open per implementation item when work starts |
 | P3 | [#4](https://github.com/TravisMa07/Container-Security-Lifecycle-Enforcement/issues/4) | `phase/p3-lifecycle` | Not created; open per implementation item when work starts |
@@ -40,9 +40,9 @@ Full scenarios, fields and definition of done remain in HANDOFF.md; this plan do
 | P6 | [#7](https://github.com/TravisMa07/Container-Security-Lifecycle-Enforcement/issues/7) | `phase/p6-compliance-evidence` | Not created; open per implementation item when work starts |
 | P7 | [#8](https://github.com/TravisMa07/Container-Security-Lifecycle-Enforcement/issues/8) | `phase/p7-evaluation` | Not created; open per implementation item when work starts |
 
-All phase issues remain open. Their acceptance checklists and dependency links are planning records, not evidence that a phase passed. For a phase with several items, use more specific branch suffixes and separate linked PRs; do not combine unrelated phase work into one PR. No PRs are created during this repository wrap-up, per the owner's clarification.
+P0 has passing qualification evidence for tracker closure; P1–P7 issues remain open. Their checklists and dependency links are planning records, not evidence that those phases passed. For a phase with several items, use more specific branch suffixes and separate linked PRs; do not combine unrelated phase work into one PR. No future-phase PRs were created during the repository wrap-up. P0 implementation now has draft PR #9.
 
-## P0 start checklist
+## P0 reproduction checklist (qualification completed)
 
 1. Read HANDOFF.md, the workflow, dependencies and threat model; use issue #1 as the phase tracker.
 2. Start a fresh `phase/p0-compatibility` branch from the final repository-readiness commit on `main`.
@@ -50,4 +50,4 @@ All phase issues remain open. Their acceptance checklists and dependency links a
 4. Open a linked draft PR for that implementation item when its real commit exists. Run only project-scoped, explicitly identified local resources; serialize heavy qualification.
 5. Resolve/pin and prove the chosen toolchain; update the compatibility ledger and issue with actual evidence. Keep P0 open for any unmet gate.
 
-License selection and authoritative framework-source review remain explicit P0 decisions. Missing local tools are work to resolve, not a reason to treat compatibility as passed. Future implementation has not started in this readiness update.
+Apache-2.0 was selected by the owner during P0. The owner retained the original source gate and supplied the publications; exact-source review and source-aligned runtime qualification passed. [P0 results](p0-ledger.md) retain all earlier failures and final evidence. The next product slice is P1 after the chosen authorized integration/base; no merge is implied.

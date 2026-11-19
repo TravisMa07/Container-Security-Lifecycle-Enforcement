@@ -1,0 +1,157 @@
+{
+  "qualification": "P0 technical closure evidence; exact official PCI/CIS source gate remains open",
+  "source_commit": "ae3c009558a7c6a2c8fc251d1356770312e5ebc7",
+  "clone_working_tree_clean": true,
+  "profile": {
+    "name": "csle-p0-close",
+    "api_port": 14576,
+    "registry_port": 15110,
+    "system": "Darwin arm64",
+    "python": "3.12.16"
+  },
+  "offline_tests": {
+    "unit": 27,
+    "contract": 17,
+    "total": 44
+  },
+  "artifacts": [
+    {
+      "path": ".local/p0/closure-clean-bootstrap.log",
+      "sha256": "59919da82ca04da2453c479f36a839a32fded15a061e5673e74903559adea994"
+    },
+    {
+      "path": ".local/p0/closure-clean-node.log",
+      "sha256": "b7d94859d7351991a09f4c4b48aa3ceafa3966d034c2b23a0f999af543d93ac9"
+    },
+    {
+      "path": ".local/p0/closure-clean-up.log",
+      "sha256": "956ab3922b37af6747d459d08f259c1da2a043564609584aeeda9c77e950e5b5"
+    },
+    {
+      "path": ".local/p0/closure-clean-kyverno.log",
+      "sha256": "cca0ed52b95817d5b29bb1f9200afca0e593ce75c0d1949dd38d28137b7c96b0"
+    },
+    {
+      "path": ".local/p0/closure-clean-ecr.log",
+      "sha256": "06ecae01b3cb0fea32494f9dd964eb951f02700d5039a9f9ef9ce0c7301545c9"
+    },
+    {
+      "path": ".local/p0/closure-clean-sign1.log",
+      "sha256": "dccb4ce0221578fdc3ad62ffb297fed0115115cf74eca947d0483e6ddfd63a50"
+    },
+    {
+      "path": ".local/p0/closure-clean-admission1.log",
+      "sha256": "6cd36ac7b1e015e7eaa13dd126824d1793e3177c28301d7e5a6eae9e1a31ca09"
+    },
+    {
+      "path": ".local/p0/closure-clean-sign2.log",
+      "sha256": "d7644a174fd1198d717b5eb0a8cb338a444241f33bf32f2404bde5571f639012"
+    },
+    {
+      "path": ".local/p0/closure-clean-admission2.log",
+      "sha256": "dff600cb60817365400249162eaef0b2816e6a533fb79d18abe0de3964c2cc57"
+    },
+    {
+      "path": ".local/p0/closure-clean-negatives.log",
+      "sha256": "8543d8ccb2ec59b2470f61f1d5d4a231e7507cad4de135b49c98eaf0693616fd"
+    },
+    {
+      "path": ".local/p0/closure-clean-adversarial.log",
+      "sha256": "f4f3a47ce8e4d77af1e91c1b3d65a350fb2fc838f806b60ef0875bad0446fc6a"
+    },
+    {
+      "path": ".local/p0/closure-clean-expired.log",
+      "sha256": "c0f21bbc3fb2d123708f9d3c25b8f8adb6a0dd44c98e411580188a5f068dcf32"
+    },
+    {
+      "path": ".local/p0/closure-reviewed-bootstrap.log",
+      "sha256": "b93a61a39128f5c1eccd243c03b19b27922529fdc4dff4e8793eb3298b477962"
+    },
+    {
+      "path": ".local/p0/closure-reviewed-tests.log",
+      "sha256": "0ef231993a68254e39ee229649ad1b6668f2423c153c365ba25412c72444d1a2"
+    },
+    {
+      "path": ".local/p0/closure-reviewed-runtime.log",
+      "sha256": "5be3b3b6b6904a8fd29ee83d92863b1154ca5ec53c7019bf562d6312f2fb2850"
+    },
+    {
+      "path": ".local/p0/closure-reviewed-ecr.log",
+      "sha256": "571d6a6308b7a71f43125deebfa328039f648675bd37cc3fae11a1d31df5a765"
+    },
+    {
+      "path": ".local/p0/closure-reviewed-sign1.log",
+      "sha256": "34d6b605bf6aa85e74da7c87d6946a73dd9707fb78bcf7bdec4a634fe19e8d5a"
+    },
+    {
+      "path": ".local/p0/closure-reviewed-admission1.log",
+      "sha256": "75e560d1ff126d85eb64410fe9b01278484159986224edcb9391f717985c2cdd"
+    },
+    {
+      "path": ".local/p0/closure-reviewed-sign2.log",
+      "sha256": "c373b55f3052fc088486ee2682a16fe4618c7430db8d8a183361931314fd337c"
+    },
+    {
+      "path": ".local/p0/closure-reviewed-admission2.log",
+      "sha256": "8c7af67b9d98cad088d71e52c13d68b0e9fc9425dca55e35b19042a1b5c1f16e"
+    },
+    {
+      "path": ".local/p0/closure-reviewed-negatives.log",
+      "sha256": "1886ee86072d8f073b14a31b681eaf8f10aa8271e36de42c030b0b964f859f1a"
+    },
+    {
+      "path": ".local/p0/closure-reviewed-adversarial.log",
+      "sha256": "2fa9b0c0608b88326962c3654cc08b062571c667d7acf16fe9e9d59403c3ec66"
+    },
+    {
+      "path": ".local/p0/closure-python-audit.json",
+      "sha256": "9258d92894c1531ea1ee6b78c0621f3c90fd78d1a6ef9315ae9d8e0efcc501e0"
+    },
+    {
+      "path": ".local/p0/closure-scan-shape-red.log",
+      "sha256": "9d558a8bb329545abaa30d203513a0b71a23b035fb8da128021937a0fe91f1c4"
+    },
+    {
+      "path": ".local/p0/closure-all-green.log",
+      "sha256": "dda5d42e3d98a4334f1349517dc47688072dcfe11ff71352dd045796bae635ca"
+    },
+    {
+      "path": ".local/p0/closure-clone/.local/p0/node-image.json",
+      "sha256": "0da48fc987cc29f6b9c06a015b9653fd2c0309a5b06e1f02c8e1c470280a366b"
+    },
+    {
+      "path": ".local/p0/closure-clone/.local/p0/attestation-result.json",
+      "sha256": "f2821d99c9c3b2d3c4240caceb8aca376721433d3aa1c022a44f2601c701c19c"
+    },
+    {
+      "path": ".local/p0/closure-clone/.local/p0/admission-positive.json",
+      "sha256": "673fe53c00aeba60483083c73eea8094ccb1980a3ac1fbe4ed48a35934ff26b3"
+    },
+    {
+      "path": ".local/p0/closure-clone/.local/p0/ecr-result-path.txt",
+      "sha256": "b0ad238afd4cef961080dec70274317a1db521bd8817e2be6e9a1b2caf5f5f35"
+    },
+    {
+      "path": ".local/p0/closure-reviewed-expired.log",
+      "sha256": "a52daf6001c83ef01dddc4d282da1a86847c763e232bbafe801857143fa175b5"
+    },
+    {
+      "path": ".local/p0/closure-reviewed-expired-early.log",
+      "sha256": "40949f4bd3c941d138da87751ed339a05c61389dfefb95097823b445f4367381"
+    }
+  ],
+  "node_build": {
+    "version": "v1.37.2",
+    "tag": "csle-p0-node:v1.37.2",
+    "docker_config_id": "sha256:b33f2e09fb73ba381df9209a30b7d71aae3eb1305aafd8fff9635828ded89451",
+    "architecture": "arm64",
+    "source_archive_sha256": "ceb27d43ca10db57ba79b2c224d5d8e169a0e6a5611f47db8c7b8d611afab13d",
+    "base_reference": "kindest/base@sha256:8098fa3cae05bc15d9c4b93a566d19e1f8e65a25e26ebeb993b6cb41142cf791",
+    "evidence_directory": ".local/p0/closure-clone/.local/p0/runs/20261119T181911Z-e3c7ab78"
+  },
+  "current_approval_expires_at": "2026-11-19T18:30:47.371179+00:00",
+  "remaining_gate": "Exact selected framework wording review from official PCI/CIS sources, or explicit owner phase-scope amendment. No source-completeness claim.",
+  "reviewed_head_expiry": "passed: matching positive receipt, unchanged policy and exact expiry denial after elapsed window; earlier precondition refusal retained separately",
+  "historical": true,
+  "superseded_by": "docs/results/p0-final-qualification.json"
+}

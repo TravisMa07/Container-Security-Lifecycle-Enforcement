@@ -1,0 +1,126 @@
+{
+  "schema_version": "1",
+  "resolved_at": "2026-11-19",
+  "qualification": "P0 source-aligned ARM64 local profile qualified; exact source/runtime evidence and advisory limits in docs/p0-ledger.md",
+  "profiles": {
+    "darwin-arm64": {
+      "kind": {
+        "version": "v0.33.0",
+        "url": "https://github.com/kubernetes-sigs/kind/releases/download/v0.33.0/kind-darwin-arm64",
+        "sha256": "0c8c7dbe5e23594a198b786c4bc13dacc101fa6196b0cb0b23a1ca44e61f4b4f",
+        "source": "https://api.github.com/repos/kubernetes-sigs/kind/releases/tags/v0.33.0",
+        "license": "Apache-2.0"
+      },
+      "cosign": {
+        "version": "v3.1.4",
+        "url": "https://github.com/sigstore/cosign/releases/download/v3.1.4/cosign-darwin-arm64",
+        "sha256": "9f9b8cd557cf2e5b3df3373a00baa005a86b02391e3e06dd0ce37b3a1533d3a4",
+        "source": "https://api.github.com/repos/sigstore/cosign/releases/tags/v3.1.4",
+        "license": "Apache-2.0"
+      },
+      "trivy": {
+        "version": "v0.76.2",
+        "url": "https://github.com/aquasecurity/trivy/releases/download/v0.76.2/trivy_0.76.2_macOS-ARM64.tar.gz",
+        "sha256": "ae7ea358326960406b703c77b2ac490190797d80b306b5b50c2a27221da0a5b8",
+        "source": "https://api.github.com/repos/aquasecurity/trivy/releases/tags/v0.76.2",
+        "license": "Apache-2.0",
+        "member": "trivy"
+      },
+      "helm": {
+        "version": "v3.22.1",
+        "url": "https://get.helm.sh/helm-v3.22.1-darwin-arm64.tar.gz",
+        "sha256": "e73da8a0b0d5193774fdff17ce6319c7436bb22ee229b45fd64f3c40368c753a",
+        "member": "darwin-arm64/helm",
+        "source": "https://get.helm.sh/helm-v3.22.1-darwin-arm64.tar.gz.sha256sum",
+        "license": "Apache-2.0"
+      }
+    }
+  },
+  "kyverno_chart": {
+    "version": "3.10.0",
+    "app_version": "v1.20.0",
+    "url": "https://kyverno.github.io/kyverno/kyverno-3.10.0.tgz",
+    "sha256": "55961392dc0821eb367323f0e9585c061dd4407ef7ada921bd56ea1642c2a301",
+    "license": "Apache-2.0"
+  },
+  "images": {
+    "kind_node": {
+      "tag_observed": "kindest/node:v1.37.0",
+      "index_digest": "sha256:a1ed56cfb0e7b93589bdf97c8cd566405a265939e3620fc4f5de89adff580ae5",
+      "linux_arm64_digest": "sha256:6a3345f517a7df05185c648f83d18d464f2a94ea4a69eaee39b7e1de02611e59",
+      "reference": "kindest/node@sha256:a1ed56cfb0e7b93589bdf97c8cd566405a265939e3620fc4f5de89adff580ae5",
+      "qualification": "historical first smoke only; current provisioning uses patched node_build"
+    },
+    "floci": {
+      "tag_observed": "floci/floci:2.5.0",
+      "index_digest": "sha256:a0fbf944d7f338cc0856f1ef83831ea749ff2be71956eb7a7fce08fc21458e19",
+      "linux_arm64_digest": "sha256:6239c04b56a0f7f8032e0ffd7d070c73394269212b9b340467e539e9f4d61788",
+      "reference": "floci/floci@sha256:a0fbf944d7f338cc0856f1ef83831ea749ff2be71956eb7a7fce08fc21458e19"
+    },
+    "registry": {
+      "tag_observed": "registry:3.1.2",
+      "index_digest": "sha256:82f6ff4a7f982960c8aa51617fea3aabc485df6e55cce80d22deb1de36f1bc3c",
+      "linux_arm64_digest": "sha256:f3d00d4a9323fe175d9359ee9b86cbf21b2ce922636504d1438c6fbf1938e1e0",
+      "reference": "registry@sha256:82f6ff4a7f982960c8aa51617fea3aabc485df6e55cce80d22deb1de36f1bc3c"
+    },
+    "demo": {
+      "tag_observed": "alpine:3.24",
+      "index_digest": "sha256:f59abe656b692d901e184be3445e084786602108599d2a51d229c0f5a48c71bf",
+      "linux_arm64_digest": "sha256:1829893486be257df5049ab3b7fc95afbd0fc09d89803cbc580bda1ba5386b29",
+      "reference": "alpine@sha256:f59abe656b692d901e184be3445e084786602108599d2a51d229c0f5a48c71bf"
+    }
+  },
+  "kyverno_images": {
+    "readiness-checker": "sha256:6079a30d75fe7ba868a5a7e5dfa71ee92a3a8bae97adcea1c8cfb1009280ee6c",
+    "background-controller": "sha256:c72df38320a48fc9de10f9d23d087a117853bb08207b7f60f6d1e8457fb3ddb7",
+    "cleanup-controller": "sha256:0f9ce0c203561c52499e871a987ff987371f57385fcafe7af1a01dfd6db1feee",
+    "kyverno-cli": "sha256:bd2b8b7c9d550ecf04e0bacaf351adce2f82ce67fd3f291075edcee7f8ab4ab4",
+    "kyverno": "sha256:9de49c5416ea536f00a205527197ac048abdf32c5a75d633cd9afff8928f359d",
+    "kyvernopre": "sha256:339067e083430e0c97007541bef9cfdbac89bee13f7228772c77ae8aead14b8b",
+    "reports-controller": "sha256:f54e3cc106fadb1a615d0ec11c42f741f51d3580a5f70dfbe7bd7ec58864ef03"
+  },
+  "python_tooling": {
+    "python": "3.12.16",
+    "boto3": "1.44.6",
+    "requirements": "requirements-p0.lock",
+    "license": "Apache-2.0 (boto3); transitive terms remain separate",
+    "jsonschema": "4.26.0",
+    "referencing": "0.37.0",
+    "validation_formats": {
+      "rfc3339-validator": "0.1.4",
+      "rfc3986-validator": "0.1.1"
+    }
+  },
+  "licenses": {
+    "floci": "MIT",
+    "kind": "Apache-2.0",
+    "cosign": "Apache-2.0 (pinned LICENSE text reviewed; GitHub detector NOASSERTION)",
+    "helm": "Apache-2.0",
+    "trivy": "Apache-2.0",
+    "kyverno": "Apache-2.0",
+    "distribution_registry": "Apache-2.0 (repository; image packages retain separate licenses)"
+  },
+  "node_build": {
+    "version": "v1.35.10",
+    "architecture": "arm64",
+    "url": "https://dl.k8s.io/release/v1.35.10/kubernetes-server-linux-arm64.tar.gz",
+    "sha256": "337982e3d5825f60d989b440c5ef441051ffec54659e9b11a7cdcaf218270157",
+    "base_reference": "kindest/base@sha256:8098fa3cae05bc15d9c4b93a566d19e1f8e65a25e26ebeb993b6cb41142cf791",
+    "base_linux_arm64_digest": "sha256:1e056f822a80e11e300fdd79acc731a1d94504e7f0c9db5bba2bfb5104306178",
+    "output_tag": "csle-p0-node:v1.35.10",
+    "identity_note": "built from pinned inputs; actual local Docker config ID recorded separately from OCI manifest identity",
+    "selection_reason": "CIS2.1.0 target1.34\u20131.35 and audience1.35\u20131.37 intersection; current maintained1.35 security patch"
+  },
+  "historical_node_builds": [
+    {
+      "version": "v1.37.2",
+      "architecture": "arm64",
+      "url": "https://dl.k8s.io/v1.37.2/kubernetes-server-linux-arm64.tar.gz",
+      "sha256": "ceb27d43ca10db57ba79b2c224d5d8e169a0e6a5611f47db8c7b8d611afab13d",
+      "base_reference": "kindest/base@sha256:8098fa3cae05bc15d9c4b93a566d19e1f8e65a25e26ebeb993b6cb41142cf791",
+      "base_linux_arm64_digest": "sha256:1e056f822a80e11e300fdd79acc731a1d94504e7f0c9db5bba2bfb5104306178",
+      "output_tag": "csle-p0-node:v1.37.2",
+      "identity_note": "built from pinned inputs; actual local Docker config ID recorded separately from OCI manifest identity"
+    }
+  ]
+}

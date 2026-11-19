@@ -1,0 +1,130 @@
+{
+  "schema_version": "1",
+  "scope": "P0 source-aligned local feasibility qualification; no MVP or framework-wide conformance claim",
+  "status": "qualified_on_branch",
+  "executed_revision": "59b870e7b9299284948793a303943eaea30dc31b",
+  "clone_clean": true,
+  "platform": "Darwin arm64 / Docker Desktop",
+  "profile": "csle-p0-cis",
+  "ports": {
+    "floci": 14586,
+    "backing_registry": 15120
+  },
+  "tests": {
+    "unit": 27,
+    "contract": 17,
+    "total": 44
+  },
+  "source_review": "docs/results/p0-framework-source-review.json",
+  "artifacts": [
+    {
+      "path": ".local/p0-sources/owner-review/bootstrap-135.log",
+      "sha256": "9f610109e919233230ac880274a563be55b861b6ab081d3d788550692745c342"
+    },
+    {
+      "path": ".local/p0-sources/owner-review/tests-135.log",
+      "sha256": "e05d40c5b05acd24304fa017718b7777a226fe8bfa14e92c4bcca0e26cf4d4fe"
+    },
+    {
+      "path": ".local/p0-sources/owner-review/docs-135.log",
+      "sha256": "f387e9f0a32fa8080972ab9ebee10bb272d1421faf8726c4e5263c18045f1f69"
+    },
+    {
+      "path": ".local/p0-sources/owner-review/node-135.log",
+      "sha256": "561955ae48dc66a2fc3874ce475b859ed1918cdb141313a83aa4bfab011a544d"
+    },
+    {
+      "path": ".local/p0-sources/owner-review/up-135.log",
+      "sha256": "01f929bf6a3b1ac3efe99c7c6ae5d756b03e275597313e58410b726525e67597"
+    },
+    {
+      "path": ".local/p0-sources/owner-review/kyverno-135.log",
+      "sha256": "0f118b274f969f9cffb88603cc162b1ccca19da79d4779e40e66cbf726a69bde"
+    },
+    {
+      "path": ".local/p0-sources/owner-review/ecr-135.log",
+      "sha256": "3796eb424eeb471fda8a3b2c31e36591dbba16cb50091b6166c2ccd9f9218e4c"
+    },
+    {
+      "path": ".local/p0-sources/owner-review/sign1-135.log",
+      "sha256": "95d7b197dc474b51b86b1b09f68a1587cb217755a54207bb8be6cdf7b14e433a"
+    },
+    {
+      "path": ".local/p0-sources/owner-review/admission1-135.log",
+      "sha256": "8f2bd0b3f0fa781a6e8e7490cfa2254a4627a177bf2d2afe2a20a9d3e53ff538"
+    },
+    {
+      "path": ".local/p0-sources/owner-review/sign2-135.log",
+      "sha256": "1e9213bbfdae8e7dbae869a02fe48ed170babecd18fa47b760e5edc736e93de5"
+    },
+    {
+      "path": ".local/p0-sources/owner-review/admission2-135.log",
+      "sha256": "617f8259e383a1340a729adf41497480c0bb90783c33ec98b80cb8289f201018"
+    },
+    {
+      "path": ".local/p0-sources/owner-review/negatives-135.log",
+      "sha256": "5ccf5cc4cad08eb2e0a20a230b5ec5351dcc0b3e74f75c949b4ea593c63e8768"
+    },
+    {
+      "path": ".local/p0-sources/owner-review/adversarial-135.log",
+      "sha256": "a227ba1fa95521c6c30c4e0ab7f24263558ad15376fa164462d1ce9cba494002"
+    },
+    {
+      "path": ".local/p0-sources/owner-review/expired-135.log",
+      "sha256": "78bedff1311434b544cca0f9afd5d07c6a53efedcb7d08a11e8defcc7306acca"
+    },
+    {
+      "path": ".local/p0-sources/owner-review/positive1-135.json",
+      "sha256": "26483c59d37c1a56120897de062ef67b0955e685e8c29652cba53f4eca2b4067"
+    },
+    {
+      "path": ".local/p0-sources/owner-review/positive2-135.json",
+      "sha256": "4e334e43bb987e381ac38acc1c54946336d9dfe937b42f4158e36c6d2108c687"
+    },
+    {
+      "path": ".local/p0/source-clone/.local/p0/attestation-result.json",
+      "sha256": "fbe3d3f43ec2c06630db987e05f9be9a02dd68e3fbe63f3aa4d48fd38ad67115"
+    },
+    {
+      "path": ".local/p0/source-clone/.local/p0/admission-positive.json",
+      "sha256": "4e334e43bb987e381ac38acc1c54946336d9dfe937b42f4158e36c6d2108c687"
+    },
+    {
+      "path": ".local/p0/source-clone/.local/p0/ecr-result-path.txt",
+      "sha256": "2716b7e8b4ba86941ba6dc2e65e09366412e064fa2b1651a77917c5fd2f1fee5"
+    }
+  ],
+  "node_build": {
+    "version": "v1.35.10",
+    "tag": "csle-p0-node:v1.35.10",
+    "docker_config_id": "sha256:a2aa41a5f52ee9b68cebf4d4e8bfa107d7d5e831ad59433af0f924b96e5146fc",
+    "architecture": "arm64",
+    "source_archive_sha256": "337982e3d5825f60d989b440c5ef441051ffec54659e9b11a7cdcaf218270157",
+    "base_reference": "kindest/base@sha256:8098fa3cae05bc15d9c4b93a566d19e1f8e65a25e26ebeb993b6cb41142cf791",
+    "evidence_directory": ".local/p0/source-clone/.local/p0/runs/20261119T190416Z-34ff5d9f"
+  },
+  "passed_scenarios": [
+    "source-bounded node/runtime identity",
+    "Floci ECR/OCI byte identity and actual Trivy scan",
+    "two successive trusted assessments, actual admissions and matching runtime digest",
+    "active-policy revocation",
+    "unsigned artifact",
+    "wrong trust key",
+    "privileged configuration",
+    "wrong outer subject",
+    "modified signed predicate",
+    "modified signature",
+    "future-issued evidence",
+    "stale scan",
+    "stale DB",
+    "expiry after prior positive and unchanged policy"
+  ],
+  "limitations": [
+    "single ARM64 local fixed-fixture profile",
+    "Docker image/build cache available; no cold-daemon or bit-for-bit build claim",
+    "publications reviewed from owner-supplied copies, not publisher-signature authenticated",
+    "P1\u2013P7 remain unimplemented/unqualified; P6 mappings still require implementation tests and manual/context facts",
+    "known upstream advisory applicability limits remain in dependencies.md",
+    "raw publications/extracts/renders are not tracked"
+  ]
+}

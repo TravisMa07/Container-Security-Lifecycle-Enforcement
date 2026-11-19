@@ -21,3 +21,7 @@ Floci signing/referrer behavior and container-to-host registry networking are in
 ## Validation
 
 Foundation checks establish document integrity only. P0 must prove the precise tool chain, architecture support, registry transport, signature format, custom predicate, freshness and fail-closed admission behavior. P1 freezes contract expectations before implementing storage/ingestion.
+
+Amendment 2026-11-19: the owner selected Apache-2.0 during P0; the repository LICENSE contains the official text. This supersedes the initially unresolved license choice without changing external dependency terms.
+
+P0 closure continuation: Python3.12.16 supersedes the initial3.12.12 baseline. Distribution3.1.2 supersedes the initial2.8.3 compatibility image. Kubernetes1.37.2 is built using Kind’s supported release-file path with checksum-pinned release bytes and a pinned base image because no patched official node tag was available. The actual built config ID and running node version are checked; config identity is kept distinct from OCI manifest identity. See dependencies.md and the P0 ledger for tested scope and advisory limitations.

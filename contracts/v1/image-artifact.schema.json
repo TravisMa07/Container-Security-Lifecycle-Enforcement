@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:csle:contracts:v1:image-artifact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "image_id",
+    "registry",
+    "repository",
+    "tags_observed",
+    "manifest_digest",
+    "index_digest",
+    "platform_digest",
+    "platform",
+    "source",
+    "source_reference",
+    "first_seen",
+    "last_seen",
+    "resolution_status",
+    "resolution_reason"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1"
+    },
+    "image_id": {
+      "anyOf": [
+        {
+          "$ref": "urn:csle:contracts:v1:common#/$defs/digest"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "registry": {
+      "$ref": "urn:csle:contracts:v1:common#/$defs/text"
+    },
+    "repository": {
+      "$ref": "urn:csle:contracts:v1:common#/$defs/text"
+    },
+    "tags_observed": {
+      "type": "array",
+      "maxItems": 1000,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "urn:csle:contracts:v1:common#/$defs/text"
+      }
+    },
+    "manifest_digest": {
+      "anyOf": [
+        {
+          "$ref": "urn:csle:contracts:v1:common#/$defs/digest"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "index_digest": {
+      "anyOf": [
+        {
+          "$ref": "urn:csle:contracts:v1:common#/$defs/digest"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "platform_digest": {
+      "anyOf": [
+        {
+          "$ref": "urn:csle:contracts:v1:common#/$defs/digest"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "platform": {
+      "anyOf": [
+        {
+          "$ref": "urn:csle:contracts:v1:common#/$defs/platform"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "source": {
+      "enum": [
+        "oci_registry",
+        "emulated_aws_ecr",
+        "kubernetes",
+        "synthetic_contract_test"
+      ]
+    },
+    "source_reference": {
+      "$ref": "urn:csle:contracts:v1:common#/$defs/text"
+    },
+    "first_seen": {
+      "$ref": "urn:csle:contracts:v1:common#/$defs/utc"
+    },
+    "last_seen": {
+      "$ref": "urn:csle:contracts:v1:common#/$defs/utc"
+    },
+    "resolution_status": {
+      "enum": [
+        "resolved",
+        "unknown"
+      ]
+    },
+    "resolution_reason": {
+      "anyOf": [
+        {
+          "$ref": "urn:csle:contracts:v1:common#/$defs/text"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "resolution_status": {
+            "const": "resolved"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "image_id": {
+            "$ref": "urn:csle:contracts:v1:common#/$defs/digest"
+          },
+          "manifest_digest": {
+            "$ref": "urn:csle:contracts:v1:common#/$defs/digest"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "image_id": {
+            "type": "null"
+          },
+          "manifest_digest": {
+            "type": "null"
+          },
+          "index_digest": {
+            "type": "null"
+          },
+          "platform_digest": {
+            "type": "null"
+          },
+          "resolution_reason": {
+            "$ref": "urn:csle:contracts:v1:common#/$defs/text"
+          }
+        }
+      }
+    }
+  ],
+  "$comment": "image_id equals the selected manifest digest, first_seen <= last_seen, and parent-index/platform relationships are domain invariants; JSON Schema validates their explicit shape only."
+}
