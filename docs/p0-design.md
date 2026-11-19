@@ -52,3 +52,16 @@ Architecture stays the accepted modular monolith; the spike adds no app backend.
 ## Qualification and ownership
 
 Parent owns tooling/pins, shared contracts, cluster experiments and integration. `p0_sources` performs read-only official framework research from the base above, writing only ignored downloads. Heavy runs are serial. Final independent review inspects actual code, tests and evidence. PR references #1 without closing it unless every P0 gate is complete.
+
+## Evidence-driven expectation amendment: fixed v2 predicate and uncached verification
+
+The initial real reassessment failed after a fresh v1 approval: cached older payload expiry was selected. Independent read-only source review (`attestation_selection`) identified two relevant pinned v1.20.0 behaviors:
+
+- [Verification cache](https://github.com/kyverno/kyverno/blob/v1.20.0/pkg/cel/libs/imageverify/impl.go) can restore previously verified payloads before registry retrieval. [Controller flags](https://github.com/kyverno/kyverno/blob/v1.20.0/cmd/internal/flag.go) support `--imageVerifyCacheEnabled=false` (default TTL 60m). The chart extraArgs value must be string `"false"`; boolean false is omitted by the chart template.
+- [Timestamp selection](https://github.com/kyverno/kyverno/blob/v1.20.0/pkg/image/verifiers/ivpol/cosign/timestamp.go) selects newest verified same-type evidence only when candidates share a verified bundle timestamp source or recognized signed statement timestamp. `timestamp` is recognized; `issued_at` is not. The [verifier](https://github.com/kyverno/kyverno/blob/v1.20.0/pkg/image/verifiers/ivpol/cosign/verifier.go) filters requested predicate type before candidate selection.
+
+Freeze the corrected independent expectation before changing the protocol: one fixed P0 predicate URI ending `/p0-compatibility/v2`, schema_version `2`, with required signed `timestamp == issued_at`. This is a one-time compatibility schema migration, not a unique type per run. Keep issued/expiry/freshness/trust/digest/active-policy checks; disable the verification cache for this local correctness profile and confirm the rendered and running controller flag. Retain every old v1 attestation; never delete or rewrite evidence.
+
+Additional mandatory experiment: issue two distinct v2 assessments sequentially with the same key, digest, predicate type and active policy. Both actual admissions must pass and the second verified predicate/positive receipt must carry the later timestamp. Revoke the active policy and require its specific denial, then restore it. After the second approval expires, require the matching positive receipt, unchanged observed policy and specific expiry denial. Missing/wrong-trust and privileged negatives must each have a successful contemporaneous positive control. Failure of any step remains an open compatibility gate.
+
+Disabling verification caching trades additional registry/crypto work for correctness and adds no service. Production cache choices and throughput remain P5/P7 work and cannot be enabled without repeated-admission, freshness and revocation tests. Existing initial-failure artifacts remain part of the ledger even if this correction passes.
