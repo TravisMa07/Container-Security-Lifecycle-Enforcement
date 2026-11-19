@@ -21,7 +21,7 @@ The signer is a separate authorized invocation with separate key access, not a c
 | Decision | Status | Record |
 | --- | --- | --- |
 | Small monolith and independent trust boundaries | Accepted | [ADR 0001](decisions/0001-foundation.md) |
-| Python runtime baseline | 3.12.16 locally qualified for P0 | [ADR 0001](decisions/0001-foundation.md) |
+| Python runtime baseline | 3.12.16 locally qualified for P0/P1 | [ADR 0001](decisions/0001-foundation.md) |
 | Exact local tool/image/build set and admission API | Locally qualified on ARM64 with source-aligned Kubernetes1.35.10 | [P0 ledger](p0-ledger.md) |
 | License | Apache-2.0, owner-selected during P0 | [License](../LICENSE) |
 
@@ -32,3 +32,5 @@ P0 selects project-local verified tools, isolated local Docker resources, explic
 ## P1 evidence path
 
 [Design](p1-design.md): strict Pydantic image/finding/scan records, immutable SQLite raw documents and per-scan finding snapshots, hash-checked transactional migrations and a small JSON CLI. Imported assertions and executed local scans remain separate evidence contexts. The bounded loopback OCI resolver verifies index/manifest/config relationships; the Trivy runner records binary and DB identity without issuing a policy verdict. Other canonical models acquire domain behavior in their owning phases.
+
+P1 local verification:96 offline tests and an actual pinned Trivy/OCI/persistence acceptance run passed at the exact revision in [qualification](results/p1-qualification.json). Imported and executed provenance remains separate. P1 is unmerged; subsequent domains remain pending.

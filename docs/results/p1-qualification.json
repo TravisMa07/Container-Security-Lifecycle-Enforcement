@@ -1,0 +1,266 @@
+{
+  "artifacts": [
+    {
+      "path": ".local/p1/parser-red.log",
+      "sha256": "66f88a8e55cc8dd21850e02e7ae046cb38c45f29976de6c5b687deff60f7866a"
+    },
+    {
+      "path": ".local/p1/parser-green.log",
+      "sha256": "305986e909c14a0cdd64531a296321355df929212f3c745085a1ef1cbe6116a0"
+    },
+    {
+      "path": ".local/p1/store-red.log",
+      "sha256": "b4831b888fd78d23ecb81519b92ee670a1f51dd9d14bca2997d42a1c4a1f64d1"
+    },
+    {
+      "path": ".local/p1/store-green.log",
+      "sha256": "91ac6e4bafc15fbcc1f6fef0ebd33ab76f15930c6cae9faca3fe5d1f66ba238f"
+    },
+    {
+      "path": ".local/p1/oci-red.log",
+      "sha256": "c1f47a50e391e33aad07c932ccc4b5173619332a349939d3846f8a9c3bd9ecac"
+    },
+    {
+      "path": ".local/p1/oci-green.log",
+      "sha256": "6057a6ce6c7d74aec9933275804a14a6aee2ebfd16a9d929367888c528d733b3"
+    },
+    {
+      "path": ".local/p1/real-first.err",
+      "sha256": "d0a9b0f688a513f2780bd8b4b081bfdaf462e5202a816d0eb32a39531deec1eb"
+    },
+    {
+      "path": ".local/p1/review-red.log",
+      "sha256": "03e4b7d6814dcfc7cf7c107a1bb8d1f9a1a2f22cecf8efe01abe635ad35d6a71"
+    },
+    {
+      "path": ".local/p1/review-green.log",
+      "sha256": "84bfc2ca4e6226428aecd34ff79a75fc6ad28db9c3feaddb24d4750135060e15"
+    },
+    {
+      "path": ".local/p1/corruption-red.log",
+      "sha256": "3dc1ddc266ea2d205526ece65e7d971f25350ed736ae889338e63fb7ecd7313d"
+    },
+    {
+      "path": ".local/p1/corruption-green.log",
+      "sha256": "141988dc210f831eb2a6b8eb0cc2799f402531f48a5aa9c0d61736f0d69e4ff6"
+    },
+    {
+      "path": ".local/p1/utc-boundary-red.log",
+      "sha256": "d2b7719da3df2811b06f3ea457298f03e8e684c81c3b25ef6c2a32b1554daa28"
+    },
+    {
+      "path": ".local/p1/utc-boundary-green.log",
+      "sha256": "f72a05e12f934534b8082d0e35d5fdd9d080b34a1b479f6cbeeaa2cd8d045380"
+    },
+    {
+      "path": ".local/p1/qualified-code-tests.log",
+      "sha256": "b2fbe2f326b3eb36a14bcb0343bb2e77030ca2a3a049527549011d31f177b707"
+    },
+    {
+      "path": ".local/p1/qualified-code-docs.log",
+      "sha256": "f387e9f0a32fa8080972ab9ebee10bb272d1421faf8726c4e5263c18045f1f69"
+    },
+    {
+      "path": ".local/p1/qualified-fresh-tests.log",
+      "sha256": "4d7e653052aa8d0ce9cd8d74eef88209af52b6d981e0c0b4458534b3de4476f5"
+    },
+    {
+      "path": ".local/p1/fresh-install.log",
+      "sha256": "97fc3368938b3771692ba5fa6cd5d25196ef1c0330a91d46ed537813df25b245"
+    },
+    {
+      "path": ".local/p1/osv.json",
+      "sha256": "d9d358588077ffc5512cc18b19241bcb8725c42157d3d798fe4e16e04f2290c7"
+    },
+    {
+      "path": ".local/p1/qualification-corrected.json",
+      "sha256": "1ae4341879de0c781cd3e2af69b88dd2734c3d5cc82f464a8d6017712a25df95"
+    },
+    {
+      "path": ".local/p1/qualification/20261119T223805223201Z/00-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".local/p1/qualification/20261119T223805223201Z/00-stdout.json",
+      "sha256": "71bbf30b9d3a5bd98e328ae88f0f9aeca2c3bab33964917e8c0e9181adddabd1"
+    },
+    {
+      "path": ".local/p1/qualification/20261119T223805223201Z/01-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".local/p1/qualification/20261119T223805223201Z/01-stdout.json",
+      "sha256": "2d52f563e890380df6b510d5b2930579d928528e90428e12547f25c7c82fbbd0"
+    },
+    {
+      "path": ".local/p1/qualification/20261119T223805223201Z/02-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".local/p1/qualification/20261119T223805223201Z/02-stdout.json",
+      "sha256": "366075961d69ebc29e9649d1f1becacbc12e17ccea34adaf2241036acff35906"
+    },
+    {
+      "path": ".local/p1/qualification/20261119T223805223201Z/03-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".local/p1/qualification/20261119T223805223201Z/03-stdout.json",
+      "sha256": "c5b932fdf2c8741472f56253d081799948315ab1d29d99acd530384155e85719"
+    },
+    {
+      "path": ".local/p1/qualification/20261119T223805223201Z/04-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".local/p1/qualification/20261119T223805223201Z/04-stdout.json",
+      "sha256": "e1f9c7aa5ccf39e554743d7946b7733c652ce681fa86bbc70687d31c93e772da"
+    },
+    {
+      "path": ".local/p1/qualification/20261119T223805223201Z/05-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".local/p1/qualification/20261119T223805223201Z/05-stdout.json",
+      "sha256": "e1f9c7aa5ccf39e554743d7946b7733c652ce681fa86bbc70687d31c93e772da"
+    },
+    {
+      "path": ".local/p1/qualification/20261119T223805223201Z/06-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".local/p1/qualification/20261119T223805223201Z/06-stdout.json",
+      "sha256": "5467204e17f130e0b82154ca9f82fe4c1fc86b3da25611e72dc6da6b1a837347"
+    },
+    {
+      "path": ".local/p1/qualification/20261119T223805223201Z/07-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".local/p1/qualification/20261119T223805223201Z/07-stdout.json",
+      "sha256": "5467204e17f130e0b82154ca9f82fe4c1fc86b3da25611e72dc6da6b1a837347"
+    },
+    {
+      "path": ".local/p1/qualification/20261119T223805223201Z/08-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".local/p1/qualification/20261119T223805223201Z/08-stdout.json",
+      "sha256": "acdc1bc463597a67f519ac2e9825ddba4217a4880e453363ce41a29e7c1cd154"
+    },
+    {
+      "path": ".local/p1/qualification/20261119T223805223201Z/commands.json",
+      "sha256": "4d3286a56d514c1559ab4ee9f6b9dabc43d281bd752a8bfd37aebac25cbf8f07"
+    },
+    {
+      "path": ".local/p1/qualification/20261119T223805223201Z/db-metadata.json",
+      "sha256": "88f7dbe73ecb9db8d5db44c7ff731a3be4900d9bfa86f305d9044bd2a24bba8c"
+    },
+    {
+      "path": ".local/p1/qualification/20261119T223805223201Z/report.json",
+      "sha256": "1aad0b64b5de101cdf5ba65c85f01c7d7155cf7dea261ec37e6d6460c37b694f"
+    },
+    {
+      "path": ".local/p1/qualification/20261119T223805223201Z/result.json",
+      "sha256": "1ae4341879de0c781cd3e2af69b88dd2734c3d5cc82f464a8d6017712a25df95"
+    }
+  ],
+  "db_document_hash": "sha256:88f7dbe73ecb9db8d5db44c7ff731a3be4900d9bfa86f305d9044bd2a24bba8c",
+  "dirty_working_tree": false,
+  "executed_revision": "c834c6bc4bb8de000a8ee9a2cbbb7863aa54b8b3",
+  "execution": {
+    "argv": [
+      "${CHECKOUT}/.tools/bin/trivy",
+      "image",
+      "--config",
+      "",
+      "--ignorefile",
+      "",
+      "--skip-version-check",
+      "--ignore-unfixed=false",
+      "--severity",
+      "UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL",
+      "--exit-code",
+      "0",
+      "--image-src",
+      "remote",
+      "--scanners",
+      "vuln",
+      "--format",
+      "json",
+      "--output",
+      "${CHECKOUT}/.local/p1/runs/scan-0takb7b0/report.json",
+      "--cache-dir",
+      "${CHECKOUT}/.local/trivy-cache",
+      "--platform",
+      "linux/arm64",
+      "--insecure",
+      "127.0.0.1:15120/000000000000/us-east-1/csle-p0/demo@sha256:1829893486be257df5049ab3b7fc95afbd0fc09d89803cbc580bda1ba5386b29"
+    ],
+    "db_content_hash": "sha256:bcd04c5fc8238015e17b7e7fa95a34ce3cfd3f3cde034ba9594364265ccf712d",
+    "executable_hash": "sha256:7a15c426f963473a485a4f315e21f8e2c881269d500bf0de35da13a4421fa108",
+    "finished_at": "2026-11-19T22:38:06.009218Z",
+    "purpose": "P1_local_scan_evidence_not_signing_authorization",
+    "scanner_version": "0.76.2",
+    "started_at": "2026-11-19T22:38:05.860387Z"
+  },
+  "image_ref": "127.0.0.1:15120/000000000000/us-east-1/csle-p0/demo@sha256:1829893486be257df5049ab3b7fc95afbd0fc09d89803cbc580bda1ba5386b29",
+  "imported_scan_id": "sha256:c1fd28b399dac5cfeeaf6933e7713a41bdeee50c50386aac6a5c12253abf0045",
+  "independent_review": {
+    "followup": "2dcc196d45969c87e5ff7afd4faf7f0a21db0f6e plus inspected UTC boundary fix",
+    "initial": "af5dd4340b317f7eed9d78ca093dca80f2252a8b",
+    "remaining_blockers": []
+  },
+  "limitations": [
+    "Executed scanner restricted to exact pinned demo selected manifest due known upstream advisory; other reports import as unverified only",
+    "Real integration uses retained P0 loopback backing registry; no new infrastructure or real AWS account",
+    "Single macOS ARM64/v8 fixture; index selection tested offline, not qualified across real multiplatform images",
+    "Fresh pinned Python environment tested; Docker/DB download caches available, not cold full-stack provisioning",
+    "Local database owner can bypass guards and rewrite hashes; this is not cryptographic audit storage",
+    "Query paths materialize local scan history in memory; high-volume scaling unqualified",
+    "No policy verdict, signing authorization, lifecycle/remediation state or compliance conformance claim",
+    "P2-P7 remain pending; owner acceptance, merge and merged-revision verification are separate"
+  ],
+  "local_directory": ".local/p1/qualification/20261119T223805223201Z",
+  "normalized_findings": 11,
+  "passed": [
+    "real_pinned_scan",
+    "manifest_config_platform_binding",
+    "raw_hash_persistence",
+    "scanner_db_provenance",
+    "normalized_rows",
+    "reimport_idempotency",
+    "restart_query_determinism",
+    "import_execution_separation"
+  ],
+  "platform": {
+    "architecture": "arm64",
+    "os": "Darwin",
+    "python": "3.12.16",
+    "sqlite": "3.53.1"
+  },
+  "resolution": {
+    "config_digest": "sha256:abbc135a7d3909a5eb6a56aac4c769cf15be025e3c9e226b8660f2b2b378158b",
+    "endpoint": "http://127.0.0.1:15120",
+    "index_digest": null,
+    "manifest_digest": "sha256:1829893486be257df5049ab3b7fc95afbd0fc09d89803cbc580bda1ba5386b29",
+    "method": "verified_oci_manifest_and_config_bytes",
+    "platform": "linux/arm64/v8",
+    "platform_digest": "sha256:1829893486be257df5049ab3b7fc95afbd0fc09d89803cbc580bda1ba5386b29",
+    "requested_reference": "127.0.0.1:15120/000000000000/us-east-1/csle-p0/demo@sha256:1829893486be257df5049ab3b7fc95afbd0fc09d89803cbc580bda1ba5386b29"
+  },
+  "scan_id": "sha256:140e9d36112915f3ef20e70474780fd6106f2fe46fca60bfdd9b05e915eba351",
+  "scan_timestamp": "2026-11-19T22:38:06.004225Z",
+  "scanner_db_updated_at": "2026-11-19T19:04:59.970326Z",
+  "scanner_version": "0.76.2",
+  "schema_version": "1",
+  "scope": "P1 fixed-fixture local scan evidence; no policy, lifecycle, signing or compliance qualification",
+  "source_document_hash": "sha256:1aad0b64b5de101cdf5ba65c85f01c7d7155cf7dea261ec37e6d6460c37b694f",
+  "status": "qualified_on_branch",
+  "tests": {
+    "contract": 17,
+    "fresh_python_environment": true,
+    "total": 96,
+    "unit": 79
+  }
+}
