@@ -68,3 +68,12 @@ class KubeAPITests(unittest.TestCase):
             items, version = obj.list('Pod')
         self.assertEqual(items[0].get('kind'),'Pod')
         self.assertEqual(items[0].get('apiVersion'),'v1')
+
+    def test_snapshot_has_cumulative_byte_limit(self):
+        first={'kind':'PodList','metadata':{'resourceVersion':'rv','continue':'next'},'items':[]}
+        second={'kind':'PodList','metadata':{'resourceVersion':'rv'},'items':[]}
+        limit=max(len(json.dumps(first).encode()),len(json.dumps(second).encode()))+1
+        obj=api()
+        with patch('app.collectors.kubernetes.MAX_BYTES',limit),patch.object(obj,'_open',side_effect=[response(first),response(second)]):
+            with self.assertRaisesRegex(ValueError,'snapshot.*byte limit'):
+                obj.list('Pod')

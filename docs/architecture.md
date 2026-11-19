@@ -34,3 +34,7 @@ P0 selects project-local verified tools, isolated local Docker resources, explic
 [Design](p1-design.md): strict Pydantic image/finding/scan records, immutable SQLite raw documents and per-scan finding snapshots, hash-checked transactional migrations and a small JSON CLI. Imported assertions and executed local scans remain separate evidence contexts. The bounded loopback OCI resolver verifies index/manifest/config relationships; the Trivy runner records binary and DB identity without issuing a policy verdict. Other canonical models acquire domain behavior in their owning phases.
 
 P1 local verification:96 offline tests and an actual pinned Trivy/OCI/persistence acceptance run passed at the exact revision in [qualification](results/p1-qualification.json). Imported and executed provenance remains separate. P1 is unmerged; subsequent domains remain pending.
+
+## P2 observation path
+
+[P2 design](p2-design.md) adds one fixed seven-thread namespaced read-only REST collector. Explicit local CA/token/server credentials replace implicit kube contexts. Immutable resource observations and complete-snapshot membership receipts support mutable current membership/checkpoints and append-only gaps. Scope identity binds API server/CA across all namespaces for one cluster ID. Reconciliation absence is not a deletion event or remediation result. SQLite migrations2/3 append to P1 without rewriting its evidence. [P2 runbook](p2-runbook.md) owns operator semantics; P3 owns derived lifecycle decisions.

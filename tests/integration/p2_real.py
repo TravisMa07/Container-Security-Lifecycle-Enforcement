@@ -39,9 +39,12 @@ def main():
             raise AssertionError('kubectl failed; inspect '+str(run/'failed-command.log'))
         return result.stdout
     def apply(obj):
+        if obj.get('kind')=='List':
+            return {'items':[apply(item) for item in obj['items']]}
         return json.loads(command(['create','-f','-','-o','json'],json.dumps(obj)))
     config=json.loads(command(['config','view','--minify','--raw','-o','json']))
     server=config['clusters'][0]['cluster']['server']
+    versions=json.loads(command(['version','-o','json']))
     (run/'ca.crt').write_bytes(base64.b64decode(config['clusters'][0]['cluster']['certificate-authority-data']))
     apply({'apiVersion':'v1','kind':'Namespace','metadata':{'name':ns,'labels':{'io.csle.scope':'p2'}}})
     rbac=json.loads((ROOT/'infra/p2-rbac.json').read_text())
@@ -138,7 +141,9 @@ def main():
         wait(lambda:any(g['reason']=='RESOURCE_VERSION_EXPIRED' and g['ended_at'] is not None for g in query('gaps')),30)
         wait(lambda:any(g['reason']=='COLLECTOR_STOPPED' and g['ended_at'] is not None for g in query('gaps')),30)
     finally:stop(handle)
-    events=query('events');observations=query('observations');current=query('current');gaps=query('gaps')
+    events=query('events');observations=query('observations');current=query('current');gaps=query('gaps');snapshots=query('snapshots')
+    assert snapshots and any(s['members']==[] for s in snapshots)
+    assert all(m['uid']!=unseen_uid for s in snapshots for m in s['members'])
     assert not any(e['uid']==unseen_uid for e in events)
     assert any(o['uid']==first_uid for o in observations) and any(o['uid']==second_uid for o in observations)
     # Replay a real captured event without changing checkpoints/current/history.
@@ -148,9 +153,9 @@ def main():
         receipt=store.apply_event('kind-csle-p0-cis',ns,event['kind'],event['event_type'],event['raw_object'],datetime.now(timezone.utc).isoformat().replace('+00:00','Z'))
         assert receipt['inserted'] is False
         assert store.checkpoint('kind-csle-p0-cis',ns,event['kind'])==before
-    for method,value in [('events',events),('observations',observations),('current',current),('gaps',gaps)]:
+    for method,value in [('events',events),('observations',observations),('current',current),('gaps',gaps),('snapshots',snapshots)]:
         (run/(method+'.json')).write_text(json.dumps(value,sort_keys=True,indent=2))
-    for operation in ('workloads','events','observations','gaps'):
+    for operation in ('workloads','events','observations','snapshots','gaps'):
         argv=[sys.executable,'-m','app','--db',str(db),'inventory',operation,'--cluster','kind-csle-p0-cis','--namespace',ns]
         first_output=subprocess.check_output(argv,cwd=ROOT)
         assert first_output==subprocess.check_output(argv,cwd=ROOT)
@@ -158,8 +163,8 @@ def main():
             'namespace':ns,'cluster_id':'kind-csle-p0-cis','server_id':api.server_id,'local_directory':str(run.relative_to(ROOT)),
             'first_job_uid':first_uid,'reused_name_job_uid':second_uid,'unobserved_job_uid':unseen_uid,
             'rbac_denials':denials,'actual_expired_resource_version_status':recovered.observed_code,'watch_connections':observed_calls,
-            'events':len(events),'observations':len(observations),'gaps':len(gaps),'collector_summaries':summaries,
-            'passed':['all_seven_resource_list_watch','read_only_namespaced_rbac','ttl_job_history','scale_zero_reference','same_name_new_uid','real_watch_reconnect','periodic_reconciliation','restart_checkpoint_and_gaps','unseen_downtime_job_not_invented','actual_api_410_and_relist','replay_idempotency','deterministic_cli']}
+            'kubernetes_server_version':versions['serverVersion']['gitVersion'],'snapshot_receipts':len(snapshots),'events':len(events),'observations':len(observations),'gaps':len(gaps),'collector_summaries':summaries,
+            'passed':['all_seven_resource_list_watch','read_only_namespaced_rbac','ttl_job_history','scale_zero_reference','same_name_new_uid','real_watch_reconnect','periodic_reconciliation','restart_checkpoint_and_gaps','unseen_downtime_job_not_invented','actual_api_410_and_relist','replay_idempotency','deterministic_cli','immutable_complete_snapshot_receipts']}
     (run/'result.json').write_text(json.dumps(result,indent=2,sort_keys=True)+'\n')
     print(json.dumps(result,indent=2,sort_keys=True))
 

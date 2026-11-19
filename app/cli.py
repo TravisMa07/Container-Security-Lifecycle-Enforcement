@@ -56,7 +56,7 @@ def arguments():
     collect.add_argument('--duration', type=float)
     collect.add_argument('--reconcile-seconds', type=int, default=30)
     collect.add_argument('--watch-seconds', type=int, default=5)
-    for operation in ('workloads', 'observations', 'events', 'gaps'):
+    for operation in ('workloads', 'observations', 'events', 'snapshots', 'gaps'):
         query = inventory_ops.add_parser(operation)
         query.add_argument('--cluster', required=True)
         query.add_argument('--namespace')

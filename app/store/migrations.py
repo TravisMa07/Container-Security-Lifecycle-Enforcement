@@ -37,3 +37,13 @@ DEFAULT_MIGRATIONS += (
         ),
     ),
 )
+
+# Preserve already executed migration2: add immutable complete-list receipts.
+DEFAULT_MIGRATIONS += (
+    (
+        'CREATE TABLE inventory_snapshots (snapshot_id TEXT PRIMARY KEY, payload TEXT NOT NULL)',
+        *(f"CREATE TRIGGER inventory_snapshots_no_{operation.lower()} BEFORE {operation} ON inventory_snapshots "
+          "BEGIN SELECT RAISE(ABORT, 'inventory snapshots are append-only'); END"
+          for operation in ('UPDATE', 'DELETE')),
+    ),
+)

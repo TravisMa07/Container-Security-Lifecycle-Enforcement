@@ -74,9 +74,9 @@ class InventoryStore:
         _scope(cluster_id,namespace)
         _ID.validate_python(server_id,strict=True)
         with self._transaction():
-            row=self.connection.execute('SELECT server_id FROM inventory_scopes WHERE cluster_id=? AND namespace=?',
-                                        (cluster_id,namespace)).fetchone()
-            if row is not None and row['server_id']!=server_id:
+            bindings=self.connection.execute('SELECT server_id FROM inventory_scopes WHERE cluster_id=?',
+                                             (cluster_id,)).fetchall()
+            if any(row['server_id']!=server_id for row in bindings):
                 raise ValueError('inventory scope is bound to a different Kubernetes server')
             self.connection.execute('INSERT OR IGNORE INTO inventory_scopes(cluster_id,namespace,server_id) VALUES(?,?,?)',
                                     (cluster_id,namespace,server_id))
@@ -243,9 +243,41 @@ class InventoryStore:
                 if row['uid'] not in uids:
                     self.connection.execute('UPDATE inventory_current SET present=0,absence_reason=? WHERE cluster_id=? AND namespace=? AND kind=? AND uid=?',
                                             ('RECONCILED_ABSENT',cluster_id,namespace,kind,row['uid']))
+            receipt={'cluster_id':cluster_id,'namespace':namespace,'kind':kind,
+                     'resource_version':resource_version,'observed_at':observed_at,'source':source,
+                     'members':sorted([{'uid':r.uid,'event_id':r.event_id} for r in records],key=lambda r:r['uid'])}
+            snapshot_id=_hash(receipt)
+            self.connection.execute('INSERT OR IGNORE INTO inventory_snapshots(snapshot_id,payload) VALUES(?,?)',
+                                    (snapshot_id,_pack(receipt)))
             self._checkpoint(cluster_id,namespace,kind,resource_version,observed_at)
             self._close_gap(cluster_id,namespace,kind,observed_at)
-            return {'inserted':inserted,'objects':len(records),'resource_version':resource_version}
+            return {'inserted':inserted,'objects':len(records),'resource_version':resource_version,'snapshot_id':snapshot_id}
+
+    def snapshots(self,cluster_id,namespace=None):
+        _ID.validate_python(cluster_id,strict=True)
+        if namespace is not None: _scope(cluster_id,namespace)
+        self.store._ensure_ready()
+        result=[]
+        try:
+            for row in self.connection.execute('SELECT snapshot_id,payload FROM inventory_snapshots ORDER BY snapshot_id'):
+                receipt=_unpack(row['payload'])
+                if _hash(receipt)!=row['snapshot_id']:
+                    raise ValueError('inventory snapshot identity check failed')
+                _scope(receipt['cluster_id'],receipt['namespace'],receipt['kind'])
+                _time(receipt['observed_at']);_ID.validate_python(receipt['resource_version'],strict=True)
+                if receipt['source'] not in ('kubernetes_list','kubernetes_reconcile') or not isinstance(receipt['members'],list):
+                    raise ValueError('invalid inventory snapshot evidence')
+                seen=set()
+                for member in receipt['members']:
+                    event=self._read_event(member['event_id'])
+                    if member['uid'] in seen or member['uid']!=event['uid'] or any(receipt[k]!=event[k] for k in ('cluster_id','namespace','kind','source')) or event['event_type']!='SNAPSHOT':
+                        raise ValueError('inventory snapshot membership association failed')
+                    seen.add(member['uid'])
+                if receipt['cluster_id']==cluster_id and (namespace is None or receipt['namespace']==namespace):
+                    result.append(dict(receipt,snapshot_id=row['snapshot_id']))
+            return result
+        except (KeyError,TypeError) as error:
+            raise ValueError('inventory snapshot integrity check failed') from error
 
     def events(self,cluster_id,namespace=None):
         _ID.validate_python(cluster_id,strict=True)

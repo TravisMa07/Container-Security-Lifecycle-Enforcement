@@ -166,3 +166,47 @@ class InventoryTests(unittest.TestCase):
             self.assertEqual(store.events(C,N),[])
             self.assertIsNone(store.checkpoint(C,N,'Pod'))
             self.assertIsNone(store.gaps(C,N)[0]['ended_at'])
+    def test_cluster_identity_cannot_mix_servers_across_namespaces(self):
+        with InventoryStore(self.path) as store:
+            store.bind_scope('cluster','one','server-one')
+            with self.assertRaises(ValueError):
+                store.bind_scope('cluster','two','server-two')
+            store.bind_scope('cluster','two','server-one')
+
+
+    def test_complete_snapshots_retain_empty_membership_and_reappearance(self):
+        with InventoryStore(self.path) as store:
+            resource=obj()
+            store.apply_snapshot(C,N,'Pod',[resource],'list-one',T0)
+            store.apply_snapshot(C,N,'Pod',[],'list-two',T1)
+            store.apply_snapshot(C,N,'Pod',[resource],'list-three',T2)
+            self.assertEqual(len(store.events(C,N)),1)
+            snapshots=store.snapshots(C,N)
+            self.assertEqual(len(snapshots),3)
+            by_version={s['resource_version']:s for s in snapshots}
+            self.assertEqual(by_version['list-two']['members'],[])
+            self.assertEqual(by_version['list-two']['observed_at'],T1)
+            self.assertEqual(by_version['list-one']['members'],by_version['list-three']['members'])
+            self.assertTrue(store.current(C,N)[0]['present'])
+            self.assertFalse(any(e['event_type']=='DELETED' for e in store.events(C,N)))
+
+    def test_snapshot_receipt_and_membership_roll_back_if_gap_close_fails(self):
+        with InventoryStore(self.path) as store:
+            store.begin_gap(C,N,'Pod','OUTAGE',T0)
+            store.connection.execute("CREATE TRIGGER close_fault BEFORE INSERT ON inventory_gap_events WHEN NEW.event_type='END' BEGIN SELECT RAISE(ABORT,'fault'); END")
+            with self.assertRaises(sqlite3.IntegrityError):
+                store.apply_snapshot(C,N,'Pod',[obj()],'rv-list',T1)
+            self.assertEqual(store.snapshots(C,N),[])
+            self.assertEqual(store.events(C,N),[])
+            self.assertEqual(store.current(C,N),[])
+            self.assertIsNone(store.checkpoint(C,N,'Pod'))
+            self.assertIsNone(store.gaps(C,N)[0]['ended_at'])
+
+    def test_snapshot_receipts_are_append_only_and_hash_checked(self):
+        with InventoryStore(self.path) as store:
+            store.apply_snapshot(C,N,'Pod',[],'rv-empty',T0)
+            for statement in ['DELETE FROM inventory_snapshots','UPDATE inventory_snapshots SET payload=payload']:
+                with self.assertRaises(sqlite3.IntegrityError):store.connection.execute(statement)
+            store.connection.execute('DROP TRIGGER inventory_snapshots_no_update')
+            store.connection.execute("UPDATE inventory_snapshots SET payload='{}'")
+            with self.assertRaises(ValueError):store.snapshots(C,N)

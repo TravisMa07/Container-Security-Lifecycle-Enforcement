@@ -101,12 +101,16 @@ class KubeAPI:
 
     def list(self, kind):
         items, version, continuation, seen = [], None, '', set()
+        total_bytes = 0
         for _ in range(21):
             params = {'limit': '500'}
             if continuation:
                 params['continue'] = continuation
             with self._open(kind, params, 15) as response:
                 raw = response.read(MAX_BYTES + 1)
+            total_bytes += len(raw)
+            if total_bytes > MAX_BYTES:
+                raise ValueError('Kubernetes snapshot exceeds byte limit')
             document = load_document(raw, MAX_BYTES)
             if not isinstance(document, dict) or not isinstance(document.get('metadata'), dict) or not isinstance(document.get('items'), list):
                 raise ValueError('invalid Kubernetes list document')
