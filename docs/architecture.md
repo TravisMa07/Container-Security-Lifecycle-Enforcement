@@ -22,9 +22,9 @@ The signer is a separate authorized invocation with separate key access, not a c
 | --- | --- | --- |
 | Small monolith and independent trust boundaries | Accepted | [ADR 0001](decisions/0001-foundation.md) |
 | Python runtime baseline | Selected for initial development, not qualified | [ADR 0001](decisions/0001-foundation.md) |
-| Exact external tool/image set and admission API | Pending compatibility experiments | [Dependencies](dependencies.md) |
+| Exact local tool/image/build set and admission API | Technically qualified on ARM64; exact-source gate open | [P0 ledger](p0-ledger.md) |
 | License | Apache-2.0, owner-selected during P0 | [License](../LICENSE) |
 
 Do not add a web service, broker, Postgres, operator framework or full Inspector adapter without a demonstrated requirement and a new decision record.
 
-P0 selects project-local verified tools, isolated local Docker resources, explicit emulator endpoints and a dedicated kubeconfig. [Compatibility results](p0-ledger.md) retain the initial cached older-payload failure and the corrected v2 profile: recognized signed timestamp, current assessment-ID binding, and verification cache disabled. Successive admissions were exercised without deleting old evidence. Product admission/predicate design remains open until the full contract/negative/source gates are qualified.
+P0 selects project-local verified tools, isolated local Docker resources, explicit emulator endpoints and a dedicated kubeconfig. [Compatibility results](p0-ledger.md) retain the initial cached older-payload failure and the corrected v2 profile: recognized signed timestamp, current assessment-ID binding, and verification cache disabled. Successive admissions were exercised without deleting old evidence. The P0 contract/negative/fresh-clone gates now pass. This remains a local single-artifact feasibility profile; P5 owns the product policy/issuance contract, and exact official framework source review remains open.

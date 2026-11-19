@@ -2,6 +2,8 @@
 
 Base: `8c5e95e661781f2810030ca6b89d6c0f7afd4f08`. Owner: root. Scope/expectations: [P0 design](p0-design.md). Phase tracker: [#1](https://github.com/TravisMa07/Container-Security-Lifecycle-Enforcement/issues/1).
 
+Current closure status: all implemented technical gates have passing evidence, including final reviewed-head expiry confirmation. Exact official PCI/CIS wording remains an unmet source gate; P0 is not closed. See the closure section below.
+
 ## Pre-implementation discovery — 2026-11-19
 
 Branch `phase/p0-compatibility`; working tree initially clean. Docker Engine 29.8.0 reachable; no running containers; kubectl has no current context. macOS ARM64, about 741 GiB filesystem free. Kind/Helm/Trivy/Cosign/AWS CLI absent from PATH. No cloud credentials read, no cluster mutation, no privileged installation.
@@ -80,3 +82,40 @@ This bounds a local single-artifact reassessment feasibility result. It does not
 Final strict v2 expiry: after the second approval expired at 17:53:17 UTC, `make p0-expired` passed. It required the exact matching prior positive receipt/predicate hash, a positive timestamp within that predicate's window, unchanged observed policy, kubectl exit 1 and the specific `P0 reject: expiry` admission denial. The hash-attributed artifact is in the smoke summary. This closes the local repeated-assessment/expiry feasibility case, not the full P0/MVP gate. A subsequent ad-hoc summary path parse initially failed; attribution was corrected without rerunning or changing the successful runtime result.
 
 Kubectl/server minor skew (1.36/1.37) is within the [official supported one-minor policy](https://kubernetes.io/releases/version-skew-policy/). Whole-stack patch status and benchmark applicability are still separate open gates.
+
+## Closure continuation — technical qualification and exact-source blocker
+
+Owner request: continue through P0 closure and commit to draft PR #9. Closure expectations/contracts frozen in `09e8f2f` before implementation. `closure_contracts` owned only schemas/tests/design; `closure_sources` and `closure_patch_review` performed read-only source/advisory work. Parent owns integration/pins/CI and serialized runtime tests. Existing concise threat model remains one shared checklist; no per-slice threat-model document or unrelated security infrastructure was added.
+
+### Contracts and offline verification
+
+Six application v1 JSON Schemas, shared definitions and explicitly synthetic fixtures are in contracts/v1. Independent C01–C16 cases and exact red/green hashes are in p0-contracts-design.md. A permissive-schema red run failed 72 invalid-input assertions before implementation; 17 contract tests now pass. Equality, chronology, actual evidence truth and cryptography remain explicit P1/P3/P5/P6 domain checks; structural validation alone cannot authorize anything.
+
+Independent `closure_review` ran the then-42 tests and found one real malformed-input defect: falsy non-list Vulnerabilities values could normalize into a clean result. Four focused red failures reproduced that behavior; the corrected validator rejects them and explicitly supports absent/null/list clean results. The final suite has 27 unit +17 contract tests (44), all passing. Review's runtime-identity caution was addressed by verifying actual kubeletVersion and container.Image against the built-node record. Native/fallback referrers are both published; separate verifier-path coverage is not claimed.
+
+### Patch and clean-clone qualification
+
+Python upgraded to 3.12.16, registry to 3.1.2. Because no patched official Kind node tag was published, supported Kind release-file building uses hash-pinned Kubernetes 1.37.2 ARM64 archive and digest-pinned Kind base. Complete known-advisory applicability and residual limits are in dependencies.md; no vulnerability-free claim is made. OSV returned no matching advisories for the fifteen exact Python dependencies queried. Only URI/date-time validators actually used are installed, avoiding unrelated format extras.
+
+Old project lab containers were stopped (not deleted), preserving their resources/data/history. No unrelated project resources were touched. A public GitHub clone under ignored `.local/p0/closure-clone` began with no copied .tools/.local state, at `93730f7`. It downloaded/verified tooling, installed hash-locked dependencies, ran tests, built a patched node, created separate `csle-p0-close` resources/loopback ports, installed Kyverno and passed the full initial/repeated-assessment, runtime identity, policy-revocation, unsigned/wrong-trust/privileged, six adversarial and expiry experiments. Docker's global content/build cache was available; cold-daemon/cache independence is not claimed.
+
+After the review fix, the clean clone fast-forwarded to `ae3c009` and remained Git-clean. Dependencies were resynchronized and all 44 tests passed. Runtime version/config ID was asserted, and ECR/Trivy, two actual admission/runtime paths, active-policy revocation, initial negatives and all six adversarial cases passed again on that source revision. The final same-predicate expiry result is appended below after its actual clock window; earlier expiry success remains separately attributed.
+
+Real adversarial cases: wrong outer subject, modified signed predicate, modified signature, future-issued signed predicate, stale scan time and stale DB time. Each has a contemporaneous valid admission control. Untampered fixture bundles are independently verified before mutation; malformed bundles/subject bindings fail independent verification and real admission. Stale/future fixtures retain valid cryptography and fail the intended content/time rule. Fixtures use only the ephemeral local key and distinct project-owned artifact digests; no old evidence index is overwritten.
+
+[Closure summary](results/p0-closure-summary.json) attributes commands/artifact hashes to exact source revisions. Runtime results qualify those executed revisions, not an unexecuted later documentation commit. Builds record Docker config IDs separately from OCI manifest identity; build inputs/outcomes are repeatable, bit-for-bit generated metadata is not claimed.
+
+### Acceptance map and remaining decision
+
+| P0 requirement | Current evidence/status |
+| --- | --- |
+| Environment and exact local tool compatibility | Passed on documented ARM64 Mac/Docker Desktop; pinned tools, patched build inputs, actual runtime identity and clean-clone path recorded |
+| ADRs, chosen license, dependency versions, risk register and test matrix | Implemented; Apache-2.0 owner-selected; source/advisory residuals explicit; no zero-CVE or production claim |
+| User stories, initial schemas and immutable digest strategy | Handoff user stories plus six frozen v1 contracts and 17 offline contract tests; domain truth remains later implementation |
+| Signed evidence and actual admission feasibility | Repeated allow/runtime identity, wrong-subject/tampered/future/stale/unsigned/wrong-trust/privileged/revoked denial passed; strict expiry separately time-qualified |
+| Exact official selected PCI/CIS wording review | BLOCKED: publisher publication access unavailable; official FAQ-backed directions are not full text/testing/applicability review |
+| Honest dependency/smoke failure/workaround record | Passed; initial cache/timestamp failure, patch changes, parser regression and their corrections retained |
+
+HANDOFF.md section19 explicitly requires exact selected framework wording from official sources during P0. Official PCI catalog metadata marks the full standard protected/agreement-required; even unprotected ROC/SAQ template retrieval returned403. CIS exact text download is registration-gated/unavailable (404/403). No publisher agreement/account was created and no personal data supplied. Full source details/hashes are in framework-sources.md. An owner-supplied official publication or explicit phase-scope amendment is required before unqualified P0 closure; neither CI nor the threat-model checklist can substitute for those facts. All three expanded MVP features and P6 source/shipping tests remain mandatory.
+
+Final reviewed-head expiry at `ae3c009`: `make p0-expired` passed after the actual second approval window, with matching positive receipt/predicate hash, unchanged policy and the specific expiry denial. An earlier invocation refused to execute before expiry; its separate precondition log is retained and is not denial evidence. Every implemented technical closure scenario now has passing evidence; exact-source wording is the sole P0 closure blocker. No issue/phase closure or merge is claimed.
