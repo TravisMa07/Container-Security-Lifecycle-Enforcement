@@ -179,3 +179,9 @@ class TimestampRegressionTests(unittest.TestCase):
         for value in ['2026-11-19T00:00:00+00:99', '2026-11-19T00:00:00-01:60', '2026-11-19T00:00:00+24:00']:
             with self.subTest(value=value), self.assertRaises(ValueError):
                 normalize_timestamp(value)
+
+    def test_utc_conversion_out_of_range_is_input_error(self):
+        from app.collectors.trivy import normalize_timestamp
+        for value in ['0001-01-01T00:00:00+23:00', '9999-12-31T23:59:59-23:00']:
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                normalize_timestamp(value)

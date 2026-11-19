@@ -40,9 +40,9 @@ def normalize_timestamp(value: str) -> str:
         raise ValueError('invalid timestamp offset')
     try:
         parsed = datetime.fromisoformat(value.replace('Z', '+00:00'))
+        return parsed.astimezone(timezone.utc).isoformat().replace('+00:00', 'Z')
     except (ValueError, OverflowError) as error:
         raise ValueError('invalid timestamp') from error
-    return parsed.astimezone(timezone.utc).isoformat().replace('+00:00', 'Z')
 
 
 def _pairs(pairs):
