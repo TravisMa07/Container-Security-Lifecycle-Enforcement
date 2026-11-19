@@ -1,0 +1,231 @@
+{
+  "actual_expired_resource_version_status": 410,
+  "artifacts": [
+    {
+      "path": ".local/p2/models-red.log",
+      "sha256": "54e947f7231480ceccda4e3e431a2016b50d11dac5b5855952b89df9660356c5"
+    },
+    {
+      "path": ".local/p2/models-green.log",
+      "sha256": "1dd974889d9848531223a1e0a7a421d03c34afc99d7d1f815219b87b8faaf81f"
+    },
+    {
+      "path": ".local/p2/store-red.log",
+      "sha256": "bcbdd80980197b8574662d5c7c3bed041b9ad8578ffbce3be2fa46a7419ae5ac"
+    },
+    {
+      "path": ".local/p2/store-green.log",
+      "sha256": "f82061ae1a347a85fd6bb47adc82137838341c1077fdeaff217a2d138a40a161"
+    },
+    {
+      "path": ".local/p2/typemeta-red.log",
+      "sha256": "6211ffadabe6d765a280699e4c0c0caecd5b6f1b24569b70e548dbbc66c7700a"
+    },
+    {
+      "path": ".local/p2/typemeta-green.log",
+      "sha256": "d314a645c1173fb76b807369ac43b31e9c3c105e7953fdcdae63fad904883cd8"
+    },
+    {
+      "path": ".local/p2/binding-red.log",
+      "sha256": "56423d925b15cfe19c4ea49d8bc8f1f0d0318d13bd115fe67331e3baa55eb6ef"
+    },
+    {
+      "path": ".local/p2/binding-green.log",
+      "sha256": "d93f1d00ac923f6e940e7597dc743f47c6321fcac3a1ac78d2b517755d9ee998"
+    },
+    {
+      "path": ".local/p2/snapshot-history-red.log",
+      "sha256": "3e237c35a054bff5be7400c0b6c863c0a039bd7752bc791eb6295a0794748c01"
+    },
+    {
+      "path": ".local/p2/snapshot-history-green.log",
+      "sha256": "980241685c393aacdcd4f20c8aa2db120191954016c4a0e8b42ea7d28968056a"
+    },
+    {
+      "path": ".local/p2/snapshot-limit-red.log",
+      "sha256": "77e175e9594f7edfeec8d8a317d4a512a561faa47a0aa5b3e97ab09a00286fd6"
+    },
+    {
+      "path": ".local/p2/snapshot-limit-green.log",
+      "sha256": "03384b8db5983f29c49e74ccefb2b5f509506e1cb7f23a081361f2fe99991125"
+    },
+    {
+      "path": ".local/p2/committed-tests.log",
+      "sha256": "9c67bdf0501af313fd116c3005ad9cc2616edc74675627a081c4ea3783972201"
+    },
+    {
+      "path": ".local/p2/committed-docs.log",
+      "sha256": "f387e9f0a32fa8080972ab9ebee10bb272d1421faf8726c4e5263c18045f1f69"
+    },
+    {
+      "path": ".local/p2/fresh-install.log",
+      "sha256": "ce0b5830e9df4d7dad82793e2b19bb261d270d0c2d07928c5363dfa4955f51b7"
+    },
+    {
+      "path": ".local/p2/fresh-tests.log",
+      "sha256": "d9b180b077ad379a2d9a8fa183148a7dc91b3c2ae0d513f07db508856ccd252d"
+    },
+    {
+      "path": ".local/p2/real-first.err",
+      "sha256": "dd348a79aa702e751be3b7ffe79822dade2c1afff49b904f91f0d34915d8d4f7"
+    },
+    {
+      "path": ".local/p2/real-second.json",
+      "sha256": "95d7ae1a37b70671e64621ff383fec4b6dfe5e1fbb6c00927e8f882860974c7e"
+    },
+    {
+      "path": ".local/p2/real-corrected.json",
+      "sha256": "acd20848fd80c1027a10de74e3db5bb4705e8c106266bdf32722ac23c5c17d0d"
+    },
+    {
+      "path": ".local/p2/kubectl-version.json",
+      "sha256": "fae77c4d7634c07d9b09967f4a045937f83ede5fb6246239eec32b24ee44a6a7"
+    },
+    {
+      "path": ".local/p2/qualification/20261119231713542877/commands.json",
+      "sha256": "0f111e8925d8081672dc56856d5a6489b28362fe0f82766e35543ca79cc23d86"
+    },
+    {
+      "path": ".local/p2/qualification/20261119231713542877/current.json",
+      "sha256": "145d309095b53aa099956a499640de3c32b76efd7666416d454457626c70f851"
+    },
+    {
+      "path": ".local/p2/qualification/20261119231713542877/events.json",
+      "sha256": "33ff766b420b7ff68dc5bb24e24d2e9ab3d36840c4c15d01f41924154245f56d"
+    },
+    {
+      "path": ".local/p2/qualification/20261119231713542877/gaps.json",
+      "sha256": "40dcee31ec99508d9eeabc81dce62b367f632156cc85e43dea127cda3800d582"
+    },
+    {
+      "path": ".local/p2/qualification/20261119231713542877/observations.json",
+      "sha256": "ebd1a9de5cc8c9b9a628a1b5ad198d83e29a8d777e16429eb77dda970e1e621f"
+    },
+    {
+      "path": ".local/p2/qualification/20261119231713542877/result.json",
+      "sha256": "acd20848fd80c1027a10de74e3db5bb4705e8c106266bdf32722ac23c5c17d0d"
+    },
+    {
+      "path": ".local/p2/qualification/20261119231713542877/snapshots.json",
+      "sha256": "c82140d666283f054a9b5c90675cad13ae3e304d968726bb821b2bb58514665a"
+    }
+  ],
+  "cluster_id": "kind-csle-p0-cis",
+  "collector_summaries": [
+    {
+      "cluster_id": "kind-csle-p0-cis",
+      "error_reasons": [],
+      "errors": 0,
+      "namespace": "csle-p2-20261119231713542877",
+      "status": "stopped"
+    },
+    {
+      "cluster_id": "kind-csle-p0-cis",
+      "error_reasons": [
+        "RESOURCE_VERSION_EXPIRED"
+      ],
+      "errors": 1,
+      "namespace": "csle-p2-20261119231713542877",
+      "status": "stopped"
+    }
+  ],
+  "dirty_working_tree": false,
+  "events": 57,
+  "executed_revision": "1ef3ed1f4b26d2942555ef53757b1d938ba164d5",
+  "expectation_freeze": "5ab817b",
+  "first_job_uid": "f2d3d94d-90e4-4c4a-a62e-238b283b55af",
+  "gaps": 29,
+  "kubernetes_server_version": "v1.35.10",
+  "limitations": [
+    "Single explicit namespace per collector; supported real profile is macOS ARM64 Kind1.35.10",
+    "Seven-kind list/watch is real; all kind/container normalization combinations also have synthetic tests",
+    "410 recovery is fault-injected by requesting RV1 from the actual server; status410 is not mocked",
+    "Downtime test stops observer, not the API server; early EOF/forbidden/storage failures have offline fault tests",
+    "Periodic relist and restart retain conservative per-kind gaps, not perfect or globally atomic historical coverage",
+    "Raw hashes identify canonical decoded resources with endpoint-supplied missing TypeMeta, not original wire JSON whitespace",
+    "Historical absence receipts start with migration3; prior development data is not retroactively reconstructed",
+    "Current/checkpoints are mutable projections; immutable events/snapshot receipts/gaps support history",
+    "Raw evidence, token files and DB remain ignored; local DB owner can bypass hashes and SQL guards",
+    "Query paths materialize small local history; high-volume/production/retention performance is unqualified",
+    "P3-P7 remain pending; no finding closure, signing, policy or compliance verdict",
+    "Owner acceptance, merge authorization and merged-revision verification remain separate"
+  ],
+  "local_directory": ".local/p2/qualification/20261119231713542877",
+  "namespace": "csle-p2-20261119231713542877",
+  "observations": 57,
+  "p1_merged_verification": {
+    "artifacts": [
+      {
+        "path": ".local/p1/merged-tests.log",
+        "sha256": "82e7b0faf734aa22e817754ae460b98b4d593dedc7e5e1e96befe0c00e8dc793"
+      },
+      {
+        "path": ".local/p1/merged-real.json",
+        "sha256": "af6b50684bb4fbcdb552f656b63eaf35fde2ef7edd02f56c942f65f75159ffb5"
+      }
+    ],
+    "real_scan_passed": true,
+    "revision": "2bffd97b325e53817f9cd9c2263564a40019b785",
+    "tests": 96
+  },
+  "passed": [
+    "all_seven_resource_list_watch",
+    "read_only_namespaced_rbac",
+    "ttl_job_history",
+    "scale_zero_reference",
+    "same_name_new_uid",
+    "real_watch_reconnect",
+    "periodic_reconciliation",
+    "restart_checkpoint_and_gaps",
+    "unseen_downtime_job_not_invented",
+    "actual_api_410_and_relist",
+    "replay_idempotency",
+    "deterministic_cli",
+    "immutable_complete_snapshot_receipts"
+  ],
+  "platform": {
+    "architecture": "arm64",
+    "kubectl_client": "v1.36.1",
+    "os": "Darwin",
+    "python": "3.12.16",
+    "sqlite": "3.53.1"
+  },
+  "rbac_denials": {
+    "create_pod": 403,
+    "delete_pod": 403,
+    "other_namespace": 403,
+    "secrets": 403
+  },
+  "retained_namespaces": [
+    "csle-p2-20261119230957339996",
+    "csle-p2-20261119231015933204",
+    "csle-p2-20261119231713542877"
+  ],
+  "reused_name_job_uid": "2d83b88c-550b-4e6c-8878-856ce13d4c26",
+  "reviews": {
+    "final": "1ef3ed1f4b26d2942555ef53757b1d938ba164d5",
+    "initial": "8a060f8645d39b6a70e8b9390815e104d73ba2b2",
+    "remaining_blockers": []
+  },
+  "schema_version": "1",
+  "scope": "P2 namespaced local lifecycle observation and coverage, no remediation/policy/compliance verdict",
+  "server_id": "sha256:6c72f9838b639293ddf58f4b64e895ee3e067d9dc8a9e0edda00225c6910a1e0",
+  "snapshot_receipts": 22,
+  "status": "qualified_on_branch",
+  "tests": {
+    "contract": 17,
+    "fresh_python_environment": true,
+    "total": 144,
+    "unit": 127
+  },
+  "unobserved_job_uid": "4b97964b-b9c8-40f5-a1a2-eb4313671163",
+  "watch_connections": {
+    "CronJob": 7,
+    "DaemonSet": 7,
+    "Deployment": 7,
+    "Job": 7,
+    "Pod": 7,
+    "ReplicaSet": 7,
+    "StatefulSet": 7
+  }
+}

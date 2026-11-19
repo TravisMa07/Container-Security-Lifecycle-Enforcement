@@ -96,13 +96,13 @@ class StoreTests(unittest.TestCase):
         with Store(self.path) as store:
             self.assertEqual(len(store.list_scans()), 1)
             self.assertIsNotNone(store.get_scan(receipt['scan_id']))
-            self.assertEqual(store.connection.execute('PRAGMA user_version').fetchone()[0], 1)
+            self.assertEqual(store.connection.execute('PRAGMA user_version').fetchone()[0], len(DEFAULT_MIGRATIONS))
             self.assertIsNone(store.connection.execute(
                 "SELECT name FROM sqlite_master WHERE name='migration_probe'"
             ).fetchone())
         good = DEFAULT_MIGRATIONS + (("CREATE TABLE migration_probe (n INTEGER)",),)
         with Store(self.path, migrations=good) as store:
-            self.assertEqual(store.connection.execute('PRAGMA user_version').fetchone()[0], 2)
+            self.assertEqual(store.connection.execute('PRAGMA user_version').fetchone()[0], len(DEFAULT_MIGRATIONS) + 1)
             self.assertEqual(len(store.list_scans()), 1)
         with self.assertRaises(ValueError):
             with Store(self.path):
@@ -112,7 +112,7 @@ class StoreTests(unittest.TestCase):
         from app.store.migrations import DEFAULT_MIGRATIONS
         with Store(self.path):
             pass
-        edited = (DEFAULT_MIGRATIONS[0] + ("CREATE TABLE ignored (n INTEGER)",),)
+        edited = (DEFAULT_MIGRATIONS[0] + ("CREATE TABLE ignored (n INTEGER)",),) + DEFAULT_MIGRATIONS[1:]
         with self.assertRaises(ValueError):
             with Store(self.path, migrations=edited):
                 pass

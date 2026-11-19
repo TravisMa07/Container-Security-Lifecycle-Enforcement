@@ -48,6 +48,18 @@ def arguments():
     finding_ops = findings.add_subparsers(dest='operation', required=True, parser_class=Parser)
     finding_ops.add_parser('list')
     finding_ops.add_parser('explain').add_argument('finding_id')
+    inventory = commands.add_parser('inventory', help='namespaced Kubernetes history and coverage')
+    inventory_ops = inventory.add_subparsers(dest='operation', required=True, parser_class=Parser)
+    collect = inventory_ops.add_parser('collect', help='read-only local list/watch; explicit CA/token required')
+    for name in ('cluster', 'namespace', 'server', 'ca', 'token-file'):
+        collect.add_argument('--' + name, required=True)
+    collect.add_argument('--duration', type=float)
+    collect.add_argument('--reconcile-seconds', type=int, default=30)
+    collect.add_argument('--watch-seconds', type=int, default=5)
+    for operation in ('workloads', 'observations', 'events', 'snapshots', 'gaps'):
+        query = inventory_ops.add_parser(operation)
+        query.add_argument('--cluster', required=True)
+        query.add_argument('--namespace')
     commands.add_parser('doctor', help='read-only scanner/platform prerequisite verification')
     return parser
 
@@ -67,6 +79,20 @@ def main(argv=None):
             binary, version, digest = verified_scanner()
             result = {'scanner': 'trivy', 'version': version, 'executable_hash': digest,
                       'path': str(binary), 'integration_qualified': False}
+        elif args.command == 'inventory':
+            from app.store.inventory import InventoryStore
+            if args.operation == 'collect':
+                from app.collectors.kubernetes import KubeAPI
+                from app.collectors.lifecycle import Collector
+                api = KubeAPI(args.server, args.ca, args.token_file, args.namespace)
+                result = Collector(api, args.db, args.cluster, args.namespace,
+                                   args.reconcile_seconds, args.watch_seconds).run(args.duration)
+                if result['errors']:
+                    raise RuntimeError('collection encountered gaps; inspect inventory gaps')
+            else:
+                with InventoryStore(args.db) as store:
+                    method = store.current if args.operation == 'workloads' else getattr(store, args.operation)
+                    result = method(args.cluster, args.namespace)
         elif args.command == 'scan':
             # Complete validation/execution before touching the database.
             if args.operation == 'import':
@@ -84,7 +110,7 @@ def main(argv=None):
             with Store(args.db) as store:
                 if args.command == 'db':
                     store.initialize()
-                    result = {'schema_version': 1, 'status': 'initialized'}
+                    result = {'schema_version': store.connection.execute('PRAGMA user_version').fetchone()[0], 'status': 'initialized'}
                 elif args.command == 'scans':
                     result = store.list_scans() if args.operation == 'list' else store.get_scan(args.scan_id)
                 else:
