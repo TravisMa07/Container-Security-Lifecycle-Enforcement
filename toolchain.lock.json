@@ -101,13 +101,26 @@
     "distribution_registry": "Apache-2.0 (repository; image packages retain separate licenses)"
   },
   "node_build": {
-    "version": "v1.37.2",
+    "version": "v1.35.10",
     "architecture": "arm64",
-    "url": "https://dl.k8s.io/v1.37.2/kubernetes-server-linux-arm64.tar.gz",
-    "sha256": "ceb27d43ca10db57ba79b2c224d5d8e169a0e6a5611f47db8c7b8d611afab13d",
+    "url": "https://dl.k8s.io/release/v1.35.10/kubernetes-server-linux-arm64.tar.gz",
+    "sha256": "337982e3d5825f60d989b440c5ef441051ffec54659e9b11a7cdcaf218270157",
     "base_reference": "kindest/base@sha256:8098fa3cae05bc15d9c4b93a566d19e1f8e65a25e26ebeb993b6cb41142cf791",
     "base_linux_arm64_digest": "sha256:1e056f822a80e11e300fdd79acc731a1d94504e7f0c9db5bba2bfb5104306178",
-    "output_tag": "csle-p0-node:v1.37.2",
-    "identity_note": "built from pinned inputs; actual local Docker config ID recorded separately from OCI manifest identity"
-  }
+    "output_tag": "csle-p0-node:v1.35.10",
+    "identity_note": "built from pinned inputs; actual local Docker config ID recorded separately from OCI manifest identity",
+    "selection_reason": "CIS2.1.0 target1.34\u20131.35 and audience1.35\u20131.37 intersection; current maintained1.35 security patch"
+  },
+  "historical_node_builds": [
+    {
+      "version": "v1.37.2",
+      "architecture": "arm64",
+      "url": "https://dl.k8s.io/v1.37.2/kubernetes-server-linux-arm64.tar.gz",
+      "sha256": "ceb27d43ca10db57ba79b2c224d5d8e169a0e6a5611f47db8c7b8d611afab13d",
+      "base_reference": "kindest/base@sha256:8098fa3cae05bc15d9c4b93a566d19e1f8e65a25e26ebeb993b6cb41142cf791",
+      "base_linux_arm64_digest": "sha256:1e056f822a80e11e300fdd79acc731a1d94504e7f0c9db5bba2bfb5104306178",
+      "output_tag": "csle-p0-node:v1.37.2",
+      "identity_note": "built from pinned inputs; actual local Docker config ID recorded separately from OCI manifest identity"
+    }
+  ]
 }
