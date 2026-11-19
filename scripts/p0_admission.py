@@ -7,14 +7,14 @@ import ipaddress
 import hashlib
 import json
 from pathlib import Path
-from p0_lab import LOCAL, KUBECONFIG, Recorder
+from p0_lab import CONTEXT, NODE_CONTAINER, LOCAL, KUBECONFIG, Recorder
 
 
 def main(expired=False):
     rec = Recorder()
     result = json.loads((LOCAL / "attestation-result.json").read_text())
     image = result["image"]
-    kubectl = ["kubectl", "--kubeconfig", KUBECONFIG, "--context", "kind-csle-p0"]
+    kubectl = ["kubectl", "--kubeconfig", KUBECONFIG, "--context", CONTEXT]
     pod = {
         "apiVersion": "v1",
         "kind": "Pod",
@@ -101,10 +101,8 @@ def main(expired=False):
         + '"]\n  capabilities = ["pull", "resolve"]\n'
     )
     destination = "/etc/containerd/certs.d/" + host
-    rec.run(["docker", "exec", "csle-p0-control-plane", "mkdir", "-p", destination])
-    rec.run(
-        ["docker", "cp", hosts, "csle-p0-control-plane:" + destination + "/hosts.toml"]
-    )
+    rec.run(["docker", "exec", NODE_CONTAINER, "mkdir", "-p", destination])
+    rec.run(["docker", "cp", hosts, NODE_CONTAINER + ":" + destination + "/hosts.toml"])
     rec.run([*kubectl, "create", "-f", path])
     rec.run(
         [
@@ -143,7 +141,7 @@ def main(expired=False):
     stale = copy.deepcopy(policy)
     for validation in stale["spec"]["validations"]:
         validation["expression"] = validation["expression"].replace(
-            "== 'p0-v2'", "== 'p0-revoked'"
+            "== 'p0-v3'", "== 'p0-revoked'"
         )
     stale_path = rec.directory / "revoked-policy.json"
     stale_path.write_text(json.dumps(stale))

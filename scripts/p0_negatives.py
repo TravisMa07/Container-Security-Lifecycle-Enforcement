@@ -7,7 +7,7 @@ from pathlib import Path
 import urllib.parse
 import urllib.request
 from p0_ecr import fetch
-from p0_lab import ROOT, LOCAL, KUBECONFIG, Recorder
+from p0_lab import CONTEXT, ROOT, LOCAL, KUBECONFIG, Recorder
 
 
 def request(url, method, data=b"", content_type="application/octet-stream"):
@@ -22,7 +22,7 @@ def main():
     rec = Recorder()
     result = json.loads((LOCAL / "attestation-result.json").read_text())
     policy = json.loads(Path(result["policy_file"]).read_text())
-    kubectl = ["kubectl", "--kubeconfig", KUBECONFIG, "--context", "kind-csle-p0"]
+    kubectl = ["kubectl", "--kubeconfig", KUBECONFIG, "--context", CONTEXT]
     host_image = result["host_image"]
     (repository, subject) = host_image.split("@")
     origin = "http://" + repository.split("/")[0]

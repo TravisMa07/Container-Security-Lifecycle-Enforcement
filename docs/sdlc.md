@@ -21,3 +21,7 @@ Subagents may research, review independent expectations and implement nonoverlap
 No hidden privileged commands or cleanup. Preserve evidence by default; deletion is separately authorized and constrained to project-owned resources. No real AWS or paid service is part of local acceptance.
 
 Use the [PR template](../.github/PULL_REQUEST_TEMPLATE.md) for behavior, phase linkage, independent expectations, actual tests/evidence, risks and remaining gates. Repository branch protections and required-check rules have not been configured; this is a documented workflow, not a claim of server-enforced protection.
+
+## Proportionate security process
+
+Keep the existing concise threat model as the shared boundary checklist. Update it when trust boundaries change; do not create another threat-model document or approval checklist for every slice. Put useful safeguards into acceptance tests (identity, signatures, freshness, local isolation and evidence integrity). Dependency findings are ordinary engineering work, not evidence of a compromise or a reason to add unrelated infrastructure. Preserve the handoff’s mandatory security tests and keep bookkeeping in the owning design/ledger.

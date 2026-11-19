@@ -79,7 +79,7 @@ def install_verified(source, destination, digest, member=None):
     return hashlib.sha256(payload).hexdigest()
 
 
-def download(url, target):
+def download(url, target, max_bytes=MAX_BYTES):
     if not url.startswith("https://"):
         raise ValueError("upstream downloads require HTTPS")
     with urllib.request.urlopen(url, timeout=60) as response:
@@ -94,7 +94,7 @@ def download(url, target):
                     if not data:
                         break
                     total += len(data)
-                    if total > MAX_BYTES:
+                    if total > max_bytes:
                         raise ValueError("download exceeds size limit")
                     stream.write(data)
                 stream.close()

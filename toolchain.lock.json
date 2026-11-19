@@ -57,10 +57,10 @@
       "reference": "floci/floci@sha256:a0fbf944d7f338cc0856f1ef83831ea749ff2be71956eb7a7fce08fc21458e19"
     },
     "registry": {
-      "tag_observed": "registry:2.8.3",
-      "index_digest": "sha256:a3d8aaa63ed8681a604f1dea0aa03f100d5895b6a58ace528858a7b332415373",
-      "linux_arm64_digest": "sha256:fa647fc1e5d5df7d8d923fb6332aab8e78783f8fca1a1394efb4011f68f5a793",
-      "reference": "registry@sha256:a3d8aaa63ed8681a604f1dea0aa03f100d5895b6a58ace528858a7b332415373"
+      "tag_observed": "registry:3.1.2",
+      "index_digest": "sha256:82f6ff4a7f982960c8aa51617fea3aabc485df6e55cce80d22deb1de36f1bc3c",
+      "linux_arm64_digest": "sha256:f3d00d4a9323fe175d9359ee9b86cbf21b2ce922636504d1438c6fbf1938e1e0",
+      "reference": "registry@sha256:82f6ff4a7f982960c8aa51617fea3aabc485df6e55cce80d22deb1de36f1bc3c"
     },
     "demo": {
       "tag_observed": "alpine:3.24",
@@ -79,10 +79,12 @@
     "reports-controller": "sha256:f54e3cc106fadb1a615d0ec11c42f741f51d3580a5f70dfbe7bd7ec58864ef03"
   },
   "python_tooling": {
-    "python": "3.12.12",
+    "python": "3.12.16",
     "boto3": "1.44.6",
     "requirements": "requirements-p0.lock",
-    "license": "Apache-2.0 (boto3); transitive terms remain separate"
+    "license": "Apache-2.0 (boto3); transitive terms remain separate",
+    "jsonschema": "4.26.0",
+    "referencing": "0.37.0"
   },
   "licenses": {
     "floci": "MIT",
@@ -92,5 +94,15 @@
     "trivy": "Apache-2.0",
     "kyverno": "Apache-2.0",
     "distribution_registry": "Apache-2.0 (repository; image packages retain separate licenses)"
+  },
+  "node_build": {
+    "version": "v1.37.2",
+    "architecture": "arm64",
+    "url": "https://dl.k8s.io/v1.37.2/kubernetes-server-linux-arm64.tar.gz",
+    "sha256": "ceb27d43ca10db57ba79b2c224d5d8e169a0e6a5611f47db8c7b8d611afab13d",
+    "base_reference": "kindest/base@sha256:8098fa3cae05bc15d9c4b93a566d19e1f8e65a25e26ebeb993b6cb41142cf791",
+    "base_linux_arm64_digest": "sha256:1e056f822a80e11e300fdd79acc731a1d94504e7f0c9db5bba2bfb5104306178",
+    "output_tag": "csle-p0-node:v1.37.2",
+    "identity_note": "built from pinned inputs; actual local Docker config ID recorded separately from OCI manifest identity"
   }
 }

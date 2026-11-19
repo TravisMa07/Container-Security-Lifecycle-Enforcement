@@ -112,3 +112,27 @@ class EvidenceFailureTests(unittest.TestCase):
             entry = json.loads((recorder.directory / "commands.jsonl").read_text())
             self.assertEqual(entry["failure"], "os_error")
             self.assertEqual(entry["exit_code"], 127)
+
+
+class ProfileIsolationTests(unittest.TestCase):
+    def test_project_scoped_profile_and_distinct_ports(self):
+        from p0_lab import profile_values
+
+        self.assertEqual(
+            profile_values("csle-p0-close", "14576", "15110"),
+            ("csle-p0-close", 14576, 15110),
+        )
+
+    def test_unscoped_or_shell_like_profile_is_rejected(self):
+        from p0_lab import profile_values
+
+        for name in ["production", "csle-p0-../escape", "csle-p0;echo", "csle-p0-"]:
+            with self.subTest(name=name), self.assertRaises(ValueError):
+                profile_values(name, 14576, 15110)
+
+    def test_privileged_or_colliding_ports_are_rejected(self):
+        from p0_lab import profile_values
+
+        for pair in [(80, 15110), (14576, 14576), (65536, 15110)]:
+            with self.subTest(pair=pair), self.assertRaises(ValueError):
+                profile_values("csle-p0-close", *pair)

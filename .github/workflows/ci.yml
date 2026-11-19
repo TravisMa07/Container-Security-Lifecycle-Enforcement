@@ -13,7 +13,11 @@ jobs:
           persist-credentials: false
       - name: Check repository documents
         run: make check
-      - name: Offline tooling safety tests
+      - name: Install hash-locked test dependencies
+        run: |
+          python3 -m venv .tools/venv
+          .tools/venv/bin/python -m pip install --require-hashes -r requirements-p0.lock
+      - name: Offline tooling safety and contract tests
         run: make test
       - name: Check script syntax
         run: python3 -m compileall -q scripts tests

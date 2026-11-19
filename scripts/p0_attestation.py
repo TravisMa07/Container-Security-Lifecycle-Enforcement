@@ -7,7 +7,17 @@ import os
 import uuid
 from pathlib import Path
 import subprocess
-from p0_lab import ROOT, LOCAL, KUBECONFIG, Recorder, local_docker
+from p0_lab import (
+    CONTEXT,
+    PROFILE,
+    API_PORT,
+    FLOCI_CONTAINER,
+    ROOT,
+    LOCAL,
+    KUBECONFIG,
+    Recorder,
+    local_docker,
+)
 
 TYPE = "https://github.com/TravisMa07/Container-Security-Lifecycle-Enforcement/attestations/p0-compatibility/v2"
 
@@ -54,7 +64,7 @@ def main():
     ecr = json.loads(ecr_path.read_text())
     report_path = rec.directory / "trusted-trivy.json"
     if not ecr["image"].startswith(
-        "localhost:14566/000000000000/us-east-1/csle-p0/demo@sha256:"
+        f"localhost:{API_PORT}/000000000000/us-east-1/csle-p0/demo@sha256:"
     ):
         raise ValueError(
             "only the explicit local compatibility repository can be signed"
@@ -114,11 +124,12 @@ def main():
         "purpose": "p0-compatibility-nonproduction",
         "subject_image_digest": ecr["manifest_digest"],
         "policy_id": "p0-scan-gate",
-        "policy_version": "p0-v2",
+        "policy_version": "p0-v3",
         "scan_result_hash": "sha256:"
         + hashlib.sha256(report_path.read_bytes()).hexdigest(),
         "scanner_version": "0.76.2",
         "scanner_db_updated_at": db["UpdatedAt"],
+        "scan_timestamp": report["CreatedAt"],
         "issued_at": now.isoformat(),
         "timestamp": now.isoformat(),
         "expires_at": min(
@@ -173,14 +184,14 @@ def main():
         [
             *local_docker(),
             "inspect",
-            "csle-p0-floci",
+            FLOCI_CONTAINER,
             "--format",
-            '{{(index .NetworkSettings.Networks "csle-p0").IPAddress}}',
+            '{{(index .NetworkSettings.Networks "' + PROFILE + '").IPAddress}}',
         ],
         text=True,
     ).strip()
     image = ip + ":4566/" + ecr["image"].split("/", 1)[1]
-    kubectl = ["kubectl", "--kubeconfig", KUBECONFIG, "--context", "kind-csle-p0"]
+    kubectl = ["kubectl", "--kubeconfig", KUBECONFIG, "--context", CONTEXT]
     ns = {
         "apiVersion": "v1",
         "kind": "Namespace",
@@ -206,10 +217,26 @@ def main():
         ("signature", crypto),
         ("schema", crypto + " && " + payload + "schema_version == '2'"),
         ("decision", crypto + " && " + payload + "decision == 'allow'"),
-        ("policy-version", crypto + " && " + payload + "policy_version == 'p0-v2'"),
+        ("policy-version", crypto + " && " + payload + "policy_version == 'p0-v3'"),
         ("issued-at", crypto + " && timestamp(" + payload + "issued_at) <= time.now()"),
         ("expiry", crypto + " && timestamp(" + payload + "expires_at) > time.now()"),
     ]
+    for name, field in [
+        ("scan-freshness", "scan_timestamp"),
+        ("db-freshness", "scanner_db_updated_at"),
+    ]:
+        value = "timestamp(" + payload + field + ")"
+        clauses.append(
+            (
+                name,
+                crypto
+                + " && "
+                + value
+                + " <= time.now() && time.now() - "
+                + value
+                + ' <= duration("24h")',
+            )
+        )
     clauses.extend(
         [
             (

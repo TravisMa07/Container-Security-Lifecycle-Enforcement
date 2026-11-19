@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import socket
 import subprocess
@@ -13,7 +14,27 @@ import uuid
 
 ROOT = Path(__file__).resolve().parent.parent
 LOCAL = ROOT / ".local" / "p0"
-NETWORK = "csle-p0"
+
+
+def profile_values(name, api_port, registry_port):
+    if not re.fullmatch(r"csle-p0(?:-[a-z0-9]{1,16})?", name):
+        raise ValueError("invalid project-scoped P0 profile")
+    ports = [int(api_port), int(registry_port)]
+    if any(port < 1024 or port > 65535 for port in ports) or len(set(ports)) != 2:
+        raise ValueError("invalid or overlapping loopback ports")
+    return name, *ports
+
+
+PROFILE, API_PORT, REGISTRY_PORT = profile_values(
+    os.environ.get("CSLE_P0_PROFILE", "csle-p0"),
+    os.environ.get("CSLE_P0_API_PORT", "14566"),
+    os.environ.get("CSLE_P0_REGISTRY_PORT", "15100"),
+)
+NETWORK = PROFILE
+CONTEXT = "kind-" + PROFILE
+FLOCI_CONTAINER = PROFILE + "-floci"
+NODE_CONTAINER = PROFILE + "-control-plane"
+REGISTRY_CONTAINER = "floci-aws-" + PROFILE + "-ecr-registry"
 KUBECONFIG = LOCAL / "kubeconfig"
 
 
@@ -127,6 +148,12 @@ class Recorder:
             "revision": self.revision,
             "dirty_working_tree": self.dirty,
             "source_hashes": self.source_hashes,
+            "profile": {
+                "name": PROFILE,
+                "api_port": API_PORT,
+                "registry_port": REGISTRY_PORT,
+                "context": CONTEXT,
+            },
             "log": path.name,
             "output_sha256": hashlib.sha256(output).hexdigest(),
         }
@@ -139,15 +166,24 @@ class Recorder:
 
 def up(authorized):
     require_privilege_authorization(authorized)
-    check_ports([14566, 15100])
+    check_ports([API_PORT, REGISTRY_PORT])
     docker = local_docker()
     manifest = json.loads((ROOT / "toolchain.lock.json").read_text())
+    node = json.loads((LOCAL / "node-image.json").read_text())
+    current_node = json.loads(
+        subprocess.check_output([*docker, "image", "inspect", node["tag"]], text=True)
+    )[0]
+    if (
+        current_node["Id"] != node["docker_config_id"]
+        or node["version"] != manifest["node_build"]["version"]
+    ):
+        raise ValueError("local node build identity changed or version mismatched")
     rec = Recorder()
     for resource, name in [
         ("network", NETWORK),
-        ("container", "csle-p0-floci"),
-        ("container", "floci-aws-csle-p0-ecr-registry"),
-        ("container", "csle-p0-control-plane"),
+        ("container", FLOCI_CONTAINER),
+        ("container", REGISTRY_CONTAINER),
+        ("container", NODE_CONTAINER),
     ]:
         if rec.run(["docker", resource, "inspect", name], check=False).returncode == 0:
             raise ValueError("existing resource collision: " + name)
@@ -167,7 +203,7 @@ def up(authorized):
             "run",
             "-d",
             "--name",
-            "csle-p0-floci",
+            FLOCI_CONTAINER,
             "--label",
             "io.csle.scope=p0",
             "--network",
@@ -175,7 +211,7 @@ def up(authorized):
             "--memory",
             "1536m",
             "-p",
-            "127.0.0.1:14566:4566",
+            f"127.0.0.1:{API_PORT}:4566",
             "-v",
             "/var/run/docker.sock:/var/run/docker.sock",
             "-v",
@@ -185,11 +221,11 @@ def up(authorized):
             "-e",
             "FLOCI_SERVICES_ECR_REGISTRY_IMAGE=" + image["registry"]["reference"],
             "-e",
-            "FLOCI_SERVICES_ECR_REGISTRY_CONTAINER_NAME=csle-p0-ecr-registry",
+            "FLOCI_SERVICES_ECR_REGISTRY_CONTAINER_NAME=" + PROFILE + "-ecr-registry",
             "-e",
-            "FLOCI_SERVICES_ECR_REGISTRY_BASE_PORT=15100",
+            "FLOCI_SERVICES_ECR_REGISTRY_BASE_PORT=" + str(REGISTRY_PORT),
             "-e",
-            "FLOCI_SERVICES_ECR_REGISTRY_MAX_PORT=15100",
+            "FLOCI_SERVICES_ECR_REGISTRY_MAX_PORT=" + str(REGISTRY_PORT),
             "-e",
             "FLOCI_SERVICES_ECR_DOCKER_NETWORK=" + NETWORK,
             "-e",
@@ -209,13 +245,13 @@ def up(authorized):
             "create",
             "cluster",
             "--name",
-            "csle-p0",
+            PROFILE,
             "--kubeconfig",
             KUBECONFIG,
             "--config",
             ROOT / "infra/p0/kind.yaml",
             "--image",
-            image["kind_node"]["reference"],
+            node["tag"],
             "--wait",
             "180s",
         ],
@@ -227,7 +263,7 @@ def up(authorized):
             "--kubeconfig",
             KUBECONFIG,
             "--context",
-            "kind-csle-p0",
+            CONTEXT,
             "get",
             "nodes",
             "-o",
@@ -236,6 +272,53 @@ def up(authorized):
     )
     print("Lab created; evidence:", rec.directory, flush=True)
     print("Resources retained. No cleanup performed.", flush=True)
+
+
+def build_node():
+    from bootstrap_tools import download
+
+    manifest = json.loads((ROOT / "toolchain.lock.json").read_text())
+    spec = manifest["node_build"]
+    rec = Recorder()
+    archive = ROOT / ".tools/downloads" / spec["sha256"]
+    archive.parent.mkdir(parents=True, exist_ok=True)
+    if not archive.exists():
+        download(spec["url"], archive, max_bytes=512 * 1024 * 1024)
+    if hashlib.sha256(archive.read_bytes()).hexdigest() != spec["sha256"]:
+        raise ValueError("Kubernetes release archive checksum mismatch")
+    env = dict(os.environ, DOCKER_HOST=local_docker()[2])
+    env.pop("DOCKER_CONTEXT", None)
+    rec.run(
+        [
+            ROOT / ".tools/bin/kind",
+            "build",
+            "node-image",
+            "--type",
+            "file",
+            archive,
+            "--arch",
+            spec["architecture"],
+            "--base-image",
+            spec["base_reference"],
+            "--image",
+            spec["output_tag"],
+        ],
+        env=env,
+        timeout=900,
+    )
+    inspected = rec.run(["docker", "image", "inspect", spec["output_tag"]])
+    image = json.loads(inspected.stdout)[0]
+    result = {
+        "version": spec["version"],
+        "tag": spec["output_tag"],
+        "docker_config_id": image["Id"],
+        "architecture": image["Architecture"],
+        "source_archive_sha256": spec["sha256"],
+        "base_reference": spec["base_reference"],
+        "evidence_directory": str(rec.directory),
+    }
+    (LOCAL / "node-image.json").write_text(json.dumps(result, indent=2))
+    print("Patched node build:", result, flush=True)
 
 
 def install_kyverno():
@@ -260,7 +343,7 @@ def install_kyverno():
             "--kubeconfig",
             KUBECONFIG,
             "--kube-context",
-            "kind-csle-p0",
+            CONTEXT,
             "-n",
             "kyverno",
             "--create-namespace",
@@ -277,7 +360,7 @@ def install_kyverno():
             "--kubeconfig",
             KUBECONFIG,
             "--context",
-            "kind-csle-p0",
+            CONTEXT,
             "-n",
             "kyverno",
             "get",
@@ -290,7 +373,7 @@ def install_kyverno():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("action", choices=["up", "kyverno"])
+    parser.add_argument("action", choices=["up", "kyverno", "node"])
     parser.add_argument(
         "--allow-privileged-local",
         action="store_true",
@@ -299,5 +382,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.action == "up":
         up(args.allow_privileged_local)
-    else:
+    elif args.action == "kyverno":
         install_kyverno()
+    else:
+        build_node()

@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:csle:contracts:v1:derived-finding-state",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "finding_id",
+    "assessment_at",
+    "inventory_scope",
+    "validity",
+    "exposure",
+    "remediation",
+    "recommendation",
+    "reason_codes",
+    "confidence",
+    "coverage_gap_ids",
+    "evidence_ids"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1"
+    },
+    "finding_id": {
+      "$ref": "urn:csle:contracts:v1:common#/$defs/id"
+    },
+    "assessment_at": {
+      "$ref": "urn:csle:contracts:v1:common#/$defs/utc"
+    },
+    "inventory_scope": {
+      "$ref": "urn:csle:contracts:v1:common#/$defs/text"
+    },
+    "validity": {
+      "$ref": "urn:csle:contracts:v1:common#/$defs/validity"
+    },
+    "exposure": {
+      "enum": [
+        "running",
+        "configured_not_running",
+        "historical_observed",
+        "unknown"
+      ]
+    },
+    "remediation": {
+      "enum": [
+        "open",
+        "in_progress",
+        "verified_in_scope",
+        "regressed",
+        "unknown"
+      ]
+    },
+    "recommendation": {
+      "$ref": "urn:csle:contracts:v1:common#/$defs/text"
+    },
+    "reason_codes": {
+      "$ref": "urn:csle:contracts:v1:common#/$defs/reasons"
+    },
+    "confidence": {
+      "enum": [
+        "bounded",
+        "unknown"
+      ]
+    },
+    "coverage_gap_ids": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 1000,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "urn:csle:contracts:v1:common#/$defs/id"
+      }
+    },
+    "evidence_ids": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 1000,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "urn:csle:contracts:v1:common#/$defs/id"
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scope",
+        "window_start",
+        "window_end",
+        "inventory_fresh",
+        "coverage_complete",
+        "remaining_references",
+        "fixed_scan_evidence_ids",
+        "replacement_observation_ids"
+      ],
+      "properties": {
+        "scope": {
+          "$ref": "urn:csle:contracts:v1:common#/$defs/text"
+        },
+        "window_start": {
+          "$ref": "urn:csle:contracts:v1:common#/$defs/utc"
+        },
+        "window_end": {
+          "$ref": "urn:csle:contracts:v1:common#/$defs/utc"
+        },
+        "inventory_fresh": {
+          "const": true
+        },
+        "coverage_complete": {
+          "const": true
+        },
+        "remaining_references": {
+          "const": 0
+        },
+        "fixed_scan_evidence_ids": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1000,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "urn:csle:contracts:v1:common#/$defs/id"
+          }
+        },
+        "replacement_observation_ids": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1000,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "urn:csle:contracts:v1:common#/$defs/id"
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "remediation": {
+            "const": "verified_in_scope"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "verification"
+        ],
+        "properties": {
+          "exposure": {
+            "const": "historical_observed"
+          },
+          "coverage_gap_ids": {
+            "maxItems": 0
+          },
+          "evidence_ids": {
+            "minItems": 1
+          }
+        }
+      },
+      "else": {
+        "not": {
+          "required": [
+            "verification"
+          ]
+        }
+      }
+    }
+  ],
+  "$comment": "Verification fields assert required evidence context, not its truth. Actual freshness/completeness, matching scope/window, fixed package and replacement joins require deterministic domain evaluation."
+}

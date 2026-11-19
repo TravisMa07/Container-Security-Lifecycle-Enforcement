@@ -7,14 +7,14 @@ import urllib.request
 import boto3
 from botocore.config import Config
 from botocore.exceptions import ClientError
-from p0_lab import ROOT, LOCAL, Recorder, local_docker
+from p0_lab import API_PORT, ROOT, LOCAL, Recorder, local_docker
 
 
 def fetch(url):
     request = urllib.request.Request(
         url,
         headers={
-            "Accept": "application/vnd.oci.image.manifest.v1+json, application/vnd.docker.distribution.manifest.v2+json",
+            "Accept": "application/vnd.oci.image.index.v1+json, application/vnd.docker.distribution.manifest.list.v2+json, application/vnd.oci.image.manifest.v1+json, application/vnd.docker.distribution.manifest.v2+json",
             "Authorization": "Basic " + base64.b64encode(b"AWS:floci").decode(),
         },
     )
@@ -27,7 +27,7 @@ def main():
     manifest = json.loads((ROOT / "toolchain.lock.json").read_text())
     client = boto3.client(
         "ecr",
-        endpoint_url="http://127.0.0.1:14566",
+        endpoint_url=f"http://127.0.0.1:{API_PORT}",
         region_name="us-east-1",
         aws_access_key_id="test",
         aws_secret_access_key="test",
@@ -42,7 +42,7 @@ def main():
             "repositories"
         ][0]
     ref = repository["repositoryUri"] + ":p0"
-    if not ref.startswith("localhost:14566/000000000000/us-east-1/csle-p0/demo:"):
+    if not ref.startswith(f"localhost:{API_PORT}/000000000000/us-east-1/csle-p0/demo:"):
         raise ValueError("compatibility expectation failed")
     docker_config = LOCAL / "docker-config"
     docker_config.mkdir(exist_ok=True)
@@ -50,7 +50,9 @@ def main():
         json.dumps(
             {
                 "auths": {
-                    "localhost:14566": {"auth": base64.b64encode(b"AWS:floci").decode()}
+                    f"localhost:{API_PORT}": {
+                        "auth": base64.b64encode(b"AWS:floci").decode()
+                    }
                 }
             }
         )
@@ -63,7 +65,7 @@ def main():
     rec.run([*docker, "tag", source, ref])
     rec.run([*docker, "push", ref])
     path = "000000000000/us-east-1/csle-p0/demo"
-    origin = "http://127.0.0.1:14566/v2/" + path
+    origin = f"http://127.0.0.1:{API_PORT}/v2/" + path
     (raw, headers) = fetch(origin + "/manifests/p0")
     digest = "sha256:" + hashlib.sha256(raw).hexdigest()
     if not digest == demo["linux_arm64_digest"]:

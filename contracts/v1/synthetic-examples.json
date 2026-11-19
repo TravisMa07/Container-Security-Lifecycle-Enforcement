@@ -1,0 +1,147 @@
+{
+  "provenance": "synthetic_contract_test",
+  "description": "Authored solely from frozen contract expectations; no actual scanner/workload/control assertions",
+  "records": {
+    "image-artifact": {
+      "schema_version": "1",
+      "image_id": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "registry": "localhost:5000",
+      "repository": "demo/payment",
+      "tags_observed": [
+        "v1"
+      ],
+      "manifest_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "index_digest": null,
+      "platform_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "platform": "linux/arm64",
+      "source": "emulated_aws_ecr",
+      "source_reference": "localhost:5000/demo/payment:v1",
+      "first_seen": "2026-11-19T12:00:00Z",
+      "last_seen": "2026-11-19T12:00:00Z",
+      "resolution_status": "resolved",
+      "resolution_reason": null
+    },
+    "workload-observation": {
+      "schema_version": "1",
+      "cluster_id": "kind-csle",
+      "namespace": "demo",
+      "kind": "Pod",
+      "name": "payment",
+      "uid": "provider-resource-uid",
+      "owner_refs": [
+        {
+          "kind": "ReplicaSet",
+          "uid": "provider-controller-uid"
+        }
+      ],
+      "container_name": "payment",
+      "container_type": "regular",
+      "desired_image_ref": "localhost:5000/demo/payment:v1",
+      "runtime_image_id": "localhost:5000/demo/payment@sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "resolved_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "resolution_status": "resolved",
+      "phase": "Running",
+      "replicas_desired": null,
+      "replicas_ready": null,
+      "observed_at": "2026-11-19T12:00:00Z",
+      "source": "kubernetes_watch",
+      "event_type": "ADDED",
+      "observation_id": "observation-1",
+      "resource_version": "opaque-rv",
+      "idempotency_key": "source-event-1",
+      "source_event_at": null,
+      "ingested_at": "2026-11-19T12:00:00Z"
+    },
+    "vulnerability-finding": {
+      "schema_version": "1",
+      "finding_id": "finding-1",
+      "image_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "scanner": "trivy",
+      "scanner_version": "0.76.2",
+      "parser_version": "1",
+      "vuln_id": "CVE-2099-0001",
+      "package_name": "fictional-package",
+      "package_path": "/synthetic/package",
+      "installed_version": "1.0",
+      "fixed_version": "1.1",
+      "severity": "HIGH",
+      "severity_source": "fixture",
+      "target_os": "alpine",
+      "platform": "linux/arm64",
+      "aliases": [],
+      "scan_timestamp": "2026-11-19T12:00:00Z",
+      "scanner_db_updated_at": "2026-11-19T12:00:00Z",
+      "source_document_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "validity": "under_investigation",
+      "evidence_ids": [
+        "scan-fixture"
+      ],
+      "package_type": "apk"
+    },
+    "derived-finding-state": {
+      "schema_version": "1",
+      "finding_id": "finding-1",
+      "assessment_at": "2026-11-19T12:00:00Z",
+      "inventory_scope": "kind-csle/all-namespaces",
+      "validity": "under_investigation",
+      "exposure": "configured_not_running",
+      "remediation": "open",
+      "recommendation": "review_before_restart",
+      "reason_codes": [
+        "DESIRED_REFERENCE_PRESENT"
+      ],
+      "confidence": "bounded",
+      "coverage_gap_ids": [],
+      "evidence_ids": [
+        "observation-1",
+        "scan-fixture"
+      ]
+    },
+    "security-predicate": {
+      "schema_version": "1",
+      "predicate_type": "https://github.com/TravisMa07/Container-Security-Lifecycle-Enforcement/attestations/security-assessment/v1",
+      "subject_image_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "assessment_id": "assessment-1",
+      "decision": "allow",
+      "policy_id": "demo-policy",
+      "policy_version": "1",
+      "policy_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "scan_result_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "scanner_version": "0.76.2",
+      "scan_timestamp": "2026-11-19T12:00:00Z",
+      "scanner_db_updated_at": "2026-11-19T12:00:00Z",
+      "issued_at": "2026-11-19T12:00:00Z",
+      "timestamp": "2026-11-19T12:00:00Z",
+      "expires_at": "2026-11-19T13:00:00Z",
+      "signer_identity": "synthetic-key-fingerprint",
+      "reason_codes": [
+        "SYNTHETIC_CONTRACT_ONLY"
+      ],
+      "evidence_ids": [
+        "scan-fixture"
+      ]
+    },
+    "compliance-evidence": {
+      "schema_version": "1",
+      "framework": "PCI_DSS",
+      "framework_version": "4.0.1",
+      "control_id": "6.3.3",
+      "mapping_version": "1.0.0",
+      "technical_check_id": "container-vuln-remediation-timeliness",
+      "technical_procedure": "Inspect synthetic digest-bound scan and scoped remediation records",
+      "assessment": "requires_review",
+      "applicability": "not_determined",
+      "asset_scope": "fictional-demo/payment",
+      "observed_at": "2026-11-19T12:00:00Z",
+      "evidence_ids": [
+        "scan-fixture"
+      ],
+      "limitations": [
+        "Synthetic contract example; not an approved control mapping or audit evidence"
+      ],
+      "reference_url": "https://www.pcisecuritystandards.org/document_library/",
+      "source_review_id": "synthetic-review-record",
+      "reviewer": null
+    }
+  }
+}
