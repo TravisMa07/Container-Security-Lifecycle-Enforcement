@@ -60,6 +60,24 @@ def arguments():
         query = inventory_ops.add_parser(operation)
         query.add_argument('--cluster', required=True)
         query.add_argument('--namespace')
+    def assessment_options(command):
+        command.add_argument('finding_id')
+        command.add_argument('--cluster', required=True)
+        command.add_argument('--namespace', action='append', required=True)
+        command.add_argument('--replacement')
+        command.add_argument('--at')
+        command.add_argument('--inventory-max-age-seconds', type=int, default=30)
+        command.add_argument('--scan-max-age-seconds', type=int, default=86400)
+        command.add_argument('--db-max-age-seconds', type=int, default=86400)
+    assessment_options(finding_ops.add_parser('assess', help='derive evidence-bound lifecycle state'))
+    remediation = commands.add_parser('remediation', help='verify an explicit scoped replacement')
+    remediation_ops = remediation.add_subparsers(dest='operation', required=True, parser_class=Parser)
+    verify = remediation_ops.add_parser('verify')
+    assessment_options(verify)
+    lifecycle = commands.add_parser('lifecycle', help='query immutable lifecycle assessments')
+    lifecycle.add_subparsers(dest='operation', required=True, parser_class=Parser).add_parser('image').add_argument('digest')
+    assessments = commands.add_parser('assessments', help='inspect a persisted assessment')
+    assessments.add_subparsers(dest='operation', required=True, parser_class=Parser).add_parser('show').add_argument('assessment_id')
     commands.add_parser('doctor', help='read-only scanner/platform prerequisite verification')
     return parser
 
@@ -79,6 +97,20 @@ def main(argv=None):
             binary, version, digest = verified_scanner()
             result = {'scanner': 'trivy', 'version': version, 'executable_hash': digest,
                       'path': str(binary), 'integration_qualified': False}
+        elif args.command in ('remediation', 'lifecycle', 'assessments') or (args.command == 'findings' and args.operation == 'assess'):
+            from app.store.assessments import AssessmentStore
+            if args.command == 'remediation' and not args.replacement:
+                raise ValueError('explicit replacement digest required')
+            with AssessmentStore(args.db) as store:
+                if args.command == 'lifecycle':
+                    result = store.list_assessments(args.digest)
+                elif args.command == 'assessments':
+                    result = store.get_assessment(args.assessment_id)
+                    if result is None:
+                        raise ValueError('assessment not found')
+                else:
+                    result = store.assess(args.finding_id, args.cluster, args.namespace, args.replacement, args.at,
+                                          args.inventory_max_age_seconds, args.scan_max_age_seconds, args.db_max_age_seconds)
         elif args.command == 'inventory':
             from app.store.inventory import InventoryStore
             if args.operation == 'collect':

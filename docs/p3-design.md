@@ -60,3 +60,9 @@ Selected source assets: https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64
 | Actual patch/retirement/another-namespace regression | recorded Kind + real Trivy proof, independently labeled expected outcomes, zero false closures in those cases only |
 
 Run runnable behavioral red before engine implementation, then state-matrix/schema/CLI/store tests and real serialized scenarios. Report imported/fixture, locally verified, integration-qualified, accepted and merged separately. No P3 completion before all applicable gates pass.
+
+## Source-grounded fixture refinements
+
+Docker's local exporter initially rejected rewrite-timestamp with automatic unpack; the helper now exports a tar and explicitly loads it. Two no-cache builds initially differed only in var/log/apk.log contents; removing that timestamped install log (not package DB/binaries) produced identical manifest/config bytes across two no-cache builds. Resulting selected manifest is pinned in toolchain.lock.json before execution allowlist extension. This verifies the local recipe outcome with available base/build cache; no unrelated platform/cold-daemon claim follows.
+
+Docker's ARM64 config omits default variant even when building arm64/v8. [containerd's normalization](https://raw.githubusercontent.com/containerd/platforms/main/database.go) explicitly treats arm64 v8 as the empty default variant. A focused red/green test refines same-platform comparison to exactly linux/arm64 versus linux/arm64/v8; raw identities/strings remain intact, and v9/cross-architecture still reject. This is source-backed alias equivalence, not permission to ignore unknown platform fields. [Trivy reporting](https://trivy.dev/docs/latest/configuration/reporting/) and the actual pinned report confirm Packages inventory; execution now records --list-all-pkgs. [Docker reproducible builds](https://docs.docker.com/build/ci/github-actions/reproducible-builds/) grounds the fixed SOURCE_DATE_EPOCH/export handling.
