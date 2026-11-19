@@ -67,3 +67,26 @@ The official library links the v4.0.1 standard to <https://docs-prv.pcisecuritys
 The initial host/experiment tables above are discovery-time records. Current [P0 results](p0-ledger.md) supersede their Not-run entries: real Kind/Kyverno readiness, Floci OCI/ECR identity, Trivy scan, one-assessment Cosign/admission/runtime path and specific initial negatives were observed. Initial reassessment failed closed on cached older payload expiry. The corrected fixed v2/uncached profile now passes successive admissions and strict initial negatives without removing old evidence. Full compatibility/negative/source qualification remains open.
 
 Official pinned repository license review: Kind, Helm, Trivy, Kyverno and Distribution use Apache-2.0; Cosign's exact LICENSE text is Apache-2.0 although GitHub's detector returned NOASSERTION; Floci 2.5.0 uses MIT. Component repository licenses do not relicense complete image packages. Owner selected Apache-2.0 for CSLE. Checksums are rooted in upstream HTTPS metadata; independent publisher-attestation verification, complete component security-patch status, supported benchmark applicability and fresh-clone full-stack acceptance remain open.
+
+## P0 closure dependency review — 2026-11-19
+
+The initial Python/registry/node pins were compatibility experiments, not a security clearance. Current qualification upgrades Python to [3.12.16](https://www.python.org/downloads/release/python-31216/) and the backing registry to [Distribution 3.1.2](https://github.com/distribution/distribution/releases/tag/v3.1.2), addressing upstream published fixes. Registry 2.8.3 is affected by [digest verification](https://github.com/distribution/distribution/security/advisories/GHSA-685w-q87j-wqw3) and [tag deletion](https://github.com/distribution/distribution/security/advisories/GHSA-6pjf-3r9x-m592) advisories. Floci's core ECR/OCI path was retested with 3.1.2; its Distribution-2-specific garbage-collection helper remains unqualified and unused.
+
+The official Kind node catalog had no patched 1.37.2 image. Instead, `make p0-node` uses Kind's supported release-file builder with checksum-pinned [Kubernetes 1.37.2 ARM64 archive](https://dl.k8s.io/v1.37.2/kubernetes-server-linux-arm64.tar.gz) and digest-pinned Kind base. This addresses the [StatefulSet/ControllerRevision fix](https://github.com/kubernetes/kubernetes/issues/142097); the separate [Windows UNC issue](https://github.com/kubernetes/kubernetes/issues/142098) does not apply to this Linux profile. The built node's Docker config ID is recorded and compared to the actual created container; it is not mislabeled an OCI manifest digest. Build inputs/outcomes are reproducible, but bit-for-bit output identity is not claimed: generated Docker metadata can differ per build.
+
+Independent official-release review found the selected Kind 0.33.0, Kyverno 1.20.0, Cosign 3.1.4, Trivy 0.76.2 and Floci 2.5.0 current stable. Helm 3.22.1 is current in its supported 3.x line; Helm 4 is not needed for the tested Kubernetes libraries/profile. Latest does not mean vulnerability-free.
+
+Embedded Go metadata (571 unique module/version pairs queried against OSV) still has matching advisories. Bounded applicability review:
+
+| Advisory family | P0 exposure and limits |
+| --- | --- |
+| [Go CA distrust](https://vuln.go.dev/ID/GO-2026-6809.json) in Kind/Helm build versions | Kind uses the explicit local Unix engine; Helm uses a checksum-pinned local chart and project-loopback Kubernetes CA. Arbitrary external TLS usage is not qualified. |
+| [HTTP/1 server race](https://vuln.go.dev/ID/GO-2026-6859.json) | These tested CLI paths do not expose that HTTP server API. No general reachability proof is claimed. |
+| [compress malformed-input panic](https://vuln.go.dev/ID/GO-2026-6865.json) | Scanning/signing is restricted to the exact verified pinned fixture. Arbitrary-image resilience is a future adapter/release gate; a scanner failure cannot earn an allow. |
+| [OpenTelemetry truncation](https://github.com/advisories/GHSA-q7gw-24fr-5p69) | No external telemetry collector is configured. Do not claim a full upstream module clearance. |
+| [OpenPGP](https://vuln.go.dev/ID/GO-2026-5932.json), HTML parsers, Windows-only syscalls | Local ECDSA signing, pinned-chart installation and Linux/macOS profile exclude those intended paths; future feature use needs renewed review. |
+| [Azure credential helper](https://vuln.go.dev/ID/GO-2026-6225.json) | Only explicit local registry endpoints/ephemeral keys are qualified; Azure credentials and registries are excluded. |
+
+Fifteen exact Python SDK/schema/format dependencies were queried against OSV; no matching advisory was returned on this date. The lock now installs only the URI/date-time format validators actually used by the schemas, avoiding unrelated format extras. This is a version-feed result, not a claim of no vulnerabilities. Repository licenses and source origins remain recorded; OS/image transitive packages retain their own terms.
+
+Raw official release, Kubernetes CVE feed, Go metadata and OSV responses are retained in ignored `.local/p0-sources/patch-review/` and `.local/p0/closure-python-audit.json`. Known upstream findings are explicit scoped limitations; P0 qualifies this local fixed-fixture path and does not approve production or arbitrary-image use.

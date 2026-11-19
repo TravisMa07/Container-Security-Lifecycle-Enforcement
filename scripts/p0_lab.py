@@ -164,6 +164,43 @@ class Recorder:
         return result
 
 
+def verify_lab(rec, node):
+    observed = rec.run(
+        [
+            "kubectl",
+            "--kubeconfig",
+            KUBECONFIG,
+            "--context",
+            CONTEXT,
+            "get",
+            "nodes",
+            "-o",
+            "json",
+        ]
+    )
+    nodes = json.loads(observed.stdout)["items"]
+    if (
+        len(nodes) != 1
+        or nodes[0]["status"]["nodeInfo"]["kubeletVersion"] != node["version"]
+    ):
+        raise ValueError("running node version does not match the pinned build")
+    if not any(
+        c["type"] == "Ready" and c["status"] == "True"
+        for c in nodes[0]["status"]["conditions"]
+    ):
+        raise ValueError("running node is not Ready")
+    container = json.loads(rec.run(["docker", "inspect", NODE_CONTAINER]).stdout)[0]
+    if container["Image"] != node["docker_config_id"]:
+        raise ValueError(
+            "created node container does not use the recorded immutable build"
+        )
+    print(
+        "Running node version and Docker config identity verified:",
+        node["version"],
+        container["Image"],
+    )
+
+
 def up(authorized):
     require_privilege_authorization(authorized)
     check_ports([API_PORT, REGISTRY_PORT])
@@ -257,19 +294,7 @@ def up(authorized):
         ],
         env=env,
     )
-    rec.run(
-        [
-            "kubectl",
-            "--kubeconfig",
-            KUBECONFIG,
-            "--context",
-            CONTEXT,
-            "get",
-            "nodes",
-            "-o",
-            "json",
-        ]
-    )
+    verify_lab(rec, node)
     print("Lab created; evidence:", rec.directory, flush=True)
     print("Resources retained. No cleanup performed.", flush=True)
 
@@ -373,7 +398,7 @@ def install_kyverno():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("action", choices=["up", "kyverno", "node"])
+    parser.add_argument("action", choices=["up", "kyverno", "node", "verify"])
     parser.add_argument(
         "--allow-privileged-local",
         action="store_true",
@@ -384,5 +409,7 @@ if __name__ == "__main__":
         up(args.allow_privileged_local)
     elif args.action == "kyverno":
         install_kyverno()
-    else:
+    elif args.action == "node":
         build_node()
+    else:
+        verify_lab(Recorder(), json.loads((LOCAL / "node-image.json").read_text()))

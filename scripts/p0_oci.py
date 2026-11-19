@@ -80,7 +80,7 @@ def publish_bundle(base, bundle, subject_bytes, label, predicate_type):
     }
     raw = json.dumps(manifest, sort_keys=True).encode()
     put_manifest(base, "bundle-" + label, raw, manifest["mediaType"])
-    # Both OCI 1.1 native referrers and Distribution-2 fallback are exercised without
+    # Both OCI 1.1 native referrers and Distribution-2 fallback are published without
     # replacing previous evidence; every fixture uses a fresh subject digest.
     tag = digest(subject_bytes).replace(":", "-")
     try:

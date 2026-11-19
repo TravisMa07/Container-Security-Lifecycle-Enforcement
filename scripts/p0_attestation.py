@@ -39,7 +39,9 @@ def validate_scan(report, db, digest, now):
             "Type"
         ):
             raise ValueError("unsupported scanner result")
-        vulnerabilities = result.get("Vulnerabilities") or []
+        vulnerabilities = result.get("Vulnerabilities")
+        if vulnerabilities is None:
+            vulnerabilities = []
         if not isinstance(vulnerabilities, list):
             raise ValueError("malformed vulnerability list")
         for finding in vulnerabilities:
@@ -63,11 +65,13 @@ def main():
     ecr_path = Path((LOCAL / "ecr-result-path.txt").read_text())
     ecr = json.loads(ecr_path.read_text())
     report_path = rec.directory / "trusted-trivy.json"
-    if not ecr["image"].startswith(
-        f"localhost:{API_PORT}/000000000000/us-east-1/csle-p0/demo@sha256:"
-    ):
+    pinned = json.loads((ROOT / "toolchain.lock.json").read_text())["images"]["demo"][
+        "linux_arm64_digest"
+    ]
+    expected = f"localhost:{API_PORT}/000000000000/us-east-1/csle-p0/demo@{pinned}"
+    if ecr["image"] != expected or ecr["manifest_digest"] != pinned:
         raise ValueError(
-            "only the explicit local compatibility repository can be signed"
+            "only the exact pinned local compatibility artifact can be scanned and signed"
         )
     # Execute an independent fresh scan here; never sign a merely imported passing report.
     rec.run(

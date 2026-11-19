@@ -71,3 +71,19 @@ class ScanGateTests(unittest.TestCase):
                         self.digest,
                         self.now,
                     )
+
+    def test_malformed_falsy_vulnerability_values_reject(self):
+        for value in [{}, "", False, 0]:
+            with self.subTest(value=value):
+                report = copy.deepcopy(self.report)
+                report["Results"][0]["Vulnerabilities"] = value
+                with self.assertRaisesRegex(ValueError, "malformed"):
+                    validate_scan(report, self.db, self.digest, self.now)
+
+    def test_supported_absent_or_null_clean_list_accepts(self):
+        for value in [None, []]:
+            report = copy.deepcopy(self.report)
+            report["Results"][0]["Vulnerabilities"] = value
+            validate_scan(report, self.db, self.digest, self.now)
+        del self.report["Results"][0]["Vulnerabilities"]
+        validate_scan(self.report, self.db, self.digest, self.now)

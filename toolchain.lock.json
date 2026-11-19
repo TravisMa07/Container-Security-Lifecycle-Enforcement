@@ -1,7 +1,7 @@
 {
   "schema_version": "1",
   "resolved_at": "2026-11-19",
-  "qualification": "provisioning candidates; see docs/p0-ledger.md for actual results",
+  "qualification": "selected P0 compatibility profile; see ledger for exact results, advisory applicability and open source gate",
   "profiles": {
     "darwin-arm64": {
       "kind": {
@@ -48,7 +48,8 @@
       "tag_observed": "kindest/node:v1.37.0",
       "index_digest": "sha256:a1ed56cfb0e7b93589bdf97c8cd566405a265939e3620fc4f5de89adff580ae5",
       "linux_arm64_digest": "sha256:6a3345f517a7df05185c648f83d18d464f2a94ea4a69eaee39b7e1de02611e59",
-      "reference": "kindest/node@sha256:a1ed56cfb0e7b93589bdf97c8cd566405a265939e3620fc4f5de89adff580ae5"
+      "reference": "kindest/node@sha256:a1ed56cfb0e7b93589bdf97c8cd566405a265939e3620fc4f5de89adff580ae5",
+      "qualification": "historical first smoke only; current provisioning uses patched node_build"
     },
     "floci": {
       "tag_observed": "floci/floci:2.5.0",
@@ -84,7 +85,11 @@
     "requirements": "requirements-p0.lock",
     "license": "Apache-2.0 (boto3); transitive terms remain separate",
     "jsonschema": "4.26.0",
-    "referencing": "0.37.0"
+    "referencing": "0.37.0",
+    "validation_formats": {
+      "rfc3339-validator": "0.1.4",
+      "rfc3986-validator": "0.1.1"
+    }
   },
   "licenses": {
     "floci": "MIT",
