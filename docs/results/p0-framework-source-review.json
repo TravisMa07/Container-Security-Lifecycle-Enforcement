@@ -264,7 +264,10 @@
   },
   "selected_profile": {
     "kubernetes_version": "v1.35.10",
-    "reason": "intersection of the supplied CIS target and audience ranges; runtime qualification pending"
+    "reason": "intersection of supplied CIS target and audience ranges",
+    "runtime_status": "qualified_on_branch",
+    "runtime_record": "docs/results/p0-final-qualification.json",
+    "executed_revision": "59b870e7b9299284948793a303943eaea30dc31b"
   },
   "distribution_policy": "No publication, full extract or rendered page is committed; metadata and bounded original paraphrases only",
   "p6_implementation_status": "not_implemented"

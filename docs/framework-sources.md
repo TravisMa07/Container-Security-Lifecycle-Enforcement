@@ -1,6 +1,6 @@
 # P0 authoritative framework source review
 
-Reviewed 2026-11-19 by independent read-only researcher `p0_sources`, base `8c5e95e661781f2810030ca6b89d6c0f7afd4f08`. No release control mappings ship in P0. Source access and reviewed text are separate from implemented technical evidence.
+Initial review: 2026-11-19 by `p0_sources`, base `8c5e95e661781f2810030ca6b89d6c0f7afd4f08`. Historical access failures below are superseded by the owner-supplied publication review and final qualification. No release control mappings ship in P0; reviewed source text is separate from implemented technical evidence.
 
 ## NIST SP 800-53 Rev.5
 
@@ -17,13 +17,13 @@ Reviewed statements and EXAMINE/INTERVIEW/TEST assessment entries for RA-5, SI-2
 
 These are source-reviewed mapping directions, not implemented assessments or organizational compliance claims.
 
-## PCI DSS v4.0.1 — exact-source gate open
+## Initial PCI DSS4.0.1 source-access review (historical)
 
 The [official document library](https://www.pcisecuritystandards.org/document_library/?class=pcidss&doc=pci_dss) links the full standard to [PCI-DSS-v4_0_1.pdf](https://docs-prv.pcisecuritystandards.org/PCI%20DSS/Standard/PCI-DSS-v4_0_1.pdf). Both ordinary HTTP retrieval and the web tool returned 403. Full requirements, applicability and testing procedures were not reviewed; no access restriction was bypassed.
 
 [Official FAQ 1597](https://www.pcisecuritystandards.org/faqs/1597/) supports investigation of 6.3.1, 6.3.3 and 11.3.1. Scan severity cannot replace entity-specific risk ranking. Scan time and FixedVersion cannot establish vendor patch release dates or SLA satisfaction. Container image scans do not establish full internal-network/CDE coverage or qualified independent scanning personnel. All three candidates remain proposed/source-review-pending until the official full text is reviewed.
 
-## CIS Kubernetes Benchmark — exact-source gate open
+## Initial CIS source-access review (historical)
 
 The [official benchmark listing](https://www.cisecurity.org/benchmark/kubernetes) identifies edition 2.1.0. Its [download route](https://learn.cisecurity.org/benchmarks) requires registration/contact fields and presents usage terms. No registration or personal-data submission was performed.
 
@@ -35,7 +35,7 @@ Read-only researcher `closure_sources` exhausted the legitimate public publisher
 
 CIS official metadata identifies2.1.0 published2026-09-30 and advertises <https://workbench.cisecurity.org/cis/api/v1/file/7832/download>; ordinary retrieval returned404. Official campaign and applicability discussion returned403. Public metadata-page SHA-256 `ae0bf9c5d9ea946d07be36c0bd1d5c5a7e456701c4c6ca19659ec192a8db6e85`. No registration, personal-data submission or access-control bypass occurred. No third-party mirror was substituted as authoritative.
 
-Exact selected requirement wording remains unverified beyond the facts explicitly stated by the official PCI FAQ. Full PDFs are not inherently required as a format; an official source reproducing the exact selected text can suffice. Such a source has not been obtained for all selected PCI/CIS clauses. P6 mappings cannot be shipped on the basis of this access report.
+At the end of that public-access investigation, exact selected requirement wording remained unverified beyond the facts explicitly stated by the official PCI FAQ. Full PDFs are not inherently required as a format; an official source reproducing the exact selected text can suffice. Such a source has not been obtained for all selected PCI/CIS clauses. P6 mappings cannot be shipped on the basis of this access report.
 
 ## Owner-supplied publication review — original P0 gate retained
 
@@ -71,6 +71,8 @@ An early provisional reviewer interpretation of the patch deadline was rejected 
 
 Complete audit/remediation/impact/exception context was reviewed. P6 must combine configuration observations with effective admission/exception-scope evidence and human review. No currently violating pod is not proof of enforcement. Normal/init/ephemeral containers need appropriate coverage, and absent privilege-escalation configuration is not equivalent to explicitly disabling it. The non-root strategy in5.2.7 is applicable on1.35; its1.36+ user-namespace alternative has additional kernel/runtime prerequisites and is not assumed here. Obsolete policy-API terminology must not be copied into current Kyverno policies.
 
-The scope page (PDF8 /printed7) is internally inconsistent: target1.34–1.35 versus audience1.37–1.35. The conservative common version is1.35, so the supported source-aligned profile selects patched1.35.10 and is being requalified. The earlier1.37.2 experiments remain historical evidence, not whole-benchmark applicability. Even after qualification, only selected technical evidence directions are approved for later implementation; benchmark-wide conformance is not claimed.
+The scope page (PDF8 /printed7) is internally inconsistent: target1.34–1.35 versus audience1.37–1.35. The conservative common version is1.35, so the supported source-aligned profile selects patched1.35.10. Its full local qualification passed; see the final record. The earlier1.37.2 experiments remain historical evidence, not whole-benchmark applicability. Even after qualification, only selected technical evidence directions are approved for later implementation; benchmark-wide conformance is not claimed.
 
 The publication's terms page was inspected; no publication/extract/render is hosted in this repository. The original P0 source review is completed from supplied copies, without deferring it to P6. P6 still owns actual mappings, evidence evaluation/export and their acceptance tests.
+
+Final status: the original P0 source gate is satisfied by the reviewed supplied copies, without a scope waiver. The [final qualification](results/p0-final-qualification.json) binds the supported1.35.10 profile to executed source revision59b870e and its passing scenarios. P6 remains responsible for implementing and testing mappings and preserving all manual/organizational limitations.

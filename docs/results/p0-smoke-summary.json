@@ -116,5 +116,7 @@
     "full dependency patch/security and platform qualification",
     "fresh-clone end-to-end acceptance"
   ],
-  "corrected_expectation_revision": "19409bc"
+  "corrected_expectation_revision": "19409bc",
+  "historical": true,
+  "superseded_by": "docs/results/p0-final-qualification.json"
 }

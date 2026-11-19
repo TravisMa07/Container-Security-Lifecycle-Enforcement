@@ -151,5 +151,7 @@
   },
   "current_approval_expires_at": "2026-11-19T18:30:47.371179+00:00",
   "remaining_gate": "Exact selected framework wording review from official PCI/CIS sources, or explicit owner phase-scope amendment. No source-completeness claim.",
-  "reviewed_head_expiry": "passed: matching positive receipt, unchanged policy and exact expiry denial after elapsed window; earlier precondition refusal retained separately"
+  "reviewed_head_expiry": "passed: matching positive receipt, unchanged policy and exact expiry denial after elapsed window; earlier precondition refusal retained separately",
+  "historical": true,
+  "superseded_by": "docs/results/p0-final-qualification.json"
 }

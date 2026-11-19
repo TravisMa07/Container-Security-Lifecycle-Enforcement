@@ -1,7 +1,7 @@
 {
   "schema_version": "1",
   "resolved_at": "2026-11-19",
-  "qualification": "selected P0 compatibility profile; see ledger for exact results, advisory applicability and open source gate",
+  "qualification": "P0 source-aligned ARM64 local profile qualified; exact source/runtime evidence and advisory limits in docs/p0-ledger.md",
   "profiles": {
     "darwin-arm64": {
       "kind": {

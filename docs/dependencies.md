@@ -90,3 +90,7 @@ Embedded Go metadata (571 unique module/version pairs queried against OSV) still
 Fifteen exact Python SDK/schema/format dependencies were queried against OSV; no matching advisory was returned on this date. The lock now installs only the URI/date-time format validators actually used by the schemas, avoiding unrelated format extras. This is a version-feed result, not a claim of no vulnerabilities. Repository licenses and source origins remain recorded; OS/image transitive packages retain their own terms.
 
 Raw official release, Kubernetes CVE feed, Go metadata and OSV responses are retained in ignored `.local/p0-sources/patch-review/` and `.local/p0/closure-python-audit.json`. Known upstream findings are explicit scoped limitations; P0 qualifies this local fixed-fixture path and does not approve production or arbitrary-image use.
+
+## Final source-aligned selection
+
+Source review of the supplied CIS2.1.0 publication found target1.34–1.35 versus audience1.35–1.37. The selected supported profile therefore uses the shared1.35 minor, with official stable1.35.10 release bytes SHA-256 `337982e3d5825f60d989b440c5ef441051ffec54659e9b11a7cdcaf218270157`. This is above the1.35.9 fix boundary for the previously reviewed controller issue. The pinned Kind release-file build, actual node/config identity and full scenario suite passed on that version; prior1.37.2 build inputs remain historical in the lock. Kubectl1.36.1 is within supported one-minor skew. Kyverno1.20 supports1.34–1.37. No new external service or source-gate waiver was introduced.

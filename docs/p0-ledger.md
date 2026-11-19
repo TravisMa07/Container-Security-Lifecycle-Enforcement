@@ -2,7 +2,7 @@
 
 Base: `8c5e95e661781f2810030ca6b89d6c0f7afd4f08`. Owner: root. Scope/expectations: [P0 design](p0-design.md). Phase tracker: [#1](https://github.com/TravisMa07/Container-Security-Lifecycle-Enforcement/issues/1).
 
-Current closure status: all implemented technical gates have passing evidence, including final reviewed-head expiry confirmation. Exact official PCI/CIS wording remains an unmet source gate; P0 is not closed. See the closure section below.
+Current status: P0 qualified on the implementation branch. The owner retained the original source gate and supplied the publications; exact-source review and the source-aligned1.35.10 qualification passed. See the final closure section and artifact record below. Owner acceptance, merge and merged-commit verification remain separate.
 
 ## Pre-implementation discovery — 2026-11-19
 
@@ -119,3 +119,28 @@ Real adversarial cases: wrong outer subject, modified signed predicate, modified
 HANDOFF.md section19 explicitly requires exact selected framework wording from official sources during P0. Official PCI catalog metadata marks the full standard protected/agreement-required; even unprotected ROC/SAQ template retrieval returned403. CIS exact text download is registration-gated/unavailable (404/403). No publisher agreement/account was created and no personal data supplied. Full source details/hashes are in framework-sources.md. An owner-supplied official publication or explicit phase-scope amendment is required before unqualified P0 closure; neither CI nor the threat-model checklist can substitute for those facts. All three expanded MVP features and P6 source/shipping tests remain mandatory.
 
 Final reviewed-head expiry at `ae3c009`: `make p0-expired` passed after the actual second approval window, with matching positive receipt/predicate hash, unchanged policy and the specific expiry denial. An earlier invocation refused to execute before expiry; its separate precondition log is retained and is not denial evidence. Every implemented technical closure scenario now has passing evidence; exact-source wording is the sole P0 closure blocker. No issue/phase closure or merge is claimed.
+
+## Final P0 closure — original source gate satisfied
+
+The owner explicitly rejected deferring source review and supplied the official-publication copies. No requirement was waived or moved to P6. Root plus `pdf_pci_review` and `pdf_cis_review` inspected complete relevant pages and rendered tables; `p0_source_closure_review` independently verified the source metadata, clauses, manual classifications and version-scope handling. No blocking review findings remain.
+
+[Source review](framework-sources.md) and its [metadata](results/p0-framework-source-review.json) identify the exact supplied bytes: PCI DSS4.0.1 June2024,397pages SHA-256 `5e6b9093b84007b973097d20126a3768ea2f0a1d4200255c849b0fb3bf04ebc7`; CIS2.1.0 dated2026-09-30,344pages SHA-256 `491849d6ede263ce9397afc89c102e00b9ce586a45c83c969f952df633afc495`. This binds the review to owner-supplied copies; publisher digital origin was not independently authenticated. Publications, full extracts and renders remain untracked.
+
+Selected PCI6.3.1,6.3.3 and11.3.1 text, procedures, continuations and related applicability were reviewed. Final6.3.3 interpretation is entity-ranked critical patches within one month of release, other patches on entity timing. An early provisional misreading was withdrawn after visual comparison; no extraction defect or high-risk universal patch deadline is asserted. Organizational risk ranking, release dates, internal/CDE scope, cadence and personnel independence remain human/context facts. Source review is not a compliance assessment.
+
+CIS5.2.2–5.2.7 exact IDs/audit/remediation/exception context and Manual classifications were reviewed. The publication's target1.34–1.35 and audience1.35–1.37 ranges conflict; patched1.35.10 is their conservative intersection. This avoids asserting benchmark-wide applicability for earlier1.37.2 experiments. The non-root strategy supports1.35 without relying on the1.36+ user-namespace alternative. P6 must preserve manual classification and implement/test technical evidence, not infer conformance from pod absence or this source review.
+
+The source-aligned profile was frozen in0438c5f, pinned in59b870e, then qualified from a fresh public clone at exactly `59b870e7b9299284948793a303943eaea30dc31b` with a clean working tree and no copied tools/state. Docker image/build cache was available. Profile `csle-p0-cis` uses isolated loopback ports14586/15120 and dedicated kubeconfig/context. Earlier project lab containers were stopped but not deleted; their evidence remains. No unrelated resources changed.
+
+[Final machine-readable qualification](results/p0-final-qualification.json) records actual inputs, build config identity, commands/log hashes and scenario outcomes. The actual node was Ready at1.35.10 and used Docker config ID `sha256:a2aa41a5f52ee9b68cebf4d4e8bfa107d7d5e831ad59433af0f924b96e5146fc`. All44 offline tests passed. Real Floci ECR/OCI byte identity, Trivy, two distinct approved/admitted/runtime-matching assessments, active-policy revocation, unsigned/wrong-key/privileged, wrong-subject/modified-content/modified-signature/future/stale-scan/stale-DB negatives and strict expiry passed. Each negative requires the intended reason and valid controls. The final expiry ran after19:09:00 UTC, with matching positive receipt and unchanged policy. No result is transferred to an unexecuted later documentation commit.
+
+| P0 acceptance gate | Final result |
+| --- | --- |
+| Environment, compatible exact pins, runtime/identity smoke proof | Passed on the documented ARM64 local profile; known dependency limitations remain explicit |
+| Architecture, license, risk register and phased test plan | Established; Apache-2.0 owner-selected; lean shared threat model and executable checks |
+| User stories, initial canonical schemas and immutable identity strategy | Established; six schemas and17 contract tests, with domain-truth limits explicit |
+| Exact official NIST/PCI/CIS selected-source review and applicability | Completed; source hashes/locators/interpretations and conservative1.35 scope recorded |
+| Actual signed admission allow/deny, reassessment and freshness feasibility | Passed with original failures/corrections retained |
+| Reproducible local setup and honest evidence attribution | Passed fresh checkout on supported host; no cold-cache, bit-for-bit, production or other-platform claim |
+
+**P0 is qualified on branch `phase/p0-compatibility` for closure of phase tracker#1.** PR#9 remains draft/unmerged. This does not establish owner semantic acceptance, release authorization or verification on a merged commit. P1–P7 remain future work; no MVP completion, full compliance mapping implementation or organizational certification is claimed. All three expanded MVP features remain mandatory.
