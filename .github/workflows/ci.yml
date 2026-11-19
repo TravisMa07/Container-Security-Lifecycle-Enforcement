@@ -1,0 +1,17 @@
+name: Foundation integrity
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  foundation:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Check repository documents
+        run: make check
+      - name: Check discovery script syntax
+        run: python3 -m py_compile scripts/check_docs.py scripts/doctor.py

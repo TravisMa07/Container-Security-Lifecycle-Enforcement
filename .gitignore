@@ -1,0 +1,27 @@
+# Local credentials and signing material
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+cosign.password
+# Runtime evidence and downloaded tools
+.local/
+.tools/
+.state/
+/results/
+*.db
+*.db-*
+*.sqlite*
+# Python and editors
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+.DS_Store
