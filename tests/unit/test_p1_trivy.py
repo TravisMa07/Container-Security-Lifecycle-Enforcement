@@ -172,3 +172,10 @@ class ModelContractTests(unittest.TestCase):
             with self.assertRaises(ValueError): ParsedScan.model_validate(changed)
         changed=copy.deepcopy(scan); changed['findings'].append(changed['findings'][0])
         with self.assertRaises(ValueError): ParsedScan.model_validate(changed)
+
+class TimestampRegressionTests(unittest.TestCase):
+    def test_invalid_offset_components_rejected(self):
+        from app.collectors.trivy import normalize_timestamp
+        for value in ['2026-11-19T00:00:00+00:99', '2026-11-19T00:00:00-01:60', '2026-11-19T00:00:00+24:00']:
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                normalize_timestamp(value)

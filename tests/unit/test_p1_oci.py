@@ -61,3 +61,12 @@ class OCIResolutionTests(unittest.TestCase):
         for endpoint in ['https://127.0.0.1:12', 'http://example.com:12', 'http://localhost', 'http://u:p@localhost:12', 'http://localhost:12/x', 'http://localhost:12/?x=1']:
             with self.subTest(endpoint=endpoint), self.assertRaises(ValueError):
                 endpoint_url(endpoint)
+
+    def test_malformed_index_and_config_are_input_failures(self):
+        index = encoded({'schemaVersion': 2, 'manifests': [{'platform': {'os': 'linux', 'architecture': 'arm64'}}]})
+        with self.assertRaises(ValueError):
+            resolve('127.0.0.1:15120/demo@' + digest(index), self.endpoint, 'linux/arm64', lambda path, limit: index)
+        self.config = encoded({'os': 'linux', 'architecture': 'arm64', 'variant': 7})
+        self.manifest = encoded({'schemaVersion': 2, 'config': {'digest': digest(self.config), 'size': len(self.config)}, 'layers': []})
+        with self.assertRaises(ValueError):
+            resolve('127.0.0.1:15120/demo@' + digest(self.manifest), self.endpoint, 'linux/arm64', self.fetch)

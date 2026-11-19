@@ -83,3 +83,17 @@ class CLITests(unittest.TestCase):
         self.assertEqual(status, 1)
         self.assertEqual(json.loads(stderr.getvalue())['error']['code'], 'OPERATION_FAILED')
         self.assertFalse(self.db.exists())
+
+    def test_malformed_registry_input_is_json_error(self):
+        import io
+        from app.cli import main
+        from app.collectors.oci import resolve
+        from test_p1_oci import encoded, digest
+        raw = encoded({'schemaVersion': 2, 'manifests': [{'platform': {'os':'linux', 'architecture':'arm64'}}]})
+        def execute(*args):
+            return resolve('127.0.0.1:15120/demo@'+digest(raw), 'http://127.0.0.1:15120', 'linux/arm64', lambda path, limit: raw)
+        with patch('app.cli.execute_scan', side_effect=execute), patch('sys.stderr', new_callable=io.StringIO) as stderr:
+            status = main(['--db', str(self.db), 'scan', 'image', self.ref, '--registry-url', 'http://127.0.0.1:15120'])
+        self.assertEqual(status, 2)
+        self.assertEqual(json.loads(stderr.getvalue())['error']['code'], 'INVALID_INPUT')
+        self.assertFalse(self.db.exists())

@@ -65,6 +65,7 @@ class RunnerTests(unittest.TestCase):
             return b''
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
+            (root / 'toolchain.lock.json').write_text(json.dumps({'images': {'demo': {'linux_arm64_digest': ref.split('@')[1]}}}))
             (root / 'cache/db').mkdir(parents=True)
             (root / 'cache/db/metadata.json').write_bytes(b'{"UpdatedAt":"2026-11-19T00:00:00Z"}')
             (root / 'cache/db/trivy.db').write_bytes(b'synthetic DB')
@@ -85,3 +86,12 @@ class RunnerTests(unittest.TestCase):
                 with self.assertRaisesRegex(ScannerError, 'cache is in use'):
                     with _cache_lock(Path(directory)):
                         self.fail('concurrent lock acquired')
+
+    def test_unqualified_artifact_never_invokes_scanner(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'toolchain.lock.json').write_text(json.dumps({'images': {'demo': {'linux_arm64_digest': 'sha256:'+'a'*64}}}))
+            with patch('app.collectors.runner.ROOT', root), patch('app.collectors.runner.verified_scanner', return_value=(Path('trivy'), '0.76.2', 'hash')), patch('app.collectors.runner.resolve', return_value={'manifest_digest':'sha256:'+'b'*64}), patch('app.collectors.runner._run') as run:
+                with self.assertRaisesRegex(ScannerError, 'restricted to the qualified pinned demo'):
+                    execute_scan('localhost:15120/demo@sha256:'+'b'*64, 'http://localhost:15120', 'linux/arm64')
+                run.assert_not_called()

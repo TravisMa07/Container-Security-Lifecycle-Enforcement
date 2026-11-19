@@ -36,6 +36,8 @@ def parse_image_ref(value: str) -> tuple[str, str, str]:
 def normalize_timestamp(value: str) -> str:
     if not isinstance(value, str) or not re.fullmatch(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})', value):
         raise ValueError('timezone-aware RFC3339 timestamp required')
+    if value[-1] != 'Z' and (int(value[-5:-3]) > 23 or int(value[-2:]) > 59):
+        raise ValueError('invalid timestamp offset')
     try:
         parsed = datetime.fromisoformat(value.replace('Z', '+00:00'))
     except (ValueError, OverflowError) as error:
@@ -140,7 +142,7 @@ def parse_report(raw: bytes, image_ref: str, scanner_version: str | None = None,
         parse_image_ref(ref)
     if image_ref not in refs:
         raise ValueError('report does not bind the exact requested repository and digest')
-    limitations = {'REPORT_CONTENT_UNVERIFIED', 'MANIFEST_KIND_UNVERIFIED', 'REGISTRY_RESOLUTION_UNVERIFIED'}
+    limitations = {'REPORT_CONTENT_UNVERIFIED', 'MANIFEST_KIND_UNVERIFIED', 'REGISTRY_RESOLUTION_UNVERIFIED', 'DB_CONTENT_IDENTITY_UNVERIFIED'}
     reported = None
     if 'Trivy' in obj:
         trivy = _object(obj['Trivy'], 'Trivy')

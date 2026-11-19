@@ -1,6 +1,8 @@
 # Current limitations
 
-P0 provides pinned local tooling, an isolated compatibility lab and real experiments; no application inventory, persistence, lifecycle engine, production policy service, compliance export or complete demo exists. P0 is qualified on its implementation branch; P1–P7 and the MVP remain incomplete.
+P0 is merged. P1 adds scan evidence persistence and a JSON CLI on its implementation branch; final qualification is recorded in the P1 ledger. Kubernetes inventory/history, lifecycle reasoning, product signing/policy, compliance export and the complete demo remain pending P2–P7. The MVP is incomplete.
+
+P1 imports digest-bound reports with explicit unverified provenance. Executed scans are restricted to the exact pinned P0 demo manifest and loopback OCI endpoint until the known malformed-compression advisory boundary is revisited. Multi-platform selection has offline tests; real P1 scanning is qualified only for the single ARM64/v8 manifest. There is no scan approval/clean verdict or automatic cache reuse. Query paths currently materialize stored scan details in memory, suitable for the small local demonstration rather than high-volume inventory.
 
 A single-assessment path demonstrated Floci OCI bytes/ECR metadata → Trivy → Cosign → Kyverno admission and a matching runtime digest. The initial v1 reassessment failed closed on cached older evidence. A source-grounded fixed v2 schema plus disabled verification cache now passes two successive admissions and strict initial negatives while retaining old evidence. This profile is a narrow single-artifact compatibility prototype; the six canonical schemas, real wrong-subject/tampered/future/stale negatives and a fresh-clone qualification now pass. Exact official PCI/CIS source wording was reviewed from supplied copies; the source-aligned Kubernetes1.35.10 profile passed. See the [P0 ledger](p0-ledger.md); do not infer a complete signed-attestation product from a one-time smoke result.
 

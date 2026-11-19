@@ -83,6 +83,8 @@ def resolve(image_ref, endpoint, platform, fetch=None):
         for entry in descriptors:
             if not isinstance(entry, dict) or not isinstance(entry.get('platform'), dict):
                 raise ValueError('invalid platform descriptor')
+            if not isinstance(entry.get('digest'), str) or not DIGEST.fullmatch(entry['digest']) or type(entry.get('size')) is not int or entry['size'] < 0:
+                raise ValueError('invalid index descriptor digest or size')
             declared = entry['platform']
             if declared.get('os') == parts[0] and declared.get('architecture') == parts[1] and (len(parts) == 2 or declared.get('variant') == parts[2]):
                 matches.append(entry)
@@ -96,6 +98,8 @@ def resolve(image_ref, endpoint, platform, fetch=None):
     if not isinstance(descriptor, dict) or 'size' not in descriptor:
         raise ValueError('config descriptor required')
     config = document('blobs', descriptor.get('digest'), descriptor['size'])
+    if any(not isinstance(config.get(key), str) or not re.fullmatch(r'[a-z0-9][a-z0-9._-]*', config[key]) for key in ('os', 'architecture')) or ('variant' in config and (not isinstance(config['variant'], str) or not re.fullmatch(r'[a-z0-9][a-z0-9._-]*', config['variant']))):
+        raise ValueError('invalid config platform fields')
     if config.get('os') != parts[0] or config.get('architecture') != parts[1] or (len(parts) == 3 and config.get('variant') != parts[2]):
         raise ValueError('config platform mismatch')
     return {'requested_reference': image_ref, 'endpoint': origin,

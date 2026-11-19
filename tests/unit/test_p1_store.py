@@ -238,5 +238,16 @@ class StoreTests(unittest.TestCase):
                 store.save_scan(forged, RAW, DB)
             self.assertEqual(store.list_scans(), [])
 
+    def test_malformed_normalized_snapshot_is_integrity_error(self):
+        for index, malformed in enumerate(['{}', '[]', 'null']):
+            with self.subTest(malformed=malformed):
+                path = Path(self.temp.name) / ('corrupt-' + str(index) + '.sqlite3')
+                with Store(path) as store:
+                    scan_id = store.save_scan(parsed(), RAW, DB)['scan_id']
+                    store.connection.execute('DROP TRIGGER scans_no_update')
+                    store.connection.execute('UPDATE scans SET payload=?', (malformed,))
+                    with self.assertRaises(ValueError):
+                        store.get_scan(scan_id)
+
 if __name__ == '__main__':
     unittest.main()

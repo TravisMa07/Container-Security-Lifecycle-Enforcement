@@ -77,6 +77,9 @@ def execute_scan(image_ref, registry_url, platform, cache_dir=None):
     from app.collectors.trivy import parse_report, load_document
     binary, version, binary_hash = verified_scanner()
     resolution = resolve(image_ref, registry_url, platform)
+    known = json.loads((ROOT / 'toolchain.lock.json').read_text())['images']['demo']['linux_arm64_digest']
+    if resolution['manifest_digest'] != known:
+        raise ScannerError('executed scanning is restricted to the qualified pinned demo artifact; see dependencies.md')
     selected_ref = image_ref.split('@')[0] + '@' + resolution['manifest_digest']
     cache = (Path(cache_dir) if cache_dir else ROOT / '.local/trivy-cache').resolve()
     cache.mkdir(parents=True, exist_ok=True, mode=0o700)

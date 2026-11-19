@@ -189,20 +189,23 @@ class Store:
         self._read_document(row["source_document_hash"])
         if row["db_document_hash"] is not None:
             self._read_document(row["db_document_hash"])
-        payload = json.loads(row["payload"])
-        findings = []
-        for finding_row in self.connection.execute(
-                "SELECT finding_id, payload FROM scan_findings WHERE scan_id=? ORDER BY finding_id", (scan_id,)):
-            finding = json.loads(finding_row["payload"])
-            if finding["finding_id"] != finding_row["finding_id"]:
-                raise ValueError("finding snapshot identity check failed")
-            findings.append(finding)
-        payload["findings"] = findings
-        if (payload["source_document_hash"] != row["source_document_hash"]
-                or payload["db_document_hash"] != row["db_document_hash"]
-                or _hash(_json(payload).encode()) != scan_id):
-            raise ValueError("normalized scan snapshot integrity check failed")
-        return dict(payload, scan_id=scan_id)
+        try:
+            payload = json.loads(row["payload"])
+            findings = []
+            for finding_row in self.connection.execute(
+                    "SELECT finding_id, payload FROM scan_findings WHERE scan_id=? ORDER BY finding_id", (scan_id,)):
+                finding = json.loads(finding_row["payload"])
+                if finding["finding_id"] != finding_row["finding_id"]:
+                    raise ValueError("finding snapshot identity check failed")
+                findings.append(finding)
+            payload["findings"] = findings
+            if (payload["source_document_hash"] != row["source_document_hash"]
+                    or payload["db_document_hash"] != row["db_document_hash"]
+                    or _hash(_json(payload).encode()) != scan_id):
+                raise ValueError("normalized scan snapshot integrity check failed")
+            return dict(payload, scan_id=scan_id)
+        except (KeyError, TypeError, json.JSONDecodeError) as error:
+            raise ValueError("normalized scan snapshot integrity check failed") from error
 
     def list_scans(self):
         self._ensure_ready()
