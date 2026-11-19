@@ -272,3 +272,16 @@ class EngineMatrixTests(unittest.TestCase):
         value=facts()
         value['scans'][1]['report']['Results'][0]['Packages'].append({'Name':'crypto','Version':'2.0-r1'})
         self.assertEqual(evaluate(value)['state']['remediation'],'verified_in_scope')
+
+    def test_every_relevant_target_needs_complete_package_inventory(self):
+        variants=[None,False,0,{},'', [None],[{}],[{'Version':'2.0-r1'}],[{'Name':'crypto','Version':'2.0-r1','PkgPath':False}]]
+        for packages in variants:
+            value=facts()
+            value['scans'][1]['report']['Results'].append({'Type':'alpine','Class':'os-pkgs','Target':'second','Packages':packages,'Vulnerabilities':[]})
+            with self.subTest(packages=packages):self.assertNotEqual(evaluate(value)['state']['remediation'],'verified_in_scope')
+        value=facts()
+        value['scans'][1]['report']['Results'].append({'Type':'alpine','Class':'os-pkgs','Target':'second','Vulnerabilities':[]})
+        self.assertNotEqual(evaluate(value)['state']['remediation'],'verified_in_scope')
+        value=facts()
+        value['scans'][1]['report']['Results'].append({'Type':'alpine','Class':'os-pkgs','Target':'second','Packages':[],'Vulnerabilities':[]})
+        self.assertEqual(evaluate(value)['state']['remediation'],'verified_in_scope')

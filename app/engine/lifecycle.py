@@ -237,13 +237,14 @@ def _package_fixed(original,replacement,finding):
     for result in replacement['report'].get('Results') or []:
         if not isinstance(result,dict) or result.get('Type')!=finding.package_type:continue
         packages=result.get('Packages')
-        if isinstance(packages,list):
-            for package in packages:
-                if not isinstance(package,dict):continue
-                path=package.get('PkgPath') or None
-                if package.get('Name')==finding.package_name and path==finding.package_path:
-                    if package.get('Version')!=fixed:return False
-                    matched=True
+        if not isinstance(packages,list):return False
+        for package in packages:
+            if not isinstance(package,dict) or not isinstance(package.get('Name'),str) or not package['Name'].strip():return False
+            if package.get('Name')==finding.package_name and package.get('PkgPath') is not None and not isinstance(package['PkgPath'],str):return False
+            path=package.get('PkgPath') or None
+            if package.get('Name')==finding.package_name and path==finding.package_path:
+                if package.get('Version')!=fixed:return False
+                matched=True
         vulnerabilities=result.get('Vulnerabilities')
         if vulnerabilities is not None and not isinstance(vulnerabilities,list):return False
         for vulnerability in vulnerabilities or []:
