@@ -19,3 +19,24 @@ First real setup at8a060f8 failed in the test harness after successful RBAC crea
 Independent p2_review inspected8a060f8 and139 tests (including parent CLI additions). Two reproduced blockers: one cluster ID could bind different servers in different namespaces; complete/empty snapshots had no immutable membership receipt, losing observed absence history after later reappearance. Regression logs binding-red.log and snapshot-history-red.log show intended assertion failures (the first history-test attempt only showed missing API; replaced by a runnable empty-result skeleton before recording meaningful red). Corrections enforce cluster-wide server binding and append immutable scope/kind/RV/time/member receipts, including empty snapshots. Migration3 adds receipts without editing executed migration2. No past absence is reconstructed on upgrade. SQL fault at gap-close proves receipt/event/current/checkpoint rollback together; append-only/tamper tests validate receipts.
 
 Review also noted aggregate pagination memory; cumulative20MiB snapshot cap was reproduced red and fixed. Log snapshot-limit-red.log/green.log retained. Corrected suites144 pass (127 unit +17 contract), including all P1/P0 tests. Parent owns final source/runtime/CI attribution; no P2 merge authorized.
+
+## Final P2 qualification
+
+Clean executed source `1ef3ed1f4b26d2942555ef53757b1d938ba164d5`. `make test`:144 passed (127 unit +17 contract). Document checks, compileall and whitespace checks pass. A newly created Python3.12.16 environment installed the same20 hash-locked development packages and editable CLI; all144 tests pass there. No dependency/tool pin changed.
+
+Actual `tests/integration/p2_real.py` passed on Kubernetes1.35.10: all seven resource list/watch paths using read-only namespaced token; secrets/create/delete/other-namespace403; short-lived Job captured before TTL deletion and retained after restart; name reused with new UID; scale-zero desired image retained; repeated actual watches; periodic reconciliation; observer downtime with an entirely unseen Job never invented; actual API410 from old RV1 followed by closed expiry gap/relist; real-event duplicate idempotency; immutable complete/empty snapshot receipts and deterministic CLI queries. Recovery summary deliberately contains exactly the exercised RESOURCE_VERSION_EXPIRED error; it is not mislabeled a no-error run. The observer was stopped during the unseen Job scenario; no API-server outage or live storage corruption is claimed. Offline tests own those transport/SQL fault assertions.
+
+[Qualification record](results/p2-qualification.json) owns exact UID/run/server identity, counts, log/raw-artifact hashes and limitations. The earlier setup failure and working-tree success remain traceable. Three newly created project namespaces are retained; new Job TTL cleanup was intentional, no pre-existing resource/cluster/context was deleted or changed. Raw objects, owner-only tokens, databases and tools are outside Git. Migration3 preserves earlier applied migrations and creates no fictional prior receipts.
+
+Independent final review inspected corrected1ef3ed1, verified discovered tests/atomicity/identity/bounds and found no remaining blockers. Implementation, local verification and bounded real integration qualification are satisfied. Owner semantic acceptance, P2 merge authorization and merged-revision verification remain separate. Final documentation commits do not imply runtime execution at another source revision. Current-head CI is reported in PR#11 after push. P3–P7 remain mandatory and unimplemented here.
+
+| Acceptance | Evidence |
+| --- | --- |
+| Seven-kind typed UID/owner/container refs |15 normalizer cases/P0 schema checks plus seven actual API watches |
+| Immutable events/checkpoints and duplicate/name reuse | Store faults/restart/replay suites and actual captured Job UID reuse |
+| History after TTL and zero replicas | Actual raw DELETED Job observations and scale-zero desired reference |
+| Reconnect/410/reconcile/restart/gaps | Actual watch connections and410/relist; offline failed-list/early-EOF/fault cases |
+| No invented unseen history / observed absence preserved | Actual downtime Job absent from events/receipts; empty/reappearance regression; atomic receipt history |
+| CLI and provenance | Actual deterministic events/observations/snapshots/current/gaps queries and exact source/artifact record |
+
+Issue#3 remains linked for closure on integration; draft PR#11 is unmerged.

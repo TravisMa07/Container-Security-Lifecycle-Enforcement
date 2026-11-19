@@ -80,3 +80,7 @@ Implemented/locally verified/fixed-fixture integration-qualified at clean `c834c
 ## P1 authorized merge / P2 delivery
 
 Owner requested PR#10 merge and the next roadmap PR. PR#10 was readied/merged at2bffd97b325e53817f9cd9c2263564a40019b785;96 tests and actual P1 scan acceptance passed on merged main. P2 began from that clean base; expectation freeze5ab817b and [draft PR#11](https://github.com/TravisMa07/Container-Security-Lifecycle-Enforcement/pull/11), refs issue#3. p2_normalizer and p2_store had nonoverlapping implementation ownership; p2_review read-only. Parent owns shared interfaces/migrations, REST/coordinator/CLI/RBAC, serialized Kind qualification and status. [P2 ledger](p2-ledger.md) records preliminary real success and review corrections; final source qualification/CI remain pending. P2 merge/release not authorized.
+
+## P2 local qualification ready for review
+
+Clean1ef3ed1f4b26d2942555ef53757b1d938ba164d5 passed144 tests in existing/fresh pinned Python environments and actual Kind1.35.10 lifecycle/RBAC/410/reconciliation/history scenarios. [P2 evidence](results/p2-qualification.json) and [ledger](p2-ledger.md) retain exact attribution, failed harness setup and review red/green corrections. Snapshot receipts preserve empty-list/absence history; P3 cannot infer a fix from absence or ignore gaps. P2 remains in draft PR#11, unmerged and not owner-accepted by passing tests alone. P3 is next after the chosen accepted integration; no further phase implementation or merge is implied.
