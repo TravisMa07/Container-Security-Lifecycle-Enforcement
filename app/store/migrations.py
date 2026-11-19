@@ -19,3 +19,21 @@ DEFAULT_MIGRATIONS = (
         ),
     ),
 )
+
+# P2 adds history and mutable projections; migration1 remains byte-identical.
+DEFAULT_MIGRATIONS += (
+    (
+        'CREATE TABLE inventory_events (event_id TEXT PRIMARY KEY, payload TEXT NOT NULL)',
+        'CREATE TABLE inventory_observations (observation_id TEXT PRIMARY KEY, event_id TEXT NOT NULL REFERENCES inventory_events(event_id), payload TEXT NOT NULL)',
+        'CREATE TABLE inventory_current (cluster_id TEXT NOT NULL, namespace TEXT NOT NULL, kind TEXT NOT NULL, uid TEXT NOT NULL, event_id TEXT NOT NULL REFERENCES inventory_events(event_id), present INTEGER NOT NULL CHECK(present IN (0,1)), absence_reason TEXT, last_seen TEXT NOT NULL, PRIMARY KEY(cluster_id,namespace,kind,uid))',
+        'CREATE TABLE inventory_checkpoints (cluster_id TEXT NOT NULL, namespace TEXT NOT NULL, kind TEXT NOT NULL, resource_version TEXT NOT NULL, observed_at TEXT NOT NULL, PRIMARY KEY(cluster_id,namespace,kind))',
+        'CREATE TABLE inventory_scopes (cluster_id TEXT NOT NULL, namespace TEXT NOT NULL, server_id TEXT NOT NULL, PRIMARY KEY(cluster_id,namespace))',
+        'CREATE TABLE inventory_gap_events (gap_event_id TEXT PRIMARY KEY, gap_id TEXT NOT NULL, cluster_id TEXT NOT NULL, namespace TEXT NOT NULL, kind TEXT NOT NULL, event_type TEXT NOT NULL, reason TEXT NOT NULL, observed_at TEXT NOT NULL, started_at TEXT NOT NULL)',
+        *(
+            f"CREATE TRIGGER {table}_no_{operation.lower()} BEFORE {operation} ON {table} "
+            "BEGIN SELECT RAISE(ABORT, 'inventory evidence is append-only'); END"
+            for table in ('inventory_events', 'inventory_observations', 'inventory_gap_events')
+            for operation in ('UPDATE', 'DELETE')
+        ),
+    ),
+)
