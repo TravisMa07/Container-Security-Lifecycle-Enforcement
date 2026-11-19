@@ -6,6 +6,8 @@ CSLE is a planned local-first container vulnerability lifecycle and deployment e
 
 The implementation stays small: one Python CLI/application, one watcher process, SQLite, and external Kind, Trivy, Kyverno, Cosign and Floci services. No distributed pipeline, large UI or real AWS account is required.
 
+The repository is public. [Implementation issues](https://github.com/TravisMa07/Container-Security-Lifecycle-Enforcement/issues) track P0–P7. Each implementation item will use a linked PR when work begins; future-phase PRs are not created in advance. See [contributing](CONTRIBUTING.md).
+
 ## Start here
 
 - [Architecture and decisions](docs/architecture.md)

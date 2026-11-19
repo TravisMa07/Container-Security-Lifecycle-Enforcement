@@ -10,7 +10,7 @@ Use external Kind, Kyverno, Trivy, Cosign and Floci rather than reproducing thei
 
 Use an ephemeral local signer with independent public-key trust for the local profile. Signing requires a fresh trusted scan and policy decision. Investigate current Kyverno image-verification APIs and time/policy-revocation expressions before choosing the final admission contract.
 
-Start the explicitly requested GitHub repository private, with the current folder name, no license assumption and no remote protection changes. The user authorized creation and initial push; subsequent implementation uses branches/PRs and explicit merges.
+Initially create the explicitly requested GitHub repository private, with the current folder name, no license assumption and no remote protection changes. The owner subsequently requested public visibility on 2026-11-19; that instruction supersedes the initial private default. The owner authorized creation, initial push and final repository-readiness wrap-up without PR creation. Subsequent implementation items use linked branches/PRs and explicitly authorized merges.
 
 ## Alternatives and consequences
 
