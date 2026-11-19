@@ -262,3 +262,13 @@ class EngineMatrixTests(unittest.TestCase):
             if change=='missing_receipt_field':del value['snapshots'][0]['observed_at']
             if change=='bad_current_row':del value['current'][0]['event_id']
             with self.subTest(change=change),self.assertRaises(ValueError):evaluate(value)
+
+    def test_all_matching_package_instances_must_prove_fixed(self):
+        for extra in [{'Name':'crypto','Version':'2.0-r0'},{'Name':'crypto'}]:
+            value=facts()
+            value['scans'][1]['report']['Results'][0]['Packages'].append(extra)
+            with self.subTest(extra=extra):
+                self.assertNotEqual(evaluate(value)['state']['remediation'],'verified_in_scope')
+        value=facts()
+        value['scans'][1]['report']['Results'][0]['Packages'].append({'Name':'crypto','Version':'2.0-r1'})
+        self.assertEqual(evaluate(value)['state']['remediation'],'verified_in_scope')

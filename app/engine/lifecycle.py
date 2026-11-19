@@ -241,7 +241,9 @@ def _package_fixed(original,replacement,finding):
             for package in packages:
                 if not isinstance(package,dict):continue
                 path=package.get('PkgPath') or None
-                if package.get('Name')==finding.package_name and path==finding.package_path and package.get('Version')==fixed:matched=True
+                if package.get('Name')==finding.package_name and path==finding.package_path:
+                    if package.get('Version')!=fixed:return False
+                    matched=True
         vulnerabilities=result.get('Vulnerabilities')
         if vulnerabilities is not None and not isinstance(vulnerabilities,list):return False
         for vulnerability in vulnerabilities or []:
