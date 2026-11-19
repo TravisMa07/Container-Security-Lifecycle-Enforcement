@@ -28,3 +28,7 @@ The signer is a separate authorized invocation with separate key access, not a c
 Do not add a web service, broker, Postgres, operator framework or full Inspector adapter without a demonstrated requirement and a new decision record.
 
 P0 selects project-local verified tools, isolated local Docker resources, explicit emulator endpoints and a dedicated kubeconfig. [Compatibility results](p0-ledger.md) retain the initial cached older-payload failure and the corrected v2 profile: recognized signed timestamp, current assessment-ID binding, and verification cache disabled. Successive admissions were exercised without deleting old evidence. The P0 contract/negative/fresh-clone gates now pass. This remains a local single-artifact feasibility profile; P5 owns the product policy/issuance contract, and exact official framework source review is now completed for P0. P6 implementation/conformance claims remain separate.
+
+## P1 evidence path
+
+[Design](p1-design.md): strict Pydantic image/finding/scan records, immutable SQLite raw documents and per-scan finding snapshots, hash-checked transactional migrations and a small JSON CLI. Imported assertions and executed local scans remain separate evidence contexts. The bounded loopback OCI resolver verifies index/manifest/config relationships; the Trivy runner records binary and DB identity without issuing a policy verdict. Other canonical models acquire domain behavior in their owning phases.

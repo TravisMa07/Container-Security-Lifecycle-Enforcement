@@ -16,8 +16,10 @@ jobs:
       - name: Install hash-locked test dependencies
         run: |
           python3 -m venv .tools/venv
-          .tools/venv/bin/python -m pip install --require-hashes -r requirements-p0.lock
+          .tools/venv/bin/python -m pip install --require-hashes -r requirements-dev.lock
+      - name: Install CLI without fetching build dependencies
+        run: .tools/venv/bin/python -m pip install --no-deps --no-build-isolation -e .
       - name: Offline tooling safety and contract tests
         run: make test
       - name: Check script syntax
-        run: python3 -m compileall -q scripts tests
+        run: python3 -m compileall -q scripts tests app

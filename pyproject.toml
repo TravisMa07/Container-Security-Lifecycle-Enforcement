@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools==84.2.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "csle"
+version = "0.1.0"
+description = "Local container security lifecycle evidence CLI"
+requires-python = ">=3.12"
+dependencies = ["pydantic==2.14.4"]
+license = "Apache-2.0"
+
+[project.scripts]
+csle = "app.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
