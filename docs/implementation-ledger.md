@@ -52,3 +52,9 @@ Working tree based on `4ed333231834e93b7111942017240464ede81f7b`, documentation-
 - Independent read-only review by `readiness_review` found no blocking findings. Its provisional-roadmap-status note was resolved with this evidence link. No product or tool integration was reviewed as qualified.
 
 The commit containing this section is the final repository-readiness change. Its exact pushed SHA, clean-tree/remote comparison and new CI result are verified in the final handoff; the earlier CI link above qualifies only the seed revision. No runtime compatibility claim follows from foundation CI.
+
+## P0 implementation item — 2026-11-19
+
+Base: `8c5e95e661781f2810030ca6b89d6c0f7afd4f08`; expectation-freeze commit `9d420b25ca845541d66c931da652ea7d209a89e3`; branch `phase/p0-compatibility`; [draft PR #9](https://github.com/TravisMa07/Container-Security-Lifecycle-Enforcement/pull/9), refs phase issue #1. Parent owns code/pins/cluster integration; `p0_sources` and `p0_review` performed bounded read-only research/review. No concurrent cluster qualification.
+
+Implemented project-local verified tooling and opt-in isolated compatibility experiments; 22 offline tests pass. Owner authorized local Kind privilege/Floci socket and selected Apache-2.0. Real first-assessment path passed; stronger reassessment tests exposed older-expired-payload selection. Independent source research by `attestation_selection` led to a second expectation-freeze commit `19409bc`: fixed v2 with signed recognized timestamp and disabled verification cache. Two successive corrected admissions plus strict initial negatives passed, retaining the original failures and all v1 evidence. [P0 ledger](p0-ledger.md) owns commands, hashes, failures, review fixes and remaining gates; [runbook](p0-runbook.md) owns reproducible commands and retained resources. No P0 completion, product feature qualification, merge or release is claimed.

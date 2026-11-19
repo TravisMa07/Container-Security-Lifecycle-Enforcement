@@ -1,0 +1,96 @@
+{
+  "schema_version": "1",
+  "resolved_at": "2026-11-19",
+  "qualification": "provisioning candidates; see docs/p0-ledger.md for actual results",
+  "profiles": {
+    "darwin-arm64": {
+      "kind": {
+        "version": "v0.33.0",
+        "url": "https://github.com/kubernetes-sigs/kind/releases/download/v0.33.0/kind-darwin-arm64",
+        "sha256": "0c8c7dbe5e23594a198b786c4bc13dacc101fa6196b0cb0b23a1ca44e61f4b4f",
+        "source": "https://api.github.com/repos/kubernetes-sigs/kind/releases/tags/v0.33.0",
+        "license": "Apache-2.0"
+      },
+      "cosign": {
+        "version": "v3.1.4",
+        "url": "https://github.com/sigstore/cosign/releases/download/v3.1.4/cosign-darwin-arm64",
+        "sha256": "9f9b8cd557cf2e5b3df3373a00baa005a86b02391e3e06dd0ce37b3a1533d3a4",
+        "source": "https://api.github.com/repos/sigstore/cosign/releases/tags/v3.1.4",
+        "license": "Apache-2.0"
+      },
+      "trivy": {
+        "version": "v0.76.2",
+        "url": "https://github.com/aquasecurity/trivy/releases/download/v0.76.2/trivy_0.76.2_macOS-ARM64.tar.gz",
+        "sha256": "ae7ea358326960406b703c77b2ac490190797d80b306b5b50c2a27221da0a5b8",
+        "source": "https://api.github.com/repos/aquasecurity/trivy/releases/tags/v0.76.2",
+        "license": "Apache-2.0",
+        "member": "trivy"
+      },
+      "helm": {
+        "version": "v3.22.1",
+        "url": "https://get.helm.sh/helm-v3.22.1-darwin-arm64.tar.gz",
+        "sha256": "e73da8a0b0d5193774fdff17ce6319c7436bb22ee229b45fd64f3c40368c753a",
+        "member": "darwin-arm64/helm",
+        "source": "https://get.helm.sh/helm-v3.22.1-darwin-arm64.tar.gz.sha256sum",
+        "license": "Apache-2.0"
+      }
+    }
+  },
+  "kyverno_chart": {
+    "version": "3.10.0",
+    "app_version": "v1.20.0",
+    "url": "https://kyverno.github.io/kyverno/kyverno-3.10.0.tgz",
+    "sha256": "55961392dc0821eb367323f0e9585c061dd4407ef7ada921bd56ea1642c2a301",
+    "license": "Apache-2.0"
+  },
+  "images": {
+    "kind_node": {
+      "tag_observed": "kindest/node:v1.37.0",
+      "index_digest": "sha256:a1ed56cfb0e7b93589bdf97c8cd566405a265939e3620fc4f5de89adff580ae5",
+      "linux_arm64_digest": "sha256:6a3345f517a7df05185c648f83d18d464f2a94ea4a69eaee39b7e1de02611e59",
+      "reference": "kindest/node@sha256:a1ed56cfb0e7b93589bdf97c8cd566405a265939e3620fc4f5de89adff580ae5"
+    },
+    "floci": {
+      "tag_observed": "floci/floci:2.5.0",
+      "index_digest": "sha256:a0fbf944d7f338cc0856f1ef83831ea749ff2be71956eb7a7fce08fc21458e19",
+      "linux_arm64_digest": "sha256:6239c04b56a0f7f8032e0ffd7d070c73394269212b9b340467e539e9f4d61788",
+      "reference": "floci/floci@sha256:a0fbf944d7f338cc0856f1ef83831ea749ff2be71956eb7a7fce08fc21458e19"
+    },
+    "registry": {
+      "tag_observed": "registry:2.8.3",
+      "index_digest": "sha256:a3d8aaa63ed8681a604f1dea0aa03f100d5895b6a58ace528858a7b332415373",
+      "linux_arm64_digest": "sha256:fa647fc1e5d5df7d8d923fb6332aab8e78783f8fca1a1394efb4011f68f5a793",
+      "reference": "registry@sha256:a3d8aaa63ed8681a604f1dea0aa03f100d5895b6a58ace528858a7b332415373"
+    },
+    "demo": {
+      "tag_observed": "alpine:3.24",
+      "index_digest": "sha256:f59abe656b692d901e184be3445e084786602108599d2a51d229c0f5a48c71bf",
+      "linux_arm64_digest": "sha256:1829893486be257df5049ab3b7fc95afbd0fc09d89803cbc580bda1ba5386b29",
+      "reference": "alpine@sha256:f59abe656b692d901e184be3445e084786602108599d2a51d229c0f5a48c71bf"
+    }
+  },
+  "kyverno_images": {
+    "readiness-checker": "sha256:6079a30d75fe7ba868a5a7e5dfa71ee92a3a8bae97adcea1c8cfb1009280ee6c",
+    "background-controller": "sha256:c72df38320a48fc9de10f9d23d087a117853bb08207b7f60f6d1e8457fb3ddb7",
+    "cleanup-controller": "sha256:0f9ce0c203561c52499e871a987ff987371f57385fcafe7af1a01dfd6db1feee",
+    "kyverno-cli": "sha256:bd2b8b7c9d550ecf04e0bacaf351adce2f82ce67fd3f291075edcee7f8ab4ab4",
+    "kyverno": "sha256:9de49c5416ea536f00a205527197ac048abdf32c5a75d633cd9afff8928f359d",
+    "kyvernopre": "sha256:339067e083430e0c97007541bef9cfdbac89bee13f7228772c77ae8aead14b8b",
+    "reports-controller": "sha256:f54e3cc106fadb1a615d0ec11c42f741f51d3580a5f70dfbe7bd7ec58864ef03"
+  },
+  "python_tooling": {
+    "python": "3.12.12",
+    "boto3": "1.44.6",
+    "requirements": "requirements-p0.lock",
+    "license": "Apache-2.0 (boto3); transitive terms remain separate"
+  },
+  "licenses": {
+    "floci": "MIT",
+    "kind": "Apache-2.0",
+    "cosign": "Apache-2.0 (pinned LICENSE text reviewed; GitHub detector NOASSERTION)",
+    "helm": "Apache-2.0",
+    "trivy": "Apache-2.0",
+    "kyverno": "Apache-2.0",
+    "distribution_registry": "Apache-2.0 (repository; image packages retain separate licenses)"
+  }
+}

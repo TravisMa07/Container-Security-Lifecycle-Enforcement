@@ -1,0 +1,120 @@
+{
+  "scope": "P0 compatibility experiments, not completed MVP integrations",
+  "base_revision": "9d420b25ca845541d66c931da652ea7d209a89e3",
+  "execution_working_tree": "dirty; later Recorder entries contain per-source hashes",
+  "platform": "Darwin arm64 / Docker Desktop 4.92.0 Engine 29.8.0",
+  "manifest_digest": "sha256:1829893486be257df5049ab3b7fc95afbd0fc09d89803cbc580bda1ba5386b29",
+  "observations": [
+    {
+      "case": "initial-lab",
+      "local_artifact": ".local/p0/runs/20261119T172846Z-80c23297/commands.jsonl",
+      "sha256": "ba19a8fd2cee275cff0182010d146c8cf3f4fc4f3bf5b031b411af2eafc969df",
+      "result": "passed isolated Kind/Floci start"
+    },
+    {
+      "case": "ecr-oci-trivy",
+      "local_artifact": ".local/p0/runs/20261119T173101Z-63d1acde/ecr-result.json",
+      "sha256": "65467d1495468fe0e78ad440dea26f4ff6d0be68cd71489d96782a2d59d2789b",
+      "result": "passed manifest and blob identity, supported ECR metadata and unsupported scanning"
+    },
+    {
+      "case": "real-trivy",
+      "local_artifact": ".local/p0/runs/20261119T173101Z-63d1acde/trivy.json",
+      "sha256": "ad2d77cb2f78cb1e911bc005eb88180b8de7235951c8cfb996a7d245fc7bef33",
+      "result": "passed real scan, 11 MEDIUM findings; not CVE-free"
+    },
+    {
+      "case": "first-custom-predicate",
+      "local_artifact": ".local/p0/runs/20261119T173307Z-b79f4778/bundle.json",
+      "sha256": "9437d112cc2e8e001d432c1b1d933bc3151985a8a7ff51f842478212e6b8244b",
+      "result": "signed and independently verified"
+    },
+    {
+      "case": "first-admission-runtime-and-revocation",
+      "local_artifact": ".local/p0/runs/20261119T173346Z-e670047e/commands.jsonl",
+      "sha256": "3b06270881e0a5d32fa40c33a06cbc3f73e47cc4ba1ad0bb1d51e1bc20d6a26c",
+      "result": "passed first one-assessment admission/runtime identity and active-policy change denial"
+    },
+    {
+      "case": "first-negative-smokes",
+      "local_artifact": ".local/p0/runs/20261119T173500Z-e07bd1a7/negative-result.json",
+      "sha256": "1c7c9951f24fed325a7b94db3a8bb41d92c605532fc99ccb6edde73ff4883acb",
+      "result": "observed unsigned, wrong-trust and privileged denial; later strengthened positive controls"
+    },
+    {
+      "case": "initial-expired-smoke",
+      "local_artifact": ".local/p0/runs/20261119T173703Z-2889dd16/commands.jsonl",
+      "sha256": "b7db93db1bd77704a3596f3081f7c28f0637a75d6608f4771a91decccaa40d87",
+      "result": "observed denial after expiry; initial generic-message harness, later strengthened cause checks"
+    },
+    {
+      "case": "fresh-independent-rescan",
+      "local_artifact": ".local/p0/runs/20261119T174019Z-1364fa2d/trusted-trivy.json",
+      "sha256": "042392fc118aa1e85b470c80571ac6117902688ec437679fcbd835a8cc3d4540",
+      "result": "passed execution and validation before reissue"
+    },
+    {
+      "case": "reissue-signature",
+      "local_artifact": ".local/p0/runs/20261119T174019Z-1364fa2d/bundle.json",
+      "sha256": "97d601276a80e9fd232b704de7542a90767e2a706467e817f9bf084fb27c34f3",
+      "result": "signed and independently verified"
+    },
+    {
+      "case": "reissue-admission",
+      "local_artifact": ".local/p0/runs/20261119T174020Z-cd8c6f82/001.log",
+      "sha256": "217bc4d025c8fd74d839c9a646106c30fb1c56a16d024ae4fd33ff6ec65fcea9",
+      "result": "FAILED positive: older payload expiry selected despite fresh reissue"
+    },
+    {
+      "case": "strict-negative-baseline",
+      "local_artifact": ".local/p0/runs/20261119T174020Z-fc37a4a5/001.log",
+      "sha256": "431065e9ff2d66a6f82f1489bd915399d0850d066d8de68c2e2cf92376ca8404",
+      "result": "STOPPED at required positive baseline; no negative passes claimed"
+    },
+    {
+      "case": "reviewed-current-tree-ecr-trivy-repeat",
+      "local_artifact": ".local/p0/runs/20261119T174511Z-5b87ccec/ecr-result.json",
+      "sha256": "b28a0f1fc496d6b80ac3b9396d8eaf52375371067f90cb2193dbda1b61e733e3",
+      "result": "passed current-tree ECR/OCI and Trivy repeat; command records retain source hashes"
+    },
+    {
+      "case": "cache-disabled-controller",
+      "local_artifact": ".local/p0/cache-controller-args.json",
+      "sha256": "a8c463ad51058eefe073105c297da6ef96438bf33e27cc55f366c7fb5c749a38",
+      "result": "confirmed running --imageVerifyCacheEnabled=false"
+    },
+    {
+      "case": "v2-first-positive",
+      "local_artifact": ".local/p0/v2-first-positive.json",
+      "sha256": "fef7b81297490d1ee55ef40d8caf25adeabf7a4da431a0ddf6b9e494c21da130",
+      "result": "first actual admission/runtime identity and policy-version denial passed"
+    },
+    {
+      "case": "v2-second-positive",
+      "local_artifact": ".local/p0/v2-second-positive.json",
+      "sha256": "2c54d165a24102ed6862fcbccd337f1d75923b92e9a209386962bae0bbbb48f5",
+      "result": "distinct successive same-type assessment admitted, current assessment-id binding passed"
+    },
+    {
+      "case": "v2-strict-negatives",
+      "local_artifact": ".local/p0/runs/20261119T175020Z-ef121be0/negative-result.json",
+      "sha256": "c59b7f1314a79528403b09b8fd7c02b9f0162cea09b850c04476e798d6057ea3",
+      "result": "unsigned/wrong-trust/privileged deny with positive baselines passed"
+    },
+    {
+      "case": "v2-strict-expiry",
+      "local_artifact": ".local/p0/runs/20261119T175340Z-b52fcb9b/commands.jsonl",
+      "sha256": "847eb81fc5ccc377abbe911e59612f88c9a6e2600910027a9e143b7c7d4153b6",
+      "result": "passed matching prior positive receipt, unchanged observed policy, specific expiry admission denial after second approval expired"
+    }
+  ],
+  "remaining_gates": [
+    "complete wrong-digest, altered-content/signature and future-issued negative matrix; exact source/contract/fresh-clone gates",
+    "complete wrong-digest, altered-signature/predicate and future-issued negative suite",
+    "full official PCI/CIS requirement and applicability review",
+    "final v1 contracts/schema freeze",
+    "full dependency patch/security and platform qualification",
+    "fresh-clone end-to-end acceptance"
+  ],
+  "corrected_expectation_revision": "19409bc"
+}

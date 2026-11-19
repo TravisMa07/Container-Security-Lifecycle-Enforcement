@@ -1,4 +1,4 @@
-name: Foundation integrity
+name: Repository checks
 on:
   push:
   pull_request:
@@ -13,5 +13,7 @@ jobs:
           persist-credentials: false
       - name: Check repository documents
         run: make check
-      - name: Check discovery script syntax
-        run: python3 -m py_compile scripts/check_docs.py scripts/doctor.py
+      - name: Offline tooling safety tests
+        run: make test
+      - name: Check script syntax
+        run: python3 -m compileall -q scripts tests

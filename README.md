@@ -2,7 +2,7 @@
 
 CSLE is a planned local-first container vulnerability lifecycle and deployment enforcement tool. It will correlate immutable image identities with Kubernetes workload history, verify scoped remediation and regression, and export bounded technical evidence.
 
-**Current status: repository foundation only. No product integrations or MVP milestones are qualified.** [HANDOFF.md](HANDOFF.md) is the authoritative specification. Signed security attestations, functional Floci/ECR integration, and PCI DSS 4.0.1 evidence mappings are mandatory MVP gates.
+**Current status: P0 compatibility tooling and experiments in progress; no product feature or MVP milestone is qualified.** [HANDOFF.md](HANDOFF.md) is the authoritative specification. Signed security attestations, functional Floci/ECR integration, and PCI DSS 4.0.1 evidence mappings are mandatory MVP gates.
 
 The implementation stays small: one Python CLI/application, one watcher process, SQLite, and external Kind, Trivy, Kyverno, Cosign and Floci services. No distributed pipeline, large UI or real AWS account is required.
 
@@ -18,8 +18,8 @@ The repository is public. [Implementation issues](https://github.com/TravisMa07/
 - [Qualification ledger](docs/implementation-ledger.md)
 - [Limitations](docs/limitations.md)
 
-Run `make check` for foundation integrity checks and `make doctor` for read-only prerequisite discovery. Doctor exits nonzero when required tools are absent. Neither command establishes integration compatibility. Application installation, bootstrap and demo commands will be added with their tested implementation slices.
+Run `make bootstrap` for project-local pinned P0 tools, `make test` for offline safety tests, `make check` for document integrity, and `make doctor` for read-only prerequisite discovery. See the [P0 runbook](docs/p0-runbook.md) and [P0 results](docs/p0-ledger.md). A real integration path and successive reassessments passed in the corrected cache-disabled v2 profile; P0 remains open for the remaining source/contract/negative gates. No product application or full demo command exists.
 
 Development host observed: macOS 26.5.1 ARM64, Docker Desktop 4.92.0 / Engine 29.8.0, 15 Docker CPUs and about 7.75 GiB Docker memory. Linux and AMD64 support remain unqualified.
 
-No license has been selected; no third-party reuse permission is granted by the absence of a license. License selection remains an owner decision before release.
+Licensed under [Apache-2.0](LICENSE), selected by the owner during P0. External tools, datasets and images retain their own licenses and usage terms.

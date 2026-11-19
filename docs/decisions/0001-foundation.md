@@ -21,3 +21,5 @@ Floci signing/referrer behavior and container-to-host registry networking are in
 ## Validation
 
 Foundation checks establish document integrity only. P0 must prove the precise tool chain, architecture support, registry transport, signature format, custom predicate, freshness and fail-closed admission behavior. P1 freezes contract expectations before implementing storage/ingestion.
+
+Amendment 2026-11-19: the owner selected Apache-2.0 during P0; the repository LICENSE contains the official text. This supersedes the initially unresolved license choice without changing external dependency terms.

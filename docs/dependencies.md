@@ -1,6 +1,6 @@
 # Dependency research and environment
 
-Observed 2026-11-19. Documentation/release discovery is distinct from a runtime smoke result. Exact app dependencies and OCI digests are not locked yet; P0 remains open. Do not use these candidates as an install lockfile.
+Observed 2026-11-19. Documentation/release discovery is distinct from a runtime smoke result. P0 tool/image pins are now in toolchain.lock.json and SDK dependencies in requirements-p0.lock. Application dependencies are P1 work. P0 remains open; initial candidates below are retained as research history.
 
 ## Host evidence
 
@@ -43,7 +43,7 @@ Pin versions, download checksums, OCI index/platform digests, licenses and sourc
 
 ## Candidate version matrix (not an installation lock)
 
-Read-only research on 2026-11-19 identified the following official releases. None has been installed or tested together here. Release discovery alone does not establish patch status or support.
+Read-only research on 2026-11-19 identified the following official releases. This initial candidate list is superseded by the selected pins and bounded runtime evidence in the P0 ledger. Release discovery alone does not establish patch status or support.
 
 | Tool | Candidate | Official source |
 | --- | --- | --- |
@@ -59,3 +59,11 @@ Cosign 3 storage/bundle defaults require a joint Kyverno retrieval experiment. C
 ### PCI source-access result
 
 The official library links the v4.0.1 standard to <https://docs-prv.pcisecuritystandards.org/PCI%20DSS/Standard/PCI-DSS-v4_0_1.pdf>; the research fetch returned HTTP 403. Full source/testing-procedure review is pending. [Official FAQ 1597](https://www.pcisecuritystandards.org/faqs/1597/) supports candidate 6.3.1, 6.3.3 and 11.3.1 investigation, but does not replace full review. Scans alone do not establish entity risk ranking, vendor patch-release dates, patch deadlines, independent personnel or full CDE coverage. No approved mappings are included.
+
+## Selected P0 toolchain and actual status
+
+[Machine-readable pins](../toolchain.lock.json) record upstream artifact SHA-256, chart hash, OCI index/ARM64 manifests and tool licenses. [Hash-locked SDK requirements](../requirements-p0.lock) isolate boto3 1.44.6 under Python 3.12.12. Kind 0.33.0, Cosign 3.1.4, Trivy 0.76.2 and Helm 3.22.1 were actually provisioned and their version commands executed on Darwin ARM64. AWS CLI/Terraform remain absent; the real ECR experiment uses boto3, so neither is implied installed. Development formatting used exact Ruff 0.17.6.
+
+The initial host/experiment tables above are discovery-time records. Current [P0 results](p0-ledger.md) supersede their Not-run entries: real Kind/Kyverno readiness, Floci OCI/ECR identity, Trivy scan, one-assessment Cosign/admission/runtime path and specific initial negatives were observed. Initial reassessment failed closed on cached older payload expiry. The corrected fixed v2/uncached profile now passes successive admissions and strict initial negatives without removing old evidence. Full compatibility/negative/source qualification remains open.
+
+Official pinned repository license review: Kind, Helm, Trivy, Kyverno and Distribution use Apache-2.0; Cosign's exact LICENSE text is Apache-2.0 although GitHub's detector returned NOASSERTION; Floci 2.5.0 uses MIT. Component repository licenses do not relicense complete image packages. Owner selected Apache-2.0 for CSLE. Checksums are rooted in upstream HTTPS metadata; independent publisher-attestation verification, complete component security-patch status, supported benchmark applicability and fresh-clone full-stack acceptance remain open.
