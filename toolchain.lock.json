@@ -24,7 +24,8 @@
         "sha256": "ae7ea358326960406b703c77b2ac490190797d80b306b5b50c2a27221da0a5b8",
         "source": "https://api.github.com/repos/aquasecurity/trivy/releases/tags/v0.76.2",
         "license": "Apache-2.0",
-        "member": "trivy"
+        "member": "trivy",
+        "executable_sha256": "sha256:7a15c426f963473a485a4f315e21f8e2c881269d500bf0de35da13a4421fa108"
       },
       "helm": {
         "version": "v3.22.1",
@@ -68,6 +69,14 @@
       "index_digest": "sha256:f59abe656b692d901e184be3445e084786602108599d2a51d229c0f5a48c71bf",
       "linux_arm64_digest": "sha256:1829893486be257df5049ab3b7fc95afbd0fc09d89803cbc580bda1ba5386b29",
       "reference": "alpine@sha256:f59abe656b692d901e184be3445e084786602108599d2a51d229c0f5a48c71bf"
+    },
+    "p3_patched": {
+      "reference": "127.0.0.1:15120/csle-p3/patched@sha256:06fc10cde2cc1bf9a4860b7cc68aa844a72cd0af4fec6ef9e7da10842e3375ed",
+      "linux_arm64_digest": "sha256:06fc10cde2cc1bf9a4860b7cc68aa844a72cd0af4fec6ef9e7da10842e3375ed",
+      "config_digest": "sha256:8295fbe0d7c40b4004c25414f96eaa858700ef7d79f95e0427b1ddefccae3178",
+      "recipe_hash": "sha256:3c948778903cb4497493c6f332fe15863d30b37e18efcfe4211ac632aa33eefd",
+      "dockerfile_hash": "sha256:4f565a99e28cf83250dd2cabfe932b1314abf3889755b24c59c18b6454992744",
+      "qualification": "P3 vetted signed offline package fixture, same manifest in two no-cache builds; no arbitrary-image execution"
     }
   },
   "kyverno_images": {

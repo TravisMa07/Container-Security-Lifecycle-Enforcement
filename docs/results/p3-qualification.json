@@ -1,0 +1,548 @@
+{
+  "artifacts": [
+    {
+      "path": ".local/p3/engine-red.log",
+      "sha256": "3148ffa8d41eccb70c35603d69dff36bfe652f9f70ad2c1f4b5401f0a1df35c5"
+    },
+    {
+      "path": ".local/p3/engine-green.log",
+      "sha256": "cb568d1efd8c755eb652e6f10ca03a5989c4cad9758a3bb9585fec161eb87e8d"
+    },
+    {
+      "path": ".local/p3/fixture-red.log",
+      "sha256": "558ae290b56cb341a3b1081a2ffb2dc618a4d675e9f1174f7425de028873aeae"
+    },
+    {
+      "path": ".local/p3/fixture-green.log",
+      "sha256": "bbf0ad717a3c8b169dd5e2f19565d35d6cd51f68f78ecff80eb56c28b95c98db"
+    },
+    {
+      "path": ".local/p3/fixture-log-red.log",
+      "sha256": "995a77d9df728d87fc247c811a4aa561bb1395e9e7256365f55b8953476774d8"
+    },
+    {
+      "path": ".local/p3/platform-alias-red.log",
+      "sha256": "0c9c96edd76ae11429ef924711778a54775cd491b5934e1165a7d61a4fa00ef6"
+    },
+    {
+      "path": ".local/p3/package-conflict-red.log",
+      "sha256": "3b438d3c191c526f9fdf003fb37c1f6fec10ae8aba2467a23a83bec35d602a86"
+    },
+    {
+      "path": ".local/p3/package-conflict-green.log",
+      "sha256": "6f77037936b1a2efdce01601864833e3a97406970d07cb4b0b3eaa8cb63e1a56"
+    },
+    {
+      "path": ".local/p3/target-coverage-red.log",
+      "sha256": "1b4965802c157cc1b3ec5f4274406a96e96e2ab6f09c9e4e534dc5d295b04ca0"
+    },
+    {
+      "path": ".local/p3/target-coverage-green.log",
+      "sha256": "8f8d8ea531ccda8aea820e7ecf8db13c052122d2606ab19aed8f3c728fc9502d"
+    },
+    {
+      "path": ".local/p3/expanded-scope-red.log",
+      "sha256": "35772f74a15588a6f1da040e162f19ac5fbde23ba6084276dafa22196d6f27d3"
+    },
+    {
+      "path": ".local/p3/expanded-scope-green.log",
+      "sha256": "36c93c11fa60c481495cbbfbcac370fdd69d7a387215c2c35421d6cdcc96a6b5"
+    },
+    {
+      "path": ".local/p3/qualified-tests.log",
+      "sha256": "fe9c1bf9822596f989c8391413858a1732020ac4716b99cdf804a707675d72e7"
+    },
+    {
+      "path": ".local/p3/qualified-docs.log",
+      "sha256": "f387e9f0a32fa8080972ab9ebee10bb272d1421faf8726c4e5263c18045f1f69"
+    },
+    {
+      "path": ".local/p3/fresh-install.log",
+      "sha256": "fa2e32acca3911e2e2b4482303e09850a93f3dacc9a443371369649692c26097"
+    },
+    {
+      "path": ".local/p3/qualified-fresh-tests.log",
+      "sha256": "48e75bb331f6710ba8754a94f5b921277e12146883621d85c1ad5b084f134ee2"
+    },
+    {
+      "path": ".local/p3/fixture-first.err",
+      "sha256": "42cd91e86fe1fe7e7f91fe740d2ecffa2f938e7b4d497ac7a3aeb404e6e046bf"
+    },
+    {
+      "path": ".local/p3/fixture-second.json",
+      "sha256": "0c5af6807f5de32c7fc127c2b6845245cddc8e9007b2f6dbc829c67b6074073b"
+    },
+    {
+      "path": ".local/p3/fixture-final-a.json",
+      "sha256": "577e25def52962d4c6ef8390a749af7a8cd7cf713451e81f021590fec4250341"
+    },
+    {
+      "path": ".local/p3/fixture-final-b.json",
+      "sha256": "b5b21b00343777aed1f2266813dd8aae8e42e259cb99315532461e6fc0af1fa7"
+    },
+    {
+      "path": ".local/p3/fixture-committed.json",
+      "sha256": "f731682a66a595df016fe9f3887c8396a9af1f3741c1b536bfc3bfbf195f3267"
+    },
+    {
+      "path": ".local/p3/real-first.json",
+      "sha256": "bd0b79c73dae3b35f97b9a85b1388f1061dd18247c3458d1ca5ac6521ec21f68"
+    },
+    {
+      "path": ".local/p3/real-committed.json",
+      "sha256": "3ac1e2eba7edfffee35ef22fac69a3e5b0667684c8e932a0041590fd5f743352"
+    },
+    {
+      "path": ".local/p3/real-final.json",
+      "sha256": "5eafd23f06b6858fe559f0be3735f82380920c5169f9e091fc49a16b88c8d98a"
+    },
+    {
+      "path": ".local/p3/real-qualified.json",
+      "sha256": "26e0e07c3a40002b73d8ae145fa02f672738eecc1837bb703d99e857624622c1"
+    },
+    {
+      "path": ".local/p3/real-current.json",
+      "sha256": "b602ce70c4c1b1fb4fb9684d5362960f799d0f24630f280d1500eca32a78695c"
+    },
+    {
+      "path": ".local/p3/qualification/20261120000330168510/commands.json",
+      "sha256": "6c7556cd138d280220ecd782e0ed7270e28c1823037ad8802a54fc914df8842a"
+    },
+    {
+      "path": ".local/p3/qualification/20261120000330168510/latest-assessment.json",
+      "sha256": "81e741448806de9a26f73e85a5bc62a5a0c0162868231c41b64a35cbe1ce022e"
+    },
+    {
+      "path": ".local/p3/qualification/20261120000330168510/result.json",
+      "sha256": "b602ce70c4c1b1fb4fb9684d5362960f799d0f24630f280d1500eca32a78695c"
+    }
+  ],
+  "cluster_id": "kind-csle-p0-cis",
+  "collector_summaries": [
+    {
+      "cluster_id": "kind-csle-p0-cis",
+      "error_reasons": [],
+      "errors": 0,
+      "namespace": "csle-p3-20261120000330168510-a",
+      "status": "stopped"
+    },
+    {
+      "cluster_id": "kind-csle-p0-cis",
+      "error_reasons": [],
+      "errors": 0,
+      "namespace": "csle-p3-20261120000330168510-b",
+      "status": "stopped"
+    }
+  ],
+  "deployment_uid": "81ec0098-3c0a-49de-832f-3cf34fdb9283",
+  "dirty_working_tree": false,
+  "executed_revision": "7b1821ca348e41e55f025134f044ed141d0f604b",
+  "expectation_freeze": "748ee5d55072498f3fc24e2d6d5fba8457d61bf6",
+  "false_closures": 0,
+  "fixed_version": "3.5.9-r1",
+  "fixture": {
+    "binary_data_committed": false,
+    "build_source_revision": "ca2837e98013128788241bceb97939f26d3ec016",
+    "committed_build_result": ".local/p3/fixture-committed.json",
+    "first_no_cache_result": ".local/p3/fixture-final-a.json",
+    "manifest_digest": "sha256:06fc10cde2cc1bf9a4860b7cc68aa844a72cd0af4fec6ef9e7da10842e3375ed",
+    "recipe": "demos/images/p3-patched/recipe.json",
+    "same_manifest": true,
+    "second_no_cache_result": ".local/p3/fixture-final-b.json"
+  },
+  "installed_version": "3.5.9-r0",
+  "limitations": [
+    "Only the selected finding/package is verified; patched fixture still has unrelated zlib vulnerability",
+    "Exact single fixed-version equality, not a general package version/range solver or proof of business recovery",
+    "Imports cannot qualify remediation; scanner execution restricted to two vetted immutable demo manifests",
+    "Real qualification local macOSARM64 Kind1.35.10 with base/build/DB caches; other platforms/cold-daemon operation unqualified",
+    "Same-platform alias limited to linux/arm64 and linux/arm64/v8; raw metadata preserved",
+    "Fresh complete per-kind scopes are bounded observations, not globally atomic/perfect/predictive history",
+    "Added namespaces cannot inherit absence history; old/undated previously unseen resources do not earn regression inference",
+    "Database-owner rewriting and high-volume/retention performance remain outside the qualification",
+    "P4-P7 remain mandatory pending; no product signing/admission/compliance completion or image approval",
+    "Owner acceptance, P3 merge/release authorization and merged-revision verification remain separate"
+  ],
+  "local_directory": ".local/p3/qualification/20261120000330168510",
+  "namespaces": [
+    "csle-p3-20261120000330168510-a",
+    "csle-p3-20261120000330168510-b"
+  ],
+  "original_digest": "sha256:1829893486be257df5049ab3b7fc95afbd0fc09d89803cbc580bda1ba5386b29",
+  "p2_merged_verification": {
+    "actual_kind_passed": true,
+    "artifacts": [
+      {
+        "path": ".local/p3/p2-merged-tests.log",
+        "sha256": "2f8830b3c84522bdb8c07ac9c40243bdc702e6e1bc3fa70dae718ecc3c291f6e"
+      },
+      {
+        "path": ".local/p3/p2-merged-real.json",
+        "sha256": "cb799f07f24d6d6b325a135cb36b00be24c06f766637840ff2e59480bb8d4ed7"
+      }
+    ],
+    "revision": "e62a80ee184ec9ea5f04aad58df0994b996ba4c2",
+    "tests": 144
+  },
+  "platform": {
+    "architecture": "arm64",
+    "kubernetes": "v1.35.10",
+    "os": "Darwin",
+    "python": "3.12.16",
+    "sqlite": "3.53.1"
+  },
+  "regression_assessment_id": "sha256:b6ebf66ab830df73718baf33f8d43e4809039341cc5b7bebbc0f1ae7edf6bf39",
+  "remaining_blockers": [],
+  "replacement_digest": "sha256:06fc10cde2cc1bf9a4860b7cc68aa844a72cd0af4fec6ef9e7da10842e3375ed",
+  "retained_p3_namespaces": [
+    "csle-p3-20261119234948427239-a",
+    "csle-p3-20261119234948427239-b",
+    "csle-p3-20261119235245174404-a",
+    "csle-p3-20261119235245174404-b",
+    "csle-p3-20261119235605883560-a",
+    "csle-p3-20261119235605883560-b",
+    "csle-p3-20261119235929494706-a",
+    "csle-p3-20261119235929494706-b",
+    "csle-p3-20261120000330168510-a",
+    "csle-p3-20261120000330168510-b"
+  ],
+  "reviews": [
+    {
+      "finding": "conflicting matching package instances",
+      "resolution": "925ef7e69ebd33f203b4db216fa44b473e619254",
+      "revision": "ca2837e98013128788241bceb97939f26d3ec016"
+    },
+    {
+      "finding": "missing relevant-target package inventory",
+      "resolution": "c3845b339a08dd8618d3bec6d00dae6f0839eae7",
+      "revision": "925ef7e69ebd33f203b4db216fa44b473e619254",
+      "verified_by": "parent regression matrix and real acceptance"
+    },
+    {
+      "remaining_blockers": [],
+      "revision": "7b1821ca348e41e55f025134f044ed141d0f604b",
+      "scope": "renewed expanded-scope no-invented-history expectation/guard"
+    }
+  ],
+  "scan_evidence": [
+    {
+      "db_content_hash": "sha256:bcd04c5fc8238015e17b7e7fa95a34ce3cfd3f3cde034ba9594364265ccf712d",
+      "db_document_hash": "sha256:88f7dbe73ecb9db8d5db44c7ff731a3be4900d9bfa86f305d9044bd2a24bba8c",
+      "executable_hash": "sha256:7a15c426f963473a485a4f315e21f8e2c881269d500bf0de35da13a4421fa108",
+      "manifest_digest": "sha256:1829893486be257df5049ab3b7fc95afbd0fc09d89803cbc580bda1ba5386b29",
+      "normalized_findings": 11,
+      "platform": "linux/arm64/v8",
+      "scan_id": "sha256:5fa59509b5a6bbaa96b72ee20659b4ef9dc01d9ebf7b1c8917e60a3e1363009a",
+      "scan_timestamp": "2026-11-20T00:03:30.984819Z",
+      "scanner_db_updated_at": "2026-11-19T19:04:59.970326Z",
+      "scanner_version": "0.76.2",
+      "source_document_hash": "sha256:72c7c82d9149dfa8f41e9f466fe70e50512dece322a45657dbb53d734a7b0bb7"
+    },
+    {
+      "db_content_hash": "sha256:bcd04c5fc8238015e17b7e7fa95a34ce3cfd3f3cde034ba9594364265ccf712d",
+      "db_document_hash": "sha256:88f7dbe73ecb9db8d5db44c7ff731a3be4900d9bfa86f305d9044bd2a24bba8c",
+      "executable_hash": "sha256:7a15c426f963473a485a4f315e21f8e2c881269d500bf0de35da13a4421fa108",
+      "manifest_digest": "sha256:06fc10cde2cc1bf9a4860b7cc68aa844a72cd0af4fec6ef9e7da10842e3375ed",
+      "normalized_findings": 1,
+      "platform": "linux/arm64",
+      "scan_id": "sha256:bfa70ced4611a398abc20a79c3a41eb1476be54a08ac7e524d280d83edd4cab8",
+      "scan_timestamp": "2026-11-20T00:03:32.455072Z",
+      "scanner_db_updated_at": "2026-11-19T19:04:59.970326Z",
+      "scanner_version": "0.76.2",
+      "source_document_hash": "sha256:a47d9e2d2df8da3decfee9e7f5ad7c3f7431ab333d0062eaeb0b2bce552469b8"
+    }
+  ],
+  "scenario_count": 4,
+  "scenarios": [
+    {
+      "actual": {
+        "assessment_at": "2026-11-20T00:03:34.386346Z",
+        "confidence": "bounded",
+        "coverage_gap_ids": [],
+        "evidence_ids": [
+          "sha256:10afa0f4fbb71c3da31ba694ce1dcf3c5cdbddc9532ba9c9b018a3e40b0c83ed",
+          "sha256:174761366a32ec4609513f1c2759d13ce09507e45827d62848a718a263ac6045",
+          "sha256:18587af5d14719a9276803d860066b0f6631894d65a29f7a7dd4aab7d7496047",
+          "sha256:5300d3260e1176049e3b9b8bcb6921cc14ecca140727e4c4c7ad0dab458c599b",
+          "sha256:593f1cc82d685da6bd8a86c0181b60e313e92c0853993e1045f29468f699bc16",
+          "sha256:5fa59509b5a6bbaa96b72ee20659b4ef9dc01d9ebf7b1c8917e60a3e1363009a",
+          "sha256:607a8c6c257f959b6c16f449c90f18a708636c7a6754c207c8712df61f52b189",
+          "sha256:67b54cb06fa38a5d176e3f495238b390a2cb16562a22b9d3c38671c3bf3a888e",
+          "sha256:72c7c82d9149dfa8f41e9f466fe70e50512dece322a45657dbb53d734a7b0bb7",
+          "sha256:7b33ed9ccc6e935eb4dd90dbe7b586014d005dbb5cd4f67ef4672aee043386c2",
+          "sha256:7e85c306463b119abd325000355352022a89d8ba1b1345a802bf767680ab3b75",
+          "sha256:7ee92397e0a87c4b1894012abb7d60c58c07fe25b0364f049bd404714130bf66",
+          "sha256:7efffbd19a5c2386bae1448de2d8529742a7c2d65421f558d3a1df748f654391",
+          "sha256:8d7060438f401a1ab005c97cbf77729d95bc7ab28b0822d0ed7607eb158807e6",
+          "sha256:962ea46e57b18e0017faa4b39fb7987db3eabc3ec6ed106c17747e0dd0b04c43",
+          "sha256:96bd404ac55555ee570f4188366098e0207c86c68aa0c7baa087aa29303db6e4",
+          "sha256:9ae12ec409e0523130d6b1c486b709f926dd96af364f5242f33a2b518607d088",
+          "sha256:9cffa2dad28397bb110444b6060a1bfd26bda68b523af48134b8a8c303e08764",
+          "sha256:a079fa071995c9b637b6051a7e9093504685e51788606bacbc31d6a26e97f4ad",
+          "sha256:a8e9fc841eadb1bcb020f46815851e79d8d8e5f811f283af40af50e5bae8a360",
+          "sha256:b36bffaf0b6b54e2bcdfb749bb7e00686548528108802184d7e4db20c0308898",
+          "sha256:b58170735fe0262b940fc7874ffff982765732890c1b9fd05d3e94d0b81f889c",
+          "sha256:bfeb269c5551618adcda38ea578c4fb4e4a5df1b51ed71fc37d46829ae2f9ff3",
+          "sha256:c60c5a70ac725923710a77133e22d7bcd1462d2638a424df289d114cd147bafa",
+          "sha256:ca93631e3c8d771dc7ef210763038337e09ec27359c454a15f109b4fd845e45b",
+          "sha256:dce902b68af6c5a47ff6abfd997ab6f205165733a1406b993240de0c681d230b",
+          "sha256:ebc4599b8f1808e04293c1c5679009c83961e3f83e452ef848345fd292ed2a38",
+          "sha256:f0b820f160c7dbc05d7ddbf3d7ff8d0d98c640e5fa18f69c7f7d268f3a5cb47a",
+          "sha256:ff828c9577f256088afe10d9a396d388c15aa5da46cb5d2dbc55aa6d527a660d"
+        ],
+        "exposure": "running",
+        "finding_id": "sha256:1a7585dd29583c96f8614111cdc92482eeb93b59d2a6dba0eeb64ae4b3336452",
+        "inventory_scope": "cluster/kind-csle-p0-cis/namespaces/csle-p3-20261120000330168510-a,csle-p3-20261120000330168510-b",
+        "reason_codes": [
+          "DESIRED_REFERENCE_PRESENT",
+          "HISTORICAL_OBSERVATION_PRESENT",
+          "REMAINING_REFERENCES",
+          "RUNNING_REFERENCE_PRESENT"
+        ],
+        "recommendation": "remediate_remaining_references",
+        "remediation": "open",
+        "schema_version": "1",
+        "validity": "under_investigation"
+      },
+      "assessment_id": "sha256:f86595793fe94fb6aa94ddf6106eda0b37cee9eddeb5562de7a40ac9219c95b2",
+      "expected_exposure": "running",
+      "expected_remediation": "open",
+      "scenario": "original_running"
+    },
+    {
+      "actual": {
+        "assessment_at": "2026-11-20T00:04:06.234210Z",
+        "confidence": "bounded",
+        "coverage_gap_ids": [],
+        "evidence_ids": [
+          "sha256:116760626f89d1a3155742876b702673e1d5caab46d553090a5e6305aa68f4ba",
+          "sha256:13a218c36e410e84deb57962dfa14420ad95989d6304a207103b464dc29582c3",
+          "sha256:1e9e0cf96784ae8c055c06297dd5caef51ebe8460492a76607012983701c94ea",
+          "sha256:20df1c857fa79f44421933f3e6a4cd9c63b277b0493d10f3e620c658acfb638b",
+          "sha256:26c945366e29c57b52efbf0816aa820a7f37e42c82aab28f113c8b94941546bc",
+          "sha256:3bec6e516467b9957e28e179a3616916f7232c871097ced4189c091961def698",
+          "sha256:451b99bd7e62791b63e5740c3600d54ca672196d02b7dd74b4631c494857c427",
+          "sha256:4a5b3f28cfbb042051af9eb0a42597938888d81b8f0543eb48f683852e349ec7",
+          "sha256:522446df2bcef381d73ddc3586d244808f679f2d8dd72dd04f122825630b6501",
+          "sha256:5300d3260e1176049e3b9b8bcb6921cc14ecca140727e4c4c7ad0dab458c599b",
+          "sha256:537e133c00baacd90bc0e09a4ba36dc1e82e28e63c364d5ae334eb3ef13302a3",
+          "sha256:5a2ecdba18ba977217ada253292dbdd87c5ccd31df91ce5c1fc83676f9c3331f",
+          "sha256:5a5bdb232c580b62d436045de59b757c4076b57dfe4ca8062bdee8963454b9d2",
+          "sha256:5fa59509b5a6bbaa96b72ee20659b4ef9dc01d9ebf7b1c8917e60a3e1363009a",
+          "sha256:607a8c6c257f959b6c16f449c90f18a708636c7a6754c207c8712df61f52b189",
+          "sha256:6eed28df5b63e72eaf5d5803b35823bf41b66089f2aea5aabecbbfcfda23bbf7",
+          "sha256:72c7c82d9149dfa8f41e9f466fe70e50512dece322a45657dbb53d734a7b0bb7",
+          "sha256:7e85c306463b119abd325000355352022a89d8ba1b1345a802bf767680ab3b75",
+          "sha256:7efffbd19a5c2386bae1448de2d8529742a7c2d65421f558d3a1df748f654391",
+          "sha256:87f62657ba15cb6f9d9ecf6c6ef284059c576159079fc9d82fec09fd920fab68",
+          "sha256:8d7060438f401a1ab005c97cbf77729d95bc7ab28b0822d0ed7607eb158807e6",
+          "sha256:971556b9a9c8c3f436c0871fc005c74237a401e215127e2a2683a8fd24876b35",
+          "sha256:9ae12ec409e0523130d6b1c486b709f926dd96af364f5242f33a2b518607d088",
+          "sha256:9cffa2dad28397bb110444b6060a1bfd26bda68b523af48134b8a8c303e08764",
+          "sha256:a079fa071995c9b637b6051a7e9093504685e51788606bacbc31d6a26e97f4ad",
+          "sha256:a8e9fc841eadb1bcb020f46815851e79d8d8e5f811f283af40af50e5bae8a360",
+          "sha256:b385831e6b5eda8c0d880157eed24f66350183fedd2aa2041e31a7638403df7f",
+          "sha256:b5db1c6b40b21435419cd684be2da3d936fd60c591f18f06457a5b2d87b12b7a",
+          "sha256:bfa70ced4611a398abc20a79c3a41eb1476be54a08ac7e524d280d83edd4cab8",
+          "sha256:bfeb269c5551618adcda38ea578c4fb4e4a5df1b51ed71fc37d46829ae2f9ff3",
+          "sha256:c60c5a70ac725923710a77133e22d7bcd1462d2638a424df289d114cd147bafa",
+          "sha256:c667db90e0ba448f30078765c00c1f6877614027dc2d8d7546bf28bc40ad8316",
+          "sha256:c9e96b6f936470c3a0ee0993bdeec95db4dddaa608ebb49f60b1bd3bc80897e9",
+          "sha256:ca93631e3c8d771dc7ef210763038337e09ec27359c454a15f109b4fd845e45b",
+          "sha256:caef2850dae0addb9948f7d8fdffe5a973636169ddc9781037d75b93843ff308",
+          "sha256:e434e1d0c645e9966a5edb7c22ba450d1330162eb87bb5f19703488fac601c83",
+          "sha256:e7e63e93281cf18b9d9c41f825ef43beac3066ea766b2facd3b322549cd01096",
+          "sha256:f2533505daf600210e94b6f6dc9acf869fe9270f0d4cd84425207538f869fac4",
+          "sha256:f5e5374a049d4ec36eb711e5c2be4404ff2721c7bc89c087519de67612b4ad05",
+          "sha256:f5f3b3990166e4c18ecd8f6b73139d01021878c5cc93164a58d503410d8afb08",
+          "sha256:faded5f6fa3ccb27d25678977fb852a774044eab10583c0c06ee477230a3743e",
+          "sha256:ff828c9577f256088afe10d9a396d388c15aa5da46cb5d2dbc55aa6d527a660d"
+        ],
+        "exposure": "configured_not_running",
+        "finding_id": "sha256:1a7585dd29583c96f8614111cdc92482eeb93b59d2a6dba0eeb64ae4b3336452",
+        "inventory_scope": "cluster/kind-csle-p0-cis/namespaces/csle-p3-20261120000330168510-a,csle-p3-20261120000330168510-b",
+        "reason_codes": [
+          "DESIRED_REFERENCE_PRESENT",
+          "HISTORICAL_OBSERVATION_PRESENT",
+          "REMAINING_REFERENCES"
+        ],
+        "recommendation": "remediate_remaining_references",
+        "remediation": "open",
+        "schema_version": "1",
+        "validity": "under_investigation"
+      },
+      "assessment_id": "sha256:f32c0b4ae256033b3fb4db85bd53378cefaa42cb42b3482f1d1858352446b1d6",
+      "expected_exposure": "configured_not_running",
+      "expected_remediation": "open",
+      "scenario": "old_scale_zero_replicaset_remains"
+    },
+    {
+      "actual": {
+        "assessment_at": "2026-11-20T00:04:06.372223Z",
+        "confidence": "bounded",
+        "coverage_gap_ids": [],
+        "evidence_ids": [
+          "sha256:116760626f89d1a3155742876b702673e1d5caab46d553090a5e6305aa68f4ba",
+          "sha256:13a218c36e410e84deb57962dfa14420ad95989d6304a207103b464dc29582c3",
+          "sha256:1e9e0cf96784ae8c055c06297dd5caef51ebe8460492a76607012983701c94ea",
+          "sha256:20df1c857fa79f44421933f3e6a4cd9c63b277b0493d10f3e620c658acfb638b",
+          "sha256:2463aba2a54f36e8e353ed61fc2487bcfddc3ff294a2c20de438bf2dad0eddda",
+          "sha256:26c945366e29c57b52efbf0816aa820a7f37e42c82aab28f113c8b94941546bc",
+          "sha256:3bec6e516467b9957e28e179a3616916f7232c871097ced4189c091961def698",
+          "sha256:451b99bd7e62791b63e5740c3600d54ca672196d02b7dd74b4631c494857c427",
+          "sha256:4a5b3f28cfbb042051af9eb0a42597938888d81b8f0543eb48f683852e349ec7",
+          "sha256:522446df2bcef381d73ddc3586d244808f679f2d8dd72dd04f122825630b6501",
+          "sha256:5300d3260e1176049e3b9b8bcb6921cc14ecca140727e4c4c7ad0dab458c599b",
+          "sha256:537e133c00baacd90bc0e09a4ba36dc1e82e28e63c364d5ae334eb3ef13302a3",
+          "sha256:5a2ecdba18ba977217ada253292dbdd87c5ccd31df91ce5c1fc83676f9c3331f",
+          "sha256:5a5bdb232c580b62d436045de59b757c4076b57dfe4ca8062bdee8963454b9d2",
+          "sha256:5fa59509b5a6bbaa96b72ee20659b4ef9dc01d9ebf7b1c8917e60a3e1363009a",
+          "sha256:607a8c6c257f959b6c16f449c90f18a708636c7a6754c207c8712df61f52b189",
+          "sha256:6eed28df5b63e72eaf5d5803b35823bf41b66089f2aea5aabecbbfcfda23bbf7",
+          "sha256:72c7c82d9149dfa8f41e9f466fe70e50512dece322a45657dbb53d734a7b0bb7",
+          "sha256:7e85c306463b119abd325000355352022a89d8ba1b1345a802bf767680ab3b75",
+          "sha256:7efffbd19a5c2386bae1448de2d8529742a7c2d65421f558d3a1df748f654391",
+          "sha256:87f62657ba15cb6f9d9ecf6c6ef284059c576159079fc9d82fec09fd920fab68",
+          "sha256:8d7060438f401a1ab005c97cbf77729d95bc7ab28b0822d0ed7607eb158807e6",
+          "sha256:971556b9a9c8c3f436c0871fc005c74237a401e215127e2a2683a8fd24876b35",
+          "sha256:9ae12ec409e0523130d6b1c486b709f926dd96af364f5242f33a2b518607d088",
+          "sha256:9cffa2dad28397bb110444b6060a1bfd26bda68b523af48134b8a8c303e08764",
+          "sha256:a079fa071995c9b637b6051a7e9093504685e51788606bacbc31d6a26e97f4ad",
+          "sha256:a8e9fc841eadb1bcb020f46815851e79d8d8e5f811f283af40af50e5bae8a360",
+          "sha256:b385831e6b5eda8c0d880157eed24f66350183fedd2aa2041e31a7638403df7f",
+          "sha256:b5db1c6b40b21435419cd684be2da3d936fd60c591f18f06457a5b2d87b12b7a",
+          "sha256:bfa70ced4611a398abc20a79c3a41eb1476be54a08ac7e524d280d83edd4cab8",
+          "sha256:bfeb269c5551618adcda38ea578c4fb4e4a5df1b51ed71fc37d46829ae2f9ff3",
+          "sha256:c60c5a70ac725923710a77133e22d7bcd1462d2638a424df289d114cd147bafa",
+          "sha256:c667db90e0ba448f30078765c00c1f6877614027dc2d8d7546bf28bc40ad8316",
+          "sha256:c9e96b6f936470c3a0ee0993bdeec95db4dddaa608ebb49f60b1bd3bc80897e9",
+          "sha256:ca93631e3c8d771dc7ef210763038337e09ec27359c454a15f109b4fd845e45b",
+          "sha256:caef2850dae0addb9948f7d8fdffe5a973636169ddc9781037d75b93843ff308",
+          "sha256:e434e1d0c645e9966a5edb7c22ba450d1330162eb87bb5f19703488fac601c83",
+          "sha256:e7e63e93281cf18b9d9c41f825ef43beac3066ea766b2facd3b322549cd01096",
+          "sha256:f2533505daf600210e94b6f6dc9acf869fe9270f0d4cd84425207538f869fac4",
+          "sha256:f5e5374a049d4ec36eb711e5c2be4404ff2721c7bc89c087519de67612b4ad05",
+          "sha256:f5f3b3990166e4c18ecd8f6b73139d01021878c5cc93164a58d503410d8afb08",
+          "sha256:faded5f6fa3ccb27d25678977fb852a774044eab10583c0c06ee477230a3743e",
+          "sha256:ff828c9577f256088afe10d9a396d388c15aa5da46cb5d2dbc55aa6d527a660d"
+        ],
+        "exposure": "historical_observed",
+        "finding_id": "sha256:1a7585dd29583c96f8614111cdc92482eeb93b59d2a6dba0eeb64ae4b3336452",
+        "inventory_scope": "cluster/kind-csle-p0-cis/namespaces/csle-p3-20261120000330168510-a,csle-p3-20261120000330168510-b",
+        "reason_codes": [
+          "HISTORICAL_OBSERVATION_PRESENT",
+          "VERIFIED_SCOPED_REPLACEMENT"
+        ],
+        "recommendation": "retain_scoped_evidence_and_monitor",
+        "remediation": "verified_in_scope",
+        "schema_version": "1",
+        "validity": "under_investigation",
+        "verification": {
+          "coverage_complete": true,
+          "fixed_scan_evidence_ids": [
+            "sha256:bfa70ced4611a398abc20a79c3a41eb1476be54a08ac7e524d280d83edd4cab8"
+          ],
+          "inventory_fresh": true,
+          "remaining_references": 0,
+          "replacement_observation_ids": [
+            "sha256:a8fed4f5096415fcd4a6c8819cb554f7a8df65124c641ea6cbe01a1805138c1c"
+          ],
+          "scope": "cluster/kind-csle-p0-cis/namespaces/csle-p3-20261120000330168510-a,csle-p3-20261120000330168510-b",
+          "window_end": "2026-11-20T00:04:06.372223Z",
+          "window_start": "2026-11-20T00:04:05.885303Z"
+        }
+      },
+      "assessment_id": "sha256:71f329552e843964034d2c8e30d2dab220a63ec1de98dcddc2e37d3bcc116deb",
+      "expected_exposure": "historical_observed",
+      "expected_remediation": "verified_in_scope",
+      "scenario": "fixed_package_replacement_verified"
+    },
+    {
+      "actual": {
+        "assessment_at": "2026-11-20T00:04:07.571290Z",
+        "confidence": "bounded",
+        "coverage_gap_ids": [],
+        "evidence_ids": [
+          "sha256:116760626f89d1a3155742876b702673e1d5caab46d553090a5e6305aa68f4ba",
+          "sha256:132637ba14dd96d72ca77902b81ce9a88ce208ee49fa8fd0e843f3669196280e",
+          "sha256:13a218c36e410e84deb57962dfa14420ad95989d6304a207103b464dc29582c3",
+          "sha256:1e9e0cf96784ae8c055c06297dd5caef51ebe8460492a76607012983701c94ea",
+          "sha256:20df1c857fa79f44421933f3e6a4cd9c63b277b0493d10f3e620c658acfb638b",
+          "sha256:2463aba2a54f36e8e353ed61fc2487bcfddc3ff294a2c20de438bf2dad0eddda",
+          "sha256:26c945366e29c57b52efbf0816aa820a7f37e42c82aab28f113c8b94941546bc",
+          "sha256:3bec6e516467b9957e28e179a3616916f7232c871097ced4189c091961def698",
+          "sha256:451b99bd7e62791b63e5740c3600d54ca672196d02b7dd74b4631c494857c427",
+          "sha256:4a5b3f28cfbb042051af9eb0a42597938888d81b8f0543eb48f683852e349ec7",
+          "sha256:522446df2bcef381d73ddc3586d244808f679f2d8dd72dd04f122825630b6501",
+          "sha256:5300d3260e1176049e3b9b8bcb6921cc14ecca140727e4c4c7ad0dab458c599b",
+          "sha256:537e133c00baacd90bc0e09a4ba36dc1e82e28e63c364d5ae334eb3ef13302a3",
+          "sha256:5a2ecdba18ba977217ada253292dbdd87c5ccd31df91ce5c1fc83676f9c3331f",
+          "sha256:5a5bdb232c580b62d436045de59b757c4076b57dfe4ca8062bdee8963454b9d2",
+          "sha256:5fa59509b5a6bbaa96b72ee20659b4ef9dc01d9ebf7b1c8917e60a3e1363009a",
+          "sha256:607a8c6c257f959b6c16f449c90f18a708636c7a6754c207c8712df61f52b189",
+          "sha256:6eed28df5b63e72eaf5d5803b35823bf41b66089f2aea5aabecbbfcfda23bbf7",
+          "sha256:71f329552e843964034d2c8e30d2dab220a63ec1de98dcddc2e37d3bcc116deb",
+          "sha256:72c7c82d9149dfa8f41e9f466fe70e50512dece322a45657dbb53d734a7b0bb7",
+          "sha256:73a89ad60bafbe35a2f99c52bfc3e39453ccfc0605655bd9ebfaa1037afa0da9",
+          "sha256:764a6f85adac63ca80fba49d931846450fb1bb04edaeb1d3418ec121c6a30adf",
+          "sha256:7e85c306463b119abd325000355352022a89d8ba1b1345a802bf767680ab3b75",
+          "sha256:7efffbd19a5c2386bae1448de2d8529742a7c2d65421f558d3a1df748f654391",
+          "sha256:87f62657ba15cb6f9d9ecf6c6ef284059c576159079fc9d82fec09fd920fab68",
+          "sha256:8d7060438f401a1ab005c97cbf77729d95bc7ab28b0822d0ed7607eb158807e6",
+          "sha256:971556b9a9c8c3f436c0871fc005c74237a401e215127e2a2683a8fd24876b35",
+          "sha256:9ae12ec409e0523130d6b1c486b709f926dd96af364f5242f33a2b518607d088",
+          "sha256:9cffa2dad28397bb110444b6060a1bfd26bda68b523af48134b8a8c303e08764",
+          "sha256:a079fa071995c9b637b6051a7e9093504685e51788606bacbc31d6a26e97f4ad",
+          "sha256:a8e9fc841eadb1bcb020f46815851e79d8d8e5f811f283af40af50e5bae8a360",
+          "sha256:b385831e6b5eda8c0d880157eed24f66350183fedd2aa2041e31a7638403df7f",
+          "sha256:b5db1c6b40b21435419cd684be2da3d936fd60c591f18f06457a5b2d87b12b7a",
+          "sha256:bfeb269c5551618adcda38ea578c4fb4e4a5df1b51ed71fc37d46829ae2f9ff3",
+          "sha256:c60c5a70ac725923710a77133e22d7bcd1462d2638a424df289d114cd147bafa",
+          "sha256:c667db90e0ba448f30078765c00c1f6877614027dc2d8d7546bf28bc40ad8316",
+          "sha256:c9e96b6f936470c3a0ee0993bdeec95db4dddaa608ebb49f60b1bd3bc80897e9",
+          "sha256:ca93631e3c8d771dc7ef210763038337e09ec27359c454a15f109b4fd845e45b",
+          "sha256:caef2850dae0addb9948f7d8fdffe5a973636169ddc9781037d75b93843ff308",
+          "sha256:d0d3cb0536f96fcaa94cc88f1c2724f86722e63dae5549b184f6111da8ee25b7",
+          "sha256:e434e1d0c645e9966a5edb7c22ba450d1330162eb87bb5f19703488fac601c83",
+          "sha256:e7e63e93281cf18b9d9c41f825ef43beac3066ea766b2facd3b322549cd01096",
+          "sha256:f2533505daf600210e94b6f6dc9acf869fe9270f0d4cd84425207538f869fac4",
+          "sha256:f5e5374a049d4ec36eb711e5c2be4404ff2721c7bc89c087519de67612b4ad05",
+          "sha256:f5f3b3990166e4c18ecd8f6b73139d01021878c5cc93164a58d503410d8afb08",
+          "sha256:faded5f6fa3ccb27d25678977fb852a774044eab10583c0c06ee477230a3743e",
+          "sha256:ff828c9577f256088afe10d9a396d388c15aa5da46cb5d2dbc55aa6d527a660d"
+        ],
+        "exposure": "running",
+        "finding_id": "sha256:1a7585dd29583c96f8614111cdc92482eeb93b59d2a6dba0eeb64ae4b3336452",
+        "inventory_scope": "cluster/kind-csle-p0-cis/namespaces/csle-p3-20261120000330168510-a,csle-p3-20261120000330168510-b",
+        "reason_codes": [
+          "DESIRED_REFERENCE_PRESENT",
+          "HISTORICAL_OBSERVATION_PRESENT",
+          "REGRESSION_OBSERVED",
+          "REMAINING_REFERENCES",
+          "RUNNING_REFERENCE_PRESENT"
+        ],
+        "recommendation": "investigate_reintroduced_digest",
+        "remediation": "regressed",
+        "schema_version": "1",
+        "validity": "under_investigation"
+      },
+      "assessment_id": "sha256:b6ebf66ab830df73718baf33f8d43e4809039341cc5b7bebbc0f1ae7edf6bf39",
+      "expected_exposure": "running",
+      "expected_remediation": "regressed",
+      "scenario": "old_digest_reintroduced_other_namespace"
+    }
+  ],
+  "schema_version": "1",
+  "scope": "P3 selected-finding scoped replacement/regression on the local fixed-fixture profile; no image approval or universal remediation",
+  "selected_finding_id": "sha256:1a7585dd29583c96f8614111cdc92482eeb93b59d2a6dba0eeb64ae4b3336452",
+  "selected_package": "libcrypto3",
+  "selected_vulnerability": "CVE-2026-95692",
+  "status": "qualified_on_branch",
+  "tests": {
+    "contract": 17,
+    "fresh_python_environment": true,
+    "total": 180,
+    "unit": 163
+  },
+  "verified_assessment_id": "sha256:71f329552e843964034d2c8e30d2dab220a63ec1de98dcddc2e37d3bcc116deb"
+}

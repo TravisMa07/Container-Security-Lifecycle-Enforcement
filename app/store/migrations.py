@@ -47,3 +47,12 @@ DEFAULT_MIGRATIONS += (
           for operation in ('UPDATE', 'DELETE')),
     ),
 )
+
+DEFAULT_MIGRATIONS += (
+    (
+        'CREATE TABLE lifecycle_assessments (assessment_id TEXT PRIMARY KEY, payload TEXT NOT NULL)',
+        *(f"CREATE TRIGGER lifecycle_assessments_no_{operation.lower()} BEFORE {operation} ON lifecycle_assessments "
+          "BEGIN SELECT RAISE(ABORT, 'lifecycle assessments are append-only'); END"
+          for operation in ('UPDATE', 'DELETE')),
+    ),
+)

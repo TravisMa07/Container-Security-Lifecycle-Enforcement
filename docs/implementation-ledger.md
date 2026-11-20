@@ -84,3 +84,11 @@ Owner requested PR#10 merge and the next roadmap PR. PR#10 was readied/merged at
 ## P2 local qualification ready for review
 
 Clean1ef3ed1f4b26d2942555ef53757b1d938ba164d5 passed144 tests in existing/fresh pinned Python environments and actual Kind1.35.10 lifecycle/RBAC/410/reconciliation/history scenarios. [P2 evidence](results/p2-qualification.json) and [ledger](p2-ledger.md) retain exact attribution, failed harness setup and review red/green corrections. Snapshot receipts preserve empty-list/absence history; P3 cannot infer a fix from absence or ignore gaps. P2 remains in draft PR#11, unmerged and not owner-accepted by passing tests alone. P3 is next after the chosen accepted integration; no further phase implementation or merge is implied.
+
+## P2 authorized merge / P3 delivery
+
+Owner requested PR#11 merge and P3 implementation. PR#11 was readied/merged ate62a80ee184ec9ea5f04aad58df0994b996ba4c2;144 tests/docs and actual Kind P2 acceptance passed on clean merged main. P3 starts from that base, expectation freeze748ee5d and [draft PR#12](https://github.com/TravisMa07/Container-Security-Lifecycle-Enforcement/pull/12), refs issue#4. p3_engine owns pure engine/tests; p3_fixture fixed recipe/helper/tests; parent shared interfaces, facts/store/CLI, pins/CI/status and serialized build/scan/Kind qualification. [P3 ledger](p3-ledger.md) preserves working-tree evidence and source refinements. Final review/clean-source qualification/CI pending; P3 merge not authorized.
+
+## P3 local qualification ready for review
+
+Clean7b1821ca348e41e55f025134f044ed141d0f604b passed180 tests in existing/fresh pinned Python environments and real selected-package replacement/remaining-reference/regression acceptance. [P3 evidence](results/p3-qualification.json) and [ledger](p3-ledger.md) preserve exact source/build/DB identity, earlier passes, review-discovered package coverage bugs and parent-expanded-scope history correction with renewed review. No feature is inferred from mocks alone; fixed-version/platform/namespace limits are explicit. P3 stays draft/unmerged in PR#12; P4 is next after accepted integration. No future phase implementation or merge is implied.
