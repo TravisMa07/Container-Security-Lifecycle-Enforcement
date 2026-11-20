@@ -1,6 +1,6 @@
 # Architecture
 
-Status: accepted initial direction under the authoritative handoff and delegated engineering decisions; runtime design remains subject to P0 experiments.
+Status: accepted initial direction under the authoritative handoff and delegated engineering decisions; P0–P2 are merged with recorded qualification and P3 is qualified on its PR branch.
 
 One Python application/CLI and one watcher worker share SQLite. Collectors normalize Kubernetes observations, Trivy reports and OCI/Floci inventory; append-only observations and raw report hashes support deterministic correlation, lifecycle decisions, policy evaluation and bounded compliance export.
 
@@ -21,7 +21,7 @@ The signer is a separate authorized invocation with separate key access, not a c
 | Decision | Status | Record |
 | --- | --- | --- |
 | Small monolith and independent trust boundaries | Accepted | [ADR 0001](decisions/0001-foundation.md) |
-| Python runtime baseline | 3.12.16 locally qualified for P0/P1 | [ADR 0001](decisions/0001-foundation.md) |
+| Python runtime baseline | 3.12.16 locally qualified for P0–P3 | [ADR 0001](decisions/0001-foundation.md) |
 | Exact local tool/image/build set and admission API | Locally qualified on ARM64 with source-aligned Kubernetes1.35.10 | [P0 ledger](p0-ledger.md) |
 | License | Apache-2.0, owner-selected during P0 | [License](../LICENSE) |
 
