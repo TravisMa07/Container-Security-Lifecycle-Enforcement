@@ -341,13 +341,26 @@ def _evaluate(facts:dict)->dict:
     exposure=('unknown' if inventory_bad else 'running' if links['running'] else 'configured_not_running' if links['configured'] else 'historical_observed' if links['historical'] else 'unknown')
     remediation='unknown' if inventory_bad or scan_reasons or not links['historical'] else 'open'
     verification=None;regression_of=None
+    def observed_after_proof(row, previous_scope, previous_at):
+        event=event_map.get(row['event_id'])
+        if not event or any(event.get(k)!=row.get(k) for k in ('cluster_id','namespace','kind','uid')) or instant(event['observed_at'])>at:
+            return False
+        if row['namespace'] in previous_scope['namespaces']:
+            return True
+        # Added scope was not covered by the old absence proof. Fresh contact
+        # cannot turn an older/unseen resource into a historical reintroduction.
+        try:
+            created=instant(normalize_timestamp(event['raw_object']['metadata']['creationTimestamp']))
+            return previous_at<created<=instant(event['observed_at'])<=at
+        except (KeyError,TypeError,ValueError,OverflowError):
+            return False
     predecessors=[]
     for previous in f.previous:
         prior_scope=previous.get('scope') or {};state=previous.get('state') or {}
         if (previous.get('finding_id')==finding.finding_id and prior_scope.get('cluster_id')==cluster
             and set(prior_scope.get('namespaces') or []) and set(prior_scope['namespaces']).issubset(namespaces)
             and state.get('remediation')=='verified_in_scope' and instant(state['assessment_at'])<at
-            and any(_fresh(row['last_seen'],at,f.inventory_max_age_seconds) and instant(row['last_seen'])>instant(state['assessment_at']) for row,_ in current_old)):
+            and any(_fresh(row['last_seen'],at,f.inventory_max_age_seconds) and instant(row['last_seen'])>instant(state['assessment_at']) and observed_after_proof(row,prior_scope,instant(state['assessment_at'])) for row,_ in current_old)):
             predecessors.append(previous)
     if predecessors:
         previous=max(predecessors,key=lambda row:(instant(row['state']['assessment_at']),row['assessment_id']))

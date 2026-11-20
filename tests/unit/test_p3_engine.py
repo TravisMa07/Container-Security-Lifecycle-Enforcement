@@ -285,3 +285,17 @@ class EngineMatrixTests(unittest.TestCase):
         value=facts()
         value['scans'][1]['report']['Results'].append({'Type':'alpine','Class':'os-pkgs','Target':'second','Packages':[],'Vulnerabilities':[]})
         self.assertEqual(evaluate(value)['state']['remediation'],'verified_in_scope')
+
+    def test_expanded_scope_does_not_invent_reintroduction_of_old_unseen_workload(self):
+        prior=evaluate(facts())['state']
+        for created,expected in [(None,'open'),('2026-11-19T00:00:00Z','open'),('2026-11-19T00:00:25Z','regressed')]:
+            value=facts();value['scope']['namespaces'].append('two');value['assessment_at']='2026-11-19T00:00:30Z'
+            for field in ('snapshots','checkpoints'):
+                for row in copy.deepcopy(value[field]):row['namespace']='two';value[field].append(row)
+            outsider=event('Pod','outside-old',A,at='2026-11-19T00:00:26Z',namespace='two')
+            if created:
+                outsider['raw_object']['metadata']['creationTimestamp']=created
+                outsider['raw_object_hash']=sha256_bytes(canonical_json(outsider['raw_object']).encode())
+            value['events'].append(outsider);value['current'].append(current(outsider,last_seen='2026-11-19T00:00:26Z'))
+            value['previous']=[{'assessment_id':'prior','finding_id':value['finding']['finding_id'],'scope':{'cluster_id':'cluster','namespaces':['one']},'state':prior}]
+            with self.subTest(created=created):self.assertEqual(evaluate(value)['state']['remediation'],expected)
